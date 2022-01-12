@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.monkeywrench.entities.User;
+import com.skilldistillery.monkeywrench.repositories.UserRepository;
 
 @Service
 public class AuthServiceImpl implements AuthService {
