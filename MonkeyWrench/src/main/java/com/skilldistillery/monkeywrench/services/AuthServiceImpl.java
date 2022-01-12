@@ -16,4 +16,10 @@ public class AuthServiceImpl implements AuthService {
 	public User register(User user) {
 		return null;
 	}
+	
+	@Override
+	public User findUserByName(String username) {
+		return userRepo.findByUsername(username);
+	}
 }
+
