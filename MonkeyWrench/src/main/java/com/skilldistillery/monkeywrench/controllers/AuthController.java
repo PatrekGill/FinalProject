@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.skilldistillery.monkeywrench.entities.User;
 import com.skilldistillery.monkeywrench.services.AuthService;
 
 @RestController
+@CrossOrigin({"*", "http://localhost:4300"})
 public class AuthController {
 	
 	@Autowired
