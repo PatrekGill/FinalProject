@@ -116,15 +116,6 @@ public class Address {
 	}
 
 
-	public List<Service> getServices() {
-		return services;
-	}
-
-	public void setServices(List<Service> services) {
-		this.services = services;
-	}
-
-
 	/* ----------------------------------------------------------------------------
 		Get/Set User
 	---------------------------------------------------------------------------- */
