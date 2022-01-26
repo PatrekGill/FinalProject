@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -45,8 +46,14 @@ public class User {
 	@ManyToMany(mappedBy = "users")
 	private List<Business> businesses;
 	
-	OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user")
 	private List<Business> employees;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Service> services;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Address> addresses;
 	
 	
 
@@ -168,6 +175,46 @@ public class User {
 
 	public void setUpdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+
+	public List<Business> getBusinesses() {
+		return businesses;
+	}
+
+
+	public void setBusinesses(List<Business> businesses) {
+		this.businesses = businesses;
+	}
+
+
+	public List<Business> getEmployees() {
+		return employees;
+	}
+
+
+	public void setEmployees(List<Business> employees) {
+		this.employees = employees;
+	}
+
+
+	public List<Service> getServices() {
+		return services;
+	}
+
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
+
+
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 
