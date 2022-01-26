@@ -23,7 +23,7 @@ public class Business {
 	private int id;
 	
 	@Column(name = "name")
-	private String businessName;
+	private String name;
 	
 	@Column(name = "logo_url")
 	private String logoUrl;
@@ -61,12 +61,12 @@ public class Business {
 		this.id = id;
 	}
 
-	public String getBusinessName() {
-		return businessName;
+	public String getName() {
+		return name;
 	}
 
-	public void setBusinessName(String businessName) {
-		this.businessName = businessName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getLogoUrl() {
@@ -145,7 +145,7 @@ public class Business {
 
 	@Override
 	public String toString() {
-		return "Business [id=" + id + ", businessName=" + businessName + ", logoUrl=" + logoUrl + ", createdDate="
+		return "Business [id=" + id + ", businessName=" + name + ", logoUrl=" + logoUrl + ", createdDate="
 				+ createdDate + ", updatedDate=" + updatedDate + ", enabled=" + enabled + ", users=" + users + ", user="
 				+ user + ", serviceTypes=" + serviceTypes + "]";
 	}

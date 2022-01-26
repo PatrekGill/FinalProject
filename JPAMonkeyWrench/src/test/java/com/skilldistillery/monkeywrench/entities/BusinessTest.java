@@ -43,7 +43,7 @@ class BusinessTest {
 	@Test
 	void test_Business_name_mapping() {
 		assertNotNull(business);
-		assertEquals("CJ's", business.getBusinessName());
+		assertEquals("CJ's", business.getName());
 	}
 	
 	@Test
