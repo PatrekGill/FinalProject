@@ -44,7 +44,7 @@ class ServiceTypeTest {
 	@Test
 	void test_ServiceType_name_mapping() {
 		assertNotNull(serviceType);
-		assertEquals("HVAC Maintenance & Repair ", serviceType.getName());
+		assertEquals("HVAC Maintenance & Repair", serviceType.getName());
 	}
 	
 //DESCRIPTION IS NULL IN DB	

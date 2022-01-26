@@ -50,7 +50,7 @@ public class User {
 	private List<Business> employees;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Service> services;
+	private List<ServiceCall> serviceCalls;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Address> addresses;
@@ -198,13 +198,13 @@ public class User {
 	}
 
 
-	public List<Service> getServices() {
-		return services;
+	public List<ServiceCall> getServiceCalls() {
+		return serviceCalls;
 	}
 
 
-	public void setServices(List<Service> services) {
-		this.services = services;
+	public void setServiceCalls(List<ServiceCall> serviceCalls) {
+		this.serviceCalls = serviceCalls;
 	}
 
 

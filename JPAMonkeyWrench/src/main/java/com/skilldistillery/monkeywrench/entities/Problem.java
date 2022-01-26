@@ -22,7 +22,7 @@ public class Problem {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "problem")
-	private List<Service> services;
+	private List<ServiceCall> serviceCalls;
 
 	public int getId() {
 		return id;
@@ -40,12 +40,12 @@ public class Problem {
 		this.description = description;
 	}
 
-	public List<Service> getServices() {
-		return services;
+	public List<ServiceCall> getServices() {
+		return serviceCalls;
 	}
 
-	public void setServices(List<Service> services) {
-		this.services = services;
+	public void setServices(List<ServiceCall> serviceCalls) {
+		this.serviceCalls = serviceCalls;
 	}
 
 	@Override

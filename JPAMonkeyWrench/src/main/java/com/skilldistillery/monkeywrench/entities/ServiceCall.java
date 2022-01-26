@@ -12,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Service {
+@Table(name="service_call")
+public class ServiceCall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -52,7 +54,7 @@ public class Service {
 	private Solution solution;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "service")
+	@OneToMany(mappedBy = "serviceCall")
 	private List<ServiceComment> comments;
 	
 	@ManyToOne
@@ -65,7 +67,7 @@ public class Service {
 	/* ----------------------------------------------------------------------------
 		Constructors
 	---------------------------------------------------------------------------- */
-	public Service() {}
+	public ServiceCall() {}
 	
 
 	/* ----------------------------------------------------------------------------
@@ -232,7 +234,7 @@ public class Service {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Service other = (Service) obj;
+		ServiceCall other = (ServiceCall) obj;
 		return id == other.id;
 	}
 

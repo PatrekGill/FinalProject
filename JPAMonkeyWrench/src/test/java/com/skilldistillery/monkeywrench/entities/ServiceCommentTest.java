@@ -56,8 +56,8 @@ class ServiceCommentTest {
 	@Test
 	void test_comment_service_mapping() {
 		assertNotNull(comment);
-		assertNotNull(comment.getService());
-		assertEquals(1,comment.getService().getId());
+		assertNotNull(comment.getServiceCall());
+		assertEquals(1,comment.getServiceCall().getId());
 	}
 	
 	@Test

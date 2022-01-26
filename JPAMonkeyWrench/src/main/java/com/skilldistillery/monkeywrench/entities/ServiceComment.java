@@ -27,7 +27,7 @@ public class ServiceComment {
 	
 	@ManyToOne
 	@JoinColumn (name = "service_id")
-	private Service service;
+	private ServiceCall serviceCall;
 	
 	@CreationTimestamp
 	@Column (name = "comment_date")
@@ -78,11 +78,11 @@ public class ServiceComment {
 	/* ----------------------------------------------------------------------------
 		Get/Set Service
 	---------------------------------------------------------------------------- */
-	public Service getService() {
-		return service;
+	public ServiceCall getServiceCall() {
+		return serviceCall;
 	}
-	public void setService(Service service) {
-		this.service = service;
+	public void setServiceCall(ServiceCall serviceCall) {
+		this.serviceCall = serviceCall;
 	}
 
 	
@@ -119,7 +119,7 @@ public class ServiceComment {
 
 	@Override
 	public String toString() {
-		return "ServiceComment [id=" + id + ", text=" + text + ", user=" + user + ", service=" + service + "]";
+		return "ServiceComment [id=" + id + ", text=" + text + ", user=" + user + ", service=" + serviceCall + "]";
 	}
 	
 	
