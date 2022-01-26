@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `service` (
   `date_created` DATETIME NULL,
   `date_scheduled` DATETIME NOT NULL,
   `completed` TINYINT(1) NOT NULL DEFAULT 0,
-  `total_cost` DECIMAL NULL DEFAULT 0,
+  `total_cost` DECIMAL(25,2) NULL DEFAULT 0,
   `estimate` TINYINT(1) NULL DEFAULT 0,
   `hours_labor` INT NULL DEFAULT 0,
   `contractor_notes` TEXT NULL,
@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `equipment` (
   `serial_number` VARCHAR(45) NULL,
   `address_id` INT NOT NULL,
   `model_id` INT NOT NULL,
-  `price` DECIMAL NULL,
+  `price` DECIMAL(25,2) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_equipment_address1_idx` (`address_id` ASC),
   INDEX `fk_equipment_model1_idx` (`model_id` ASC),
@@ -404,7 +404,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `business_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (1, 1, 1, 1, 'No heat', '2022-01-01', '2022-01-02', 0, 12.99, 1, 4, 'stuff happend', 1, 1, 3, 'I give it a 3');
+INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `business_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (1, 1, 1, 1, 'No heat', '2022-01-01', '2022-01-02', 0, 12.99, 1, 4, 'stuff happened', 1, 1, 3, 'I give it a 3');
 INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `business_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (2, 2, 1, 1, 'maintenance', '2022-01-01', '2022-01-02', 0, 14.21, 0, 3, 'fixes it', 1, 2, 4, 'gave it a four');
 
 COMMIT;
