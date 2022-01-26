@@ -18,9 +18,9 @@ public class ServiceCallController {
 	private ServiceCallService serviceCallSvc;
 	
 	//get mapping (GET)
-	@GetMapping("api/service/")
-	public List<ServiceCall> getAllServices() {
-		return serviceCallSvc.getAllService();
+	@GetMapping("api/serviceCalls/")
+	public List<ServiceCall> getAllServiceCalls() {
+		return serviceCallSvc.getAllServiceCall();
 	}
 	
 	

@@ -41,15 +41,16 @@ public class ServiceCall {
 	@Column(name = "contractor_notes")
 	private String contractorNotes;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "problem_id")
 	private Problem problem;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "solution_id")
 	private Solution solution;
