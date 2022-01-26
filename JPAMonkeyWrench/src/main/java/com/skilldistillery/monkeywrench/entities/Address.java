@@ -31,15 +31,8 @@ public class Address {
 	@Column(name = "state_abbv")
 	private String stateAbbv;
 	
+	@Column(name = "zip_code")
 	private int zipCode;
-	
-	public List<Service> getServices() {
-		return services;
-	}
-
-	public void setServices(List<Service> services) {
-		this.services = services;
-	}
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "address")
@@ -105,7 +98,13 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 
-	
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
 
 	public User getUser() {
 		return user;

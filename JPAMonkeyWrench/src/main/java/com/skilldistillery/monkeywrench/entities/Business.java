@@ -21,7 +21,7 @@ public class Business {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "business_name")
+	@Column(name = "name")
 	private String businessName;
 	
 	@Column(name = "logo_url")
