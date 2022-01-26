@@ -85,5 +85,33 @@ class ServiceTest {
 		assertNotNull(service.getAddress());
 		assertEquals("Hanover",service.getAddress().getCity());
 	}
+	
+	@Test
+	void test_Service_problem_mapping() {
+		assertNotNull(service);
+		assertNotNull(service.getProblem());
+		assertEquals(1,service.getProblem().getId());
+	}
+	
+	@Test
+	void test_Service_comments_mapping() {
+		assertNotNull(service);
+		assertNotNull(service.getComments());
+		assertFalse(service.getComments().isEmpty());
+	}
+	
+	@Test
+	void test_Service_User_mapping() {
+		assertNotNull(service);
+		assertNotNull(service.getUser());
+		assertEquals(1,service.getUser().getId());
+	}
+	
+	@Test
+	void test_Service_solution_mapping() {
+		assertNotNull(service);
+		assertNotNull(service.getSolution());
+		assertEquals(1,service.getSolution().getId());
+	}
 
 }
