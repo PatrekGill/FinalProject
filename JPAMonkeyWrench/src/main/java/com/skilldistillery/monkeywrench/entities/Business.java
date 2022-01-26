@@ -42,6 +42,9 @@ public class Business {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@ManyToMany(mappedBy = "businesses")
+	private List<ServiceType> serviceTypes;
 
 	public int getId() {
 		return id;
@@ -89,6 +92,14 @@ public class Business {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<ServiceType> getServiceTypes() {
+		return serviceTypes;
+	}
+
+	public void setServiceTypes(List<ServiceType> serviceTypes) {
+		this.serviceTypes = serviceTypes;
 	}
 
 	public User getUser() {
