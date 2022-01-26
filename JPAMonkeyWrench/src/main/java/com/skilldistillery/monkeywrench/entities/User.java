@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	@Id
@@ -43,15 +45,19 @@ public class User {
 	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "users")
 	private List<Business> businesses;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Business> employees;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Service> services;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Address> addresses;
 	
