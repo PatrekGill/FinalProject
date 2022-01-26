@@ -12,6 +12,7 @@
 	<class>com.skilldistillery.monkeywrench.entities.Problem</class>
 	<class>com.skilldistillery.monkeywrench.entities.Service</class>
 	<class>com.skilldistillery.monkeywrench.entities.ServiceComment</class>
+	<class>com.skilldistillery.monkeywrench.entities.ServiceType</class>
 	<class>com.skilldistillery.monkeywrench.entities.Solution</class>
 	<class>com.skilldistillery.monkeywrench.entities.User</class>
 
