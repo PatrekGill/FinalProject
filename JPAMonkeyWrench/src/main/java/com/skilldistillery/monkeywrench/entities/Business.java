@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Business {
 
@@ -33,16 +35,18 @@ public class Business {
 	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "business_user",
-					   joinColumns = @JoinColumn(name = "business_id"),
-					   inverseJoinColumns = @JoinColumn(name = "user_id"))
+	   joinColumns = @JoinColumn(name = "business_id"),
+	   inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "businesses")
 	private List<ServiceType> serviceTypes;
 
