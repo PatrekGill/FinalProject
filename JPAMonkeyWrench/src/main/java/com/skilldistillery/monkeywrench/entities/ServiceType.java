@@ -1,17 +1,25 @@
 package com.skilldistillery.monkeywrench.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
 public class ServiceType {
 	
 	@ManyToMany
+	@JoinTable(name = "business_service_type",
+			   joinColumns = @JoinColumn(name = "contractor_id"),
+			   inverseJoinColumns = @JoinColumn(name = "business_type_id"))
+	private List<Business> businesses;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -42,6 +50,14 @@ public class ServiceType {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<Business> getBusinesses() {
+		return businesses;
+	}
+
+	public void setBusinesses(List<Business> businesses) {
+		this.businesses = businesses;
 	}
 
 	@Override
