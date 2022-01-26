@@ -13,13 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Business {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -36,6 +34,8 @@ public class Business {
 	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 	
+	private boolean enabled;
+	
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "business_user",
@@ -44,14 +44,15 @@ public class Business {
 	private List<User> users;
 	
 	@JsonIgnore
+	@ManyToMany(mappedBy = "businesses")
+	private List<ServiceType> serviceTypes;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
-	@JsonIgnore
-	@ManyToMany(mappedBy = "businesses")
-	private List<ServiceType> serviceTypes;
 
+	
 	public int getId() {
 		return id;
 	}
@@ -115,6 +116,14 @@ public class Business {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	@Override
 	public int hashCode() {
@@ -137,7 +146,8 @@ public class Business {
 	@Override
 	public String toString() {
 		return "Business [id=" + id + ", businessName=" + businessName + ", logoUrl=" + logoUrl + ", createdDate="
-				+ createdDate + ", updatedDate=" + updatedDate + "]";
+				+ createdDate + ", updatedDate=" + updatedDate + ", enabled=" + enabled + ", users=" + users + ", user="
+				+ user + ", serviceTypes=" + serviceTypes + "]";
 	}
 
 }
