@@ -24,6 +24,30 @@ public class Solution {
 	@OneToMany(mappedBy = "solution")
 	private List<Service> services;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
