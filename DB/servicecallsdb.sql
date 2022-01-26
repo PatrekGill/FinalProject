@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `service_call` (
   `solution_id` INT NULL,
   `problem_description` TEXT NOT NULL,
   `date_created` DATETIME NULL,
-  `date_scheduled` DATETIME NOT NULL,
+  `date_scheduled` DATETIME NULL,
   `completed` TINYINT(1) NOT NULL DEFAULT 0,
   `total_cost` DECIMAL(25,2) NULL DEFAULT 0,
   `estimate` TINYINT(1) NULL DEFAULT 0,
