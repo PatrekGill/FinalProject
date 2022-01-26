@@ -108,11 +108,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `service`
+-- Table `service_call`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `service` ;
+DROP TABLE IF EXISTS `service_call` ;
 
-CREATE TABLE IF NOT EXISTS `service` (
+CREATE TABLE IF NOT EXISTS `service_call` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `address_id` INT NOT NULL,
   `problem_id` INT NULL,
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `service_comment` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_service_comment_service1`
     FOREIGN KEY (`service_id`)
-    REFERENCES `service` (`id`)
+    REFERENCES `service_call` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -400,12 +400,12 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `service`
+-- Data for table `service_call`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `business_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (1, 1, 1, 1, 'No heat', '2022-01-01', '2022-01-02', 0, 12.99, 1, 4, 'stuff happened', 1, 1, 3, 'I give it a 3');
-INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `business_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (2, 2, 1, 1, 'maintenance', '2022-01-01', '2022-01-02', 0, 14.21, 0, 3, 'fixes it', 1, 2, 4, 'gave it a four');
+INSERT INTO `service_call` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `business_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (1, 1, 1, 1, 'No heat', '2022-01-01', '2022-01-02', 0, 12.99, 1, 4, 'stuff happened', 1, 1, 3, 'I give it a 3');
+INSERT INTO `service_call` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `business_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (2, 2, 1, 1, 'maintenance', '2022-01-01', '2022-01-02', 0, 14.21, 0, 3, 'fixes it', 1, 2, 4, 'gave it a four');
 
 COMMIT;
 

@@ -35,7 +35,7 @@ public class Address {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "address")
-	private List<Service> services;
+	private List<ServiceCall> serviceCalls;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "address")
@@ -74,11 +74,11 @@ public class Address {
 	/* ----------------------------------------------------------------------------
 		Get/Set Services
 	---------------------------------------------------------------------------- */
-	public List<Service> getServices() {
-		return services;
+	public List<ServiceCall> getServiceCalls() {
+		return serviceCalls;
 	}
-	public void setServices(List<Service> services) {
-		this.services = services;
+	public void setServiceCalls(List<ServiceCall> serviceCalls) {
+		this.serviceCalls = serviceCalls;
 	}
 
 	
