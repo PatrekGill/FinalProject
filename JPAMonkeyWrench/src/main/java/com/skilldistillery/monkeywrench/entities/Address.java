@@ -24,6 +24,8 @@ public class Address {
 	private String street2;
 	@Column(name = "state_abbv")
 	private String stateAbbv;
+	@Column(name="zip_code")
+	private int zipCode;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -39,7 +41,6 @@ public class Address {
 	
 	private String city;
 	private String street;
-	private int zipCode;
 	private String notes;
 
 	/* ----------------------------------------------------------------------------

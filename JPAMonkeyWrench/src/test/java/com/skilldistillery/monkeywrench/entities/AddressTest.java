@@ -60,7 +60,7 @@ class AddressTest {
 	@Test
 	void test_address_stateAbbv_mapping() {
 		assertNotNull(address);
-		assertEquals("PA",address.getStreet2());
+		assertEquals("PA",address.getStateAbbv());
 	}
 	
 	@Test
