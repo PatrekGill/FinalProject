@@ -14,23 +14,23 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 	private ServiceCallRepository serviceCallRepo;
 	
 	@Override
-	public List<ServiceCall> getAllService() {
+	public List<ServiceCall> getAllServiceCall() {
 		return serviceCallRepo.findAll();
 	}
 	
 	@Override
-	public ServiceCall getServiceById(int serviceId) {
-		return serviceCallRepo.getById(serviceId);
+	public ServiceCall getServiceCallById(int serviceCallId) {
+		return serviceCallRepo.getById(serviceCallId);
 	}
 
 	@Override
-	public ServiceCall updateServiceById(ServiceCall service, int serviceId) {
+	public ServiceCall updateServiceCallById(ServiceCall serviceCall, int serviceCallId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean deleteService(int serviceId) {
+	public boolean deleteServiceCall(int serviceCallId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
