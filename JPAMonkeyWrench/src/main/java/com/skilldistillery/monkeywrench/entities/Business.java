@@ -37,8 +37,8 @@ public class Business {
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "business_user",
-					   joinColumns = @JoinColumn(name = "business_id"),
-					   inverseJoinColumns = @JoinColumn(name = "user_id"))
+	   joinColumns = @JoinColumn(name = "business_id"),
+	   inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 	
 	@JsonIgnore

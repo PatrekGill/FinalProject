@@ -12,10 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ServiceCommentTest {
+class ProblemTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private ServiceComment comment;
+	private Problem problem;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,41 +30,25 @@ class ServiceCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		comment = em.find(ServiceComment.class, 1);
+		problem = em.find(Problem.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		comment = null;
-	}
-
-	@Test
-	void test_comment_text_mapping() {
-		assertNotNull(comment);
-		assertNotNull(comment.getText());
-		assertEquals("fix my stuff",comment.getText());
+		problem = null;
 	}
 	
 	@Test
-	void test_comment_user_mapping() {
-		assertNotNull(comment);
-		assertNotNull(comment.getUser());
-		assertEquals(2,comment.getUser().getId());
+	void test_Problem_Description_mapping() {
+		assertNotNull(problem);
+		assertEquals("NO HEAT",problem.getDescription());
 	}
 	
+	//Missing tests for MTM etc.
 	@Test
-	void test_comment_service_mapping() {
-		assertNotNull(comment);
-		assertNotNull(comment.getServiceCall());
-		assertEquals(1,comment.getServiceCall().getId());
+	void test_Problem_Services_mapping() {
+		assertNotNull(problem.getServices());
+		assertTrue(problem.getServices().size() > 1);
 	}
-	
-	@Test
-	void test_comment_date_mapping() {
-		assertNotNull(comment);
-		assertNotNull(comment.getCommentDate());
-		assertEquals(2022,comment.getCommentDate().getYear());
-	}
-
 }
