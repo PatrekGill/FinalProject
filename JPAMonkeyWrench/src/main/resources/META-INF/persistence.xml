@@ -5,6 +5,7 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 	<class>com.skilldistillery.monkeywrench.entities.Address</class>
+	<class>com.skilldistillery.monkeywrench.entities.Business</class>
 	<class>com.skilldistillery.monkeywrench.entities.Equipment</class>
 	<class>com.skilldistillery.monkeywrench.entities.EquipmentType</class>
 	<class>com.skilldistillery.monkeywrench.entities.Model</class>
