@@ -1,6 +1,7 @@
 package com.skilldistillery.monkeywrench.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,21 +21,28 @@ public class ModelServiceImpl implements ModelService {
 	}
 
 	@Override
-	public Model createNewModel() {
-		// TODO Auto-generated method stub
+	public Model createNewModel(Model model) {
+		return modelRepo.saveAndFlush(model);
+	}
+
+	@Override
+	public Model updateModel(Model model, int modelId) {
+		model.setId(modelId);
+		if(modelRepo.existsById(modelId)) {
+			return modelRepo.saveAndFlush(model);
+		}
 		return null;
 	}
 
 	@Override
-	public Model updateModel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean deleteModel() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteModel(int modelId) {
+		boolean deletedModel = false;
+		Optional<Model> op = modelRepo.findById(modelId);
+		if(op.isPresent()) {
+			modelRepo.deleteById(modelId);
+			deletedModel = true;
+		}
+		return deletedModel;
 	}
 
 	
