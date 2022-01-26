@@ -82,5 +82,12 @@ class AddressTest {
 		assertNotNull(address.getNotes());
 		assertEquals("notes",address.getNotes());
 	}
+	
+	@Test
+	void test_address_services_mapping() {
+		assertNotNull(address);
+		assertNotNull(address.getServices());
+		assertFalse(address.getServices().isEmpty());
+	}
 
 }
