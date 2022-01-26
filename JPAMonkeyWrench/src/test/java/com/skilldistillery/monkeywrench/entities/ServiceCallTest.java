@@ -12,10 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ServiceTest {
+class ServiceCallTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Service service;
+	private ServiceCall service;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,7 +30,7 @@ class ServiceTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		service = em.find(Service.class, 1);
+		service = em.find(ServiceCall.class, 1);
 	}
 
 	@AfterEach

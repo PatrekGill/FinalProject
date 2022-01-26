@@ -10,7 +10,7 @@
 	<class>com.skilldistillery.monkeywrench.entities.EquipmentType</class>
 	<class>com.skilldistillery.monkeywrench.entities.Model</class>
 	<class>com.skilldistillery.monkeywrench.entities.Problem</class>
-	<class>com.skilldistillery.monkeywrench.entities.Service</class>
+	<class>com.skilldistillery.monkeywrench.entities.ServiceCall</class>
 	<class>com.skilldistillery.monkeywrench.entities.ServiceComment</class>
 	<class>com.skilldistillery.monkeywrench.entities.ServiceType</class>
 	<class>com.skilldistillery.monkeywrench.entities.Solution</class>

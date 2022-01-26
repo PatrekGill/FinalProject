@@ -86,8 +86,8 @@ class AddressTest {
 	@Test
 	void test_address_services_mapping() {
 		assertNotNull(address);
-		assertNotNull(address.getServices());
-		assertFalse(address.getServices().isEmpty());
+		assertNotNull(address.getServiceCalls());
+		assertFalse(address.getServiceCalls().isEmpty());
 	}
 
 }
