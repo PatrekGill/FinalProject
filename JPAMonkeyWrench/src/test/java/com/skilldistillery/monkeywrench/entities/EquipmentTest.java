@@ -56,7 +56,7 @@ select * from equipment where id = 1;
 	void test1() {
 		assertNotNull(equipment);
 		assertEquals("1234", equipment.getSerialNumber());
-		assertEquals(50.0, equipment.getPrice());
+		assertEquals(50.25, equipment.getPrice());
 	}
 	
 	/*

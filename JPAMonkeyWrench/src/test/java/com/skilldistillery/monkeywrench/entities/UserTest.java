@@ -76,8 +76,8 @@ class UserTest {
 	@Test
 	void test_User_to_Service_mapping() {
 		assertNotNull(user);
-		assertNotNull(user.getServices());
-		assertTrue(user.getServices().size() > 0);
+		assertNotNull(user.getServiceCalls());
+		assertTrue(user.getServiceCalls().size() > 0);
 	}
 
 }
