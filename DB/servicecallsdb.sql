@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `notes` TEXT NULL,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(200) NOT NULL,
+  `created_date` DATETIME NULL,
+  `updated_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
@@ -84,6 +86,28 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `contractor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `contractor` ;
+
+CREATE TABLE IF NOT EXISTS `contractor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `business_name` VARCHAR(200) NULL,
+  `logo_url` VARCHAR(200) NULL,
+  `created_date` DATETIME NULL,
+  `updated_date` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_contractor_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_contractor_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `service`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `service` ;
@@ -101,10 +125,16 @@ CREATE TABLE IF NOT EXISTS `service` (
   `estimate` TINYINT(1) NULL DEFAULT 0,
   `hours_labor` INT NULL DEFAULT 0,
   `contractor_notes` TEXT NULL,
+  `contractor_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `customer_rating` INT NULL,
+  `customer_rating_comment` TEXT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_service_call_address_idx` (`address_id` ASC),
   INDEX `fk_service_call_problem1_idx` (`problem_id` ASC),
   INDEX `fk_service_call_solution1_idx` (`solution_id` ASC),
+  INDEX `fk_service_contractor1_idx` (`contractor_id` ASC),
+  INDEX `fk_service_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_service_call_address`
     FOREIGN KEY (`address_id`)
     REFERENCES `address` (`id`)
@@ -118,6 +148,16 @@ CREATE TABLE IF NOT EXISTS `service` (
   CONSTRAINT `fk_service_call_solution1`
     FOREIGN KEY (`solution_id`)
     REFERENCES `solution` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_service_contractor1`
+    FOREIGN KEY (`contractor_id`)
+    REFERENCES `contractor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_service_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -195,6 +235,7 @@ CREATE TABLE IF NOT EXISTS `service_comment` (
   `user_id` INT NOT NULL,
   `service_id` INT NOT NULL,
   `text` TEXT NOT NULL,
+  `comment_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_service_comment_user1_idx` (`user_id` ASC),
   INDEX `fk_service_comment_service1_idx` (`service_id` ASC),
@@ -212,24 +253,61 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `contractor_service`
+-- Table `contractor_user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `contractor_service` ;
+DROP TABLE IF EXISTS `contractor_user` ;
 
-CREATE TABLE IF NOT EXISTS `contractor_service` (
-  `service_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `contractor_user` (
+  `contractor_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  PRIMARY KEY (`service_id`, `user_id`),
-  INDEX `fk_service_has_user_user1_idx` (`user_id` ASC),
-  INDEX `fk_service_has_user_service1_idx` (`service_id` ASC),
-  CONSTRAINT `fk_service_has_user_service1`
-    FOREIGN KEY (`service_id`)
-    REFERENCES `service` (`id`)
+  PRIMARY KEY (`contractor_id`, `user_id`),
+  INDEX `fk_contractor_has_user_user1_idx` (`user_id` ASC),
+  INDEX `fk_contractor_has_user_contractor1_idx` (`contractor_id` ASC),
+  CONSTRAINT `fk_contractor_has_user_contractor1`
+    FOREIGN KEY (`contractor_id`)
+    REFERENCES `contractor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_service_has_user_user1`
+  CONSTRAINT `fk_contractor_has_user_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `service_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `service_type` ;
+
+CREATE TABLE IF NOT EXISTS `service_type` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `description` VARCHAR(250) NULL,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `contractor_service_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `contractor_service_type` ;
+
+CREATE TABLE IF NOT EXISTS `contractor_service_type` (
+  `contractor_id` INT NOT NULL,
+  `service_type_id` INT NOT NULL,
+  PRIMARY KEY (`contractor_id`, `service_type_id`),
+  INDEX `fk_contractor_has_service_type_service_type1_idx` (`service_type_id` ASC),
+  INDEX `fk_contractor_has_service_type_contractor1_idx` (`contractor_id` ASC),
+  CONSTRAINT `fk_contractor_has_service_type_contractor1`
+    FOREIGN KEY (`contractor_id`)
+    REFERENCES `contractor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_contractor_has_service_type_service_type1`
+    FOREIGN KEY (`service_type_id`)
+    REFERENCES `service_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -250,8 +328,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `phone_number`, `role`, `enabled`, `notes`, `username`, `password`) VALUES (1, 'John', 'Doe', '1231231111', 'contractor', 1, 'hes a guy', 'johndoe', 'johndoe');
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `phone_number`, `role`, `enabled`, `notes`, `username`, `password`) VALUES (2, 'Test', 'Testerson', '1231232222', 'customer', 1, 'Tests a lot', 'test', 'test');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `phone_number`, `role`, `enabled`, `notes`, `username`, `password`, `created_date`, `updated_date`) VALUES (1, 'John', 'Doe', '1231231111', 'contractor', 1, 'hes a guy', 'johndoe', 'johndoe', '2022-01-6 18:52:02', '2022-01-6 18:52:03');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `phone_number`, `role`, `enabled`, `notes`, `username`, `password`, `created_date`, `updated_date`) VALUES (2, 'Test', 'Testerson', '1231232222', 'customer', 1, 'Tests a lot', 'test', 'test', '2022-01-8 18:52:02', '2022-01-8 18:52:04');
 
 COMMIT;
 
@@ -312,12 +390,22 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `contractor`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `servicecallsdb`;
+INSERT INTO `contractor` (`id`, `user_id`, `business_name`, `logo_url`, `created_date`, `updated_date`) VALUES (1, 1, 'CJ\'s', 'https://image.shutterstock.com/z/stock-photo-cassette-type-air-condition-and-hvac-system[…]r-bare-skin-ceiling-of-insulated-metal-roof-735756277.jpg', '2022-01-7 18:52:01', '2022-01-7 18:52:02');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `service`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`) VALUES (1, 1, NULL, NULL, 'No heat', '2022-01-01', '2022-01-02', 0, NULL, NULL, NULL, NULL);
-INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`) VALUES (2, 2, NULL, NULL, 'maintenance', '2022-01-01', '2022-01-02', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `contractor_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (1, 1, 1, 1, 'No heat', '2022-01-01', '2022-01-02', 0, 12.99, 1, 4, 'stuff happend', 1, 1, 3, 'I give it a 3');
+INSERT INTO `service` (`id`, `address_id`, `problem_id`, `solution_id`, `problem_description`, `date_created`, `date_scheduled`, `completed`, `total_cost`, `estimate`, `hours_labor`, `contractor_notes`, `contractor_id`, `user_id`, `customer_rating`, `customer_rating_comment`) VALUES (2, 2, 1, 1, 'maintenance', '2022-01-01', '2022-01-02', 0, 14.21, 0, 3, 'fixes it', 1, 2, 4, 'gave it a four');
 
 COMMIT;
 
@@ -358,18 +446,38 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`) VALUES (1, 2, 1, 'fix my stuff');
-INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`) VALUES (2, 1, 1, 'I\'m getting there');
+INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`, `comment_date`) VALUES (1, 2, 1, 'fix my stuff', NULL);
+INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`, `comment_date`) VALUES (2, 1, 1, 'I\'m getting there', NULL);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `contractor_service`
+-- Data for table `contractor_user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `contractor_service` (`service_id`, `user_id`) VALUES (1, 1);
+INSERT INTO `contractor_user` (`contractor_id`, `user_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `service_type`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `servicecallsdb`;
+INSERT INTO `service_type` (`id`, `description`, `name`) VALUES (1, NULL, 'HVAC Maintenance & Repair');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `contractor_service_type`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `servicecallsdb`;
+INSERT INTO `contractor_service_type` (`contractor_id`, `service_type_id`) VALUES (1, 1);
 
 COMMIT;
 
