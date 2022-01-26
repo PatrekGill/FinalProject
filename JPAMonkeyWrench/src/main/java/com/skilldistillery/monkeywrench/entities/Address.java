@@ -22,6 +22,7 @@ public class Address {
 	
 	@Column(name = "street_2")
 	private String street2;
+	
 	@Column(name = "state_abbv")
 	private String stateAbbv;
 	
@@ -119,15 +120,6 @@ public class Address {
 	}
 	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
-	}
-
-
-	public List<Service> getServices() {
-		return services;
-	}
-
-	public void setServices(List<Service> services) {
-		this.services = services;
 	}
 
 
