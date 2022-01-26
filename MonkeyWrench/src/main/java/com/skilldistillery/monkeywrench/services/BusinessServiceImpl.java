@@ -22,7 +22,7 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public Business show(String username, int tid) {
+	public Business findById(int id) {
 		return null;
 	}
 
@@ -32,17 +32,17 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public Business update(String username, int tid, Business business) {
+	public Business update(String username, int id, Business business) {
 		return null;
 	}
 
 	@Override
-	public boolean destroy(String username, int tid) {
+	public boolean deleteById(String username, int id) {
 		return false;
 	}
 
 	@Override
-	public boolean existsById(int tid) {
+	public boolean existsById(int id) {
 		return false;
 	}
 	

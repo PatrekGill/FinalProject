@@ -7,13 +7,13 @@ import com.skilldistillery.monkeywrench.entities.Business;
 public interface BusinessService {
 	public List<Business> index(String username);
 
-    public Business show(String username, int tid);
+    public Business findById(int id);
 
     public Business create(String username, Business business);
 
-    public Business update(String username, int tid, Business business);
+    public Business update(String username, int id, Business business);
 
-    public boolean destroy(String username, int tid);
-    
-    public boolean existsById(int tid);
+    public boolean existsById(int id);
+
+	boolean deleteById(String username, int id);
 }
