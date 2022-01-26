@@ -48,7 +48,7 @@ class ProblemTest {
 	//Missing tests for MTM etc.
 	@Test
 	void test_Problem_Services_mapping() {
-		assertNotNull(problem);
-		assertEquals("NO HEAT",problem.getServices());
+		assertNotNull(problem.getServices());
+		assertTrue(problem.getServices().size() > 1);
 	}
 }
