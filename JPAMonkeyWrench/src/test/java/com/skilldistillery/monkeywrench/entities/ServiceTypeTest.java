@@ -42,7 +42,7 @@ class ServiceTypeTest {
 	}
 
 	@Test
-	void test_User_name_mapping() {
+	void test_ServiceType_name_mapping() {
 		assertNotNull(serviceType);
 		assertEquals("HVAC Maintenance & Repair ", serviceType.getName());
 	}
