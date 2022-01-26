@@ -41,6 +41,7 @@ public class ServiceCall {
 	@Column(name = "contractor_notes")
 	private String contractorNotes;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
@@ -57,6 +58,7 @@ public class ServiceCall {
 	@OneToMany(mappedBy = "serviceCall")
 	private List<ServiceComment> comments;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
