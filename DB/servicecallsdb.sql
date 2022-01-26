@@ -93,6 +93,7 @@ DROP TABLE IF EXISTS `business` ;
 CREATE TABLE IF NOT EXISTS `business` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
+  `enabled` TINYINT(1) NOT NULL DEFAULT 1,
   `name` VARCHAR(200) NULL,
   `logo_url` VARCHAR(200) NULL,
   `created_date` DATETIME NULL,
@@ -119,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `service_call` (
   `solution_id` INT NULL,
   `problem_description` TEXT NOT NULL,
   `date_created` DATETIME NULL,
-  `date_scheduled` DATETIME NOT NULL,
+  `date_scheduled` DATETIME NULL,
   `completed` TINYINT(1) NOT NULL DEFAULT 0,
   `total_cost` DECIMAL(25,2) NULL DEFAULT 0,
   `estimate` TINYINT(1) NULL DEFAULT 0,
@@ -394,7 +395,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `business` (`id`, `user_id`, `name`, `logo_url`, `created_date`, `updated_date`) VALUES (1, 1, 'CJ\'s', 'https://image.shutterstock.com/z/stock-photo-cassette-type-air-condition-and-hvac-system[…]r-bare-skin-ceiling-of-insulated-metal-roof-735756277.jpg', '2022-01-7 18:52:01', '2022-01-7 18:52:02');
+INSERT INTO `business` (`id`, `user_id`, `enabled`, `name`, `logo_url`, `created_date`, `updated_date`) VALUES (1, 1, 1, 'CJ\'s', 'https://image.shutterstock.com/z/stock-photo-cassette-type-air-condition-and-hvac-system[…]r-bare-skin-ceiling-of-insulated-metal-roof-735756277.jpg', '2022-01-7 18:52:01', '2022-01-7 18:52:02');
 
 COMMIT;
 
