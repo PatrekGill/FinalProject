@@ -65,5 +65,19 @@ class UserTest {
 		assertNotNull(user.getRole());
 		assertEquals("contractor",user.getRole());
 	}
+	
+	@Test
+	void test_User_to_Business_mapping() {
+		assertNotNull(user);
+		assertNotNull(user.getBusinesses());
+		assertTrue(user.getBusinesses().size() > 0);
+	}
+	
+	@Test
+	void test_User_to_Service_mapping() {
+		assertNotNull(user);
+		assertNotNull(user.getServices());
+		assertTrue(user.getServices().size() > 0);
+	}
 
 }
