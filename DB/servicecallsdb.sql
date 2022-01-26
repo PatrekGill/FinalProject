@@ -446,8 +446,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`, `comment_date`) VALUES (1, 2, 1, 'fix my stuff', NULL);
-INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`, `comment_date`) VALUES (2, 1, 1, 'I\'m getting there', NULL);
+INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`, `comment_date`) VALUES (1, 2, 1, 'fix my stuff', '2022-01-06 18:52:02');
+INSERT INTO `service_comment` (`id`, `user_id`, `service_id`, `text`, `comment_date`) VALUES (2, 1, 1, 'I\'m getting there', '2022-01-07 18:52:02');
 
 COMMIT;
 
