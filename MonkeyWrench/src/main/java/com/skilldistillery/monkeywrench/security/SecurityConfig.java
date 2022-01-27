@@ -30,26 +30,46 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // For CORS, the preflight request
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
+        
         .antMatchers("/api/equipment/**").permitAll()
+        
         .antMatchers("/api/serviceCalls/**").permitAll()
+        
         .antMatchers("/api/user/**").permitAll()
+        
         .antMatchers("/api/users/**").permitAll()
+        
         .antMatchers("/api/model/**").permitAll()
+        
         .antMatchers("/api/type/**").permitAll()
+        
         .antMatchers("/api/servicecomment/**").permitAll()
+        
         .antMatchers("/api/servicecomments/**").permitAll()
+        
         .antMatchers("/api/solution/**").permitAll()
+        // Address
         .antMatchers(HttpMethod.GET,"/api/address").permitAll()
         .antMatchers(HttpMethod.GET,"/api/address/**").permitAll()
         .antMatchers(HttpMethod.DELETE,"/api/address/**").authenticated()
         .antMatchers(HttpMethod.PUT,"/api/address/**").authenticated()
         .antMatchers(HttpMethod.POST,"/api/address").authenticated()
+        // ServiceType
+        .antMatchers(HttpMethod.GET,"/api/servicetype").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/servicetype/**").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/servicetype/**").authenticated()
+        .antMatchers(HttpMethod.PUT,"/api/servicetype/**").authenticated()
+        .antMatchers(HttpMethod.POST,"/api/servicetype").authenticated()
+        
         .antMatchers("/api/problem/**").permitAll()
+        
+        // Business
         .antMatchers(HttpMethod.GET,"/api/business").permitAll()
         .antMatchers(HttpMethod.GET,"/api/business/**").permitAll()
         .antMatchers(HttpMethod.DELETE,"/api/business/**").authenticated()
         .antMatchers(HttpMethod.PUT,"/api/business/**").authenticated()
         .antMatchers(HttpMethod.POST,"/api/business").authenticated()
+        
         .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
         .anyRequest().permitAll()               // All other requests are allowed without authorization.
         .and()

@@ -17,117 +17,119 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.monkeywrench.entities.Business;
-import com.skilldistillery.monkeywrench.services.BusinessService;
+import com.skilldistillery.monkeywrench.entities.ServiceType;
+import com.skilldistillery.monkeywrench.services.ServiceTypeService;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin({"*", "http://localhost:4200"})
-public class BusinessController {
+public class ServiceTypeController {
 	@Autowired
-	private BusinessService businessService;
+	private ServiceTypeService serviceTypeService;
 
 	/* ----------------------------------------------------------------------------
-		GET all Businesses
+		GET all serviceTypes
 	---------------------------------------------------------------------------- */
-	@GetMapping(path="business")
-	public List<Business> getAll(
+	@GetMapping(path="servicetype")
+	public List<ServiceType> getAll(
 		HttpServletRequest req, 
 		HttpServletResponse res
 	) {
-		return businessService.index();
+		return serviceTypeService.index();
 	}
 	
 
 	/* ----------------------------------------------------------------------------
-		GET business by id
+		GET serviceType by Id
 	---------------------------------------------------------------------------- */
-	@GetMapping("business/{id}")
-	public Business getById(
+	@GetMapping("servicetype/{id}")
+	public ServiceType getById(
 		@PathVariable int id,
 		HttpServletResponse res
 	) {
-		Business business = null;
-		if (businessService.existsById(id)) {
-			business = businessService.findById(id);
+		ServiceType serviceType = null;
+		if (serviceTypeService.existsById(id)) {
+			serviceType = serviceTypeService.findById(id);
 			
 		} else {
 			res.setStatus(404);
 			
 		}
 
-		return business;
+		return serviceType;
 	}
+	
 	
 
 	/* ----------------------------------------------------------------------------
-		POST create business
+		POST create serviceType
 	---------------------------------------------------------------------------- */
-	@PostMapping(path="business")
-	public Business create(
+	@PostMapping(path="servicetype")
+	public ServiceType create(
 		HttpServletRequest req, 
 		HttpServletResponse res,
 		Principal principal,
-		@RequestBody Business business
+		@RequestBody ServiceType serviceType
 	) {
 		try {
-			business = businessService.create(principal.getName(),business);
+			serviceType = serviceTypeService.create(principal.getName(),serviceType);
 			res.setStatus(201);
 			
 			StringBuffer url = req.getRequestURL();
-			url.append("/").append(business.getId());
+			url.append("/").append(serviceType.getId());
 			res.setHeader("Location",url.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("Invalid business sent to create");
+			System.err.println("Invalid ServiceType sent to create");
 			res.setStatus(400);
-			business = null;
+			serviceType = null;
 			
 		}
 		
-		return business;
+		return serviceType;
 	}
+	
 	
 
 	/* ----------------------------------------------------------------------------
-		PUT update business
+		PUT update serviceType
 	---------------------------------------------------------------------------- */
-	@PutMapping("business/{id}")
-	public Business update(
+	@PutMapping("servicetype/{id}")
+	public ServiceType update(
 		@PathVariable int id,
-		@RequestBody Business business,
+		@RequestBody ServiceType serviceType,
 		HttpServletResponse res,
 		Principal principal
 	) {
 		try {
-			business = businessService.update(principal.getName(), id, business);
-			if (business == null) {
+			serviceType = serviceTypeService.update(principal.getName(), id, serviceType);
+			if (serviceType == null) {
 				res.setStatus(404);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("Invalid business sent to update");
+			System.err.println("Invalid ServiceType sent to update");
 			res.setStatus(400);
-			business = null;
+			serviceType = null;
 			
 		}
 		
-		return business;
+		return serviceType;
 	}
 	
 	/* ----------------------------------------------------------------------------
-		DELETE business
+		DELETE serviceType
 	---------------------------------------------------------------------------- */
-	@DeleteMapping("business/{id}")
-	public void deleteBusiness(
+	@DeleteMapping("servicetype/{id}")
+	public void delete(
 		@PathVariable int id,
 		HttpServletResponse res,
 		Principal principal
 	) {
-		if (businessService.existsById(id)) {
-			if (businessService.deleteById(principal.getName(),id)) {
+		if (serviceTypeService.existsById(id)) {
+			if (serviceTypeService.deleteById(principal.getName(),id)) {
 				res.setStatus(204);
 				
 			} else {

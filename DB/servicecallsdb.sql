@@ -331,6 +331,7 @@ START TRANSACTION;
 USE `servicecallsdb`;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `phone_number`, `role`, `enabled`, `notes`, `username`, `password`, `created_date`, `updated_date`) VALUES (1, 'John', 'Doe', '1231231111', 'contractor', 1, 'hes a guy', 'johndoe', '$2a$10$RRdxemmcZudAaoLiaevK8.L77H1tfgBxWcAOgHrcjwqFy3puA6xM2', '2022-01-6 18:52:02', '2022-01-6 18:52:03');
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `phone_number`, `role`, `enabled`, `notes`, `username`, `password`, `created_date`, `updated_date`) VALUES (2, 'Test', 'Testerson', '1231232222', 'customer', 1, 'Tests a lot', 'test', '$2a$10$vA.zLAZr/ihTPnn3boZ7CuuvhCtgO3vFVuDQVQ8MvkJZO1YajPRlC', '2022-01-8 18:52:02', '2022-01-8 18:52:04');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `phone_number`, `role`, `enabled`, `notes`, `username`, `password`, `created_date`, `updated_date`) VALUES (3, 'Smith', 'Jones', '1231232223', 'admin', 1, 'is and admin', 'admin', '$2a$10$ERLPMzTwDyd/XYJthi0Y2OjY.g2DF8LEv3MIW.g0ZvjXlCzQYTxTC', '2022-01-8 18:52:02', '2022-01-8 18:52:04');
 
 COMMIT;
 

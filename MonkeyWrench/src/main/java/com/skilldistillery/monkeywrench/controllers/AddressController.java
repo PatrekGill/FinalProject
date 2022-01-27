@@ -120,7 +120,7 @@ public class AddressController {
 	}
 	
 	/* ----------------------------------------------------------------------------
-		DELETE game
+		DELETE address
 	---------------------------------------------------------------------------- */
 	@DeleteMapping("address/{id}")
 	public void delete(
