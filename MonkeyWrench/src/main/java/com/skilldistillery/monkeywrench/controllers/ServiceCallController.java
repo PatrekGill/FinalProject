@@ -30,6 +30,14 @@ public class ServiceCallController {
 		return sCallSvc.getAllServiceCall();
 	}
 	
+	//get mapping (GET)
+	@GetMapping("api/serviceCalls/{scId}")
+	public ServiceCall getServiceCallById( 
+			@PathVariable int scId
+			) {
+		return sCallSvc.getServiceCallById(scId);
+	}
+	
 	
 	// request mapping (POST)
 	@PostMapping("api/serviceCalls/")
@@ -54,7 +62,7 @@ public class ServiceCallController {
 	}
 	
 	// put mapping (PUT)
-	@PutMapping("serviceCalls/{scId}")
+	@PutMapping("api/serviceCalls/{scId}")
 	public ServiceCall updateServiceCall(
 			@PathVariable int scId, 
 			@RequestBody ServiceCall servCall,
@@ -62,7 +70,9 @@ public class ServiceCallController {
 			HttpServletResponse res
 			) {		
 		try {
+			System.out.println("===============================");
 			servCall = sCallSvc.updateServiceCallById(servCall, scId);
+			System.out.println("servCall: " + servCall.getId());
 			if(servCall == null) {
 				res.setStatus(404);
 				return null;
