@@ -16,58 +16,59 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.monkeywrench.entities.Model;
-import com.skilldistillery.monkeywrench.services.ModelService;
+import com.skilldistillery.monkeywrench.entities.EquipmentType;
+import com.skilldistillery.monkeywrench.services.EquipmentTypeService;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin({"*", "http://localhost:4300"})
-public class ModelController {
+public class EquipmentTypeController {
 	
 	@Autowired
-	private ModelService modelService;
+	EquipmentTypeService typeService;
 	
-	@GetMapping("model")
-	public List<Model> getAllModels(){
-		return modelService.findAllModels();
+	@GetMapping("type")
+	public List<EquipmentType> getAllEquipmentTypes(){
+		return typeService.getAllEquipmentType();
 	}
 	
-	@PostMapping("model")
-	public Model createNewModel(@RequestBody Model model, HttpServletResponse res, HttpServletRequest req) {
+	@PostMapping("type")
+	public EquipmentType createNewEquipmentType(@RequestBody EquipmentType type, HttpServletResponse res, HttpServletRequest req) {
 		try {
-			model = modelService.createNewModel(model);
+			type = typeService.createNewEquipmentType(type);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
-			url.append("/").append(model.getId());
-			res.setHeader("Location", url.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("Invalid Model sent");
-			res.setStatus(400);
-			model = null;
+			url.append("/").append(type.getId());
 		}
-		return model;
+		catch(Exception e) {
+			e.printStackTrace();
+			System.err.println("Invalid equipment type sent");
+			res.setStatus(400);
+			type = null;
+		}
+		return type;
 	}
 	
-	@PutMapping("model/{modelId}")
-	public Model updateModel(@RequestBody Model model, @PathVariable int modelId, HttpServletResponse res) {
+	@PutMapping("type/{typeId}")
+	public EquipmentType updateEquipmentType(@RequestBody EquipmentType type, @PathVariable int typeId, HttpServletResponse res) {
 		try {
-			model = modelService.updateModel(model, modelId);
-			if(model == null) {
+			type = typeService.updateEquipmentType(type, typeId);
+			if(type == null) {
 				res.setStatus(404);
 			}
-		} catch (Exception e) {
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
-			model = null;
+			type = null;
 		}
-		return model;
+		return type;
 	}
 	
-	@DeleteMapping("model/{modelId}")
-	public void deleteModel(@PathVariable int modelId, HttpServletResponse res) {
+	@DeleteMapping("type/{typeId}")
+	public void deleteEquipmentType(@PathVariable int typeId, HttpServletResponse res) {
 		try {
-			if(modelService.deleteModel(modelId)) {
+			if(typeService.deleteEquipmentType(typeId)) {
 				res.setStatus(204);
 			}
 			else {
