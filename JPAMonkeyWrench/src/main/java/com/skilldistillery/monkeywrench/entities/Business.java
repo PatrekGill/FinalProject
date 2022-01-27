@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Business {
@@ -36,14 +37,28 @@ public class Business {
 	
 	private boolean enabled;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties(
+		{
+			"password",
+			"notes",
+			"createdDate",
+			"updatedDate"
+		}
+	)
 	@ManyToMany
 	@JoinTable(name = "business_user",
 	   joinColumns = @JoinColumn(name = "business_id"),
 	   inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties(
+		{
+			"password",
+			"notes",
+			"createdDate",
+			"updatedDate"
+		}
+	)
 	@ManyToMany(mappedBy = "businesses")
 	private List<ServiceType> serviceTypes;
 	

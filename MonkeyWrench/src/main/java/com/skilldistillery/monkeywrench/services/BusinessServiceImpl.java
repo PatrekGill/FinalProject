@@ -63,7 +63,11 @@ public class BusinessServiceImpl implements BusinessService {
 			} else {
 				managed.setName(business.getName());
 				managed.setLogoUrl(business.getLogoUrl());
+				managed.setServiceTypes(business.getServiceTypes());
+				managed.setUsers(business.getUsers());
+				
 				managed = businessRepo.saveAndFlush(managed);
+				
 			}
 		}
 		

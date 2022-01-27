@@ -61,7 +61,7 @@ public class ServiceTypeServiceImpl implements ServiceTypeService {
 	public ServiceType update(String username, int id, ServiceType serviceType) {
 		User user = userRepo.findByUsername(username);
 		ServiceType managed = null;
-		if (existsById(id) && isAdmin(userRepo.findByUsername(username))) {
+		if (existsById(id) && isAdmin(user)) {
 			managed = findById(id);
 			managed.setName(serviceType.getName());
 			managed.setDescription(serviceType.getDescription());
