@@ -5,7 +5,7 @@ import java.util.List;
 import com.skilldistillery.monkeywrench.entities.Business;
 
 public interface BusinessService {
-	public List<Business> index(String username);
+	public List<Business> index();
 
     public Business findById(int id);
 

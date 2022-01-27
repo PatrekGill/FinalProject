@@ -17,117 +17,119 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.monkeywrench.entities.Business;
-import com.skilldistillery.monkeywrench.services.BusinessService;
+import com.skilldistillery.monkeywrench.entities.Address;
+import com.skilldistillery.monkeywrench.services.AddressService;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin({"*", "http://localhost:4200"})
-public class BusinessController {
+public class AddressController {
 	@Autowired
-	private BusinessService businessService;
+	private AddressService addressService;
 
 	/* ----------------------------------------------------------------------------
-		GET all Businesses
+		GET all Addresses
 	---------------------------------------------------------------------------- */
-	@GetMapping(path="business")
-	public List<Business> getAll(
+	@GetMapping(path="address")
+	public List<Address> getAll(
 		HttpServletRequest req, 
 		HttpServletResponse res
 	) {
-		return businessService.index();
+		return addressService.index();
 	}
 	
 
 	/* ----------------------------------------------------------------------------
-		GET business by id
+		GET address by Id
 	---------------------------------------------------------------------------- */
-	@GetMapping("business/{id}")
-	public Business getById(
+	@GetMapping("address/{id}")
+	public Address getById(
 		@PathVariable int id,
 		HttpServletResponse res
 	) {
-		Business business = null;
-		if (businessService.existsById(id)) {
-			business = businessService.findById(id);
+		Address address = null;
+		if (addressService.existsById(id)) {
+			address = addressService.findById(id);
 			
 		} else {
 			res.setStatus(404);
 			
 		}
 
-		return business;
+		return address;
 	}
+	
 	
 
 	/* ----------------------------------------------------------------------------
-		POST create business
+		POST create address
 	---------------------------------------------------------------------------- */
-	@PostMapping(path="business")
-	public Business create(
+	@PostMapping(path="address")
+	public Address create(
 		HttpServletRequest req, 
 		HttpServletResponse res,
 		Principal principal,
-		@RequestBody Business business
+		@RequestBody Address address
 	) {
 		try {
-			business = businessService.create(principal.getName(),business);
+			address = addressService.create(principal.getName(),address);
 			res.setStatus(201);
 			
 			StringBuffer url = req.getRequestURL();
-			url.append("/").append(business.getId());
+			url.append("/").append(address.getId());
 			res.setHeader("Location",url.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("Invalid business sent to create");
+			System.err.println("Invalid address sent to create");
 			res.setStatus(400);
-			business = null;
+			address = null;
 			
 		}
 		
-		return business;
+		return address;
 	}
+	
 	
 
 	/* ----------------------------------------------------------------------------
-		PUT update business
+		PUT update address
 	---------------------------------------------------------------------------- */
-	@PutMapping("business/{id}")
-	public Business update(
+	@PutMapping("address/{id}")
+	public Address update(
 		@PathVariable int id,
-		@RequestBody Business business,
+		@RequestBody Address address,
 		HttpServletResponse res,
 		Principal principal
 	) {
 		try {
-			business = businessService.update(principal.getName(), id, business);
-			if (business == null) {
+			address = addressService.update(principal.getName(), id, address);
+			if (address == null) {
 				res.setStatus(404);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("Invalid business sent to update");
+			System.err.println("Invalid address sent to update");
 			res.setStatus(400);
-			business = null;
+			address = null;
 			
 		}
 		
-		return business;
+		return address;
 	}
 	
 	/* ----------------------------------------------------------------------------
 		DELETE game
 	---------------------------------------------------------------------------- */
-	@DeleteMapping("business/{id}")
-	public void deleteBusiness(
+	@DeleteMapping("address/{id}")
+	public void delete(
 		@PathVariable int id,
 		HttpServletResponse res,
 		Principal principal
 	) {
-		if (businessService.existsById(id)) {
-			if (businessService.deleteById(principal.getName(),id)) {
+		if (addressService.existsById(id)) {
+			if (addressService.deleteById(principal.getName(),id)) {
 				res.setStatus(204);
 				
 			} else {
