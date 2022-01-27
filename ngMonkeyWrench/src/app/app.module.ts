@@ -8,13 +8,15 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './component/home/home.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { ContractorLoginComponent } from './component/contractor-login/contractor-login.component';
+import { ContractorSidebarComponent } from './component/contractor-sidebar/contractor-sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    ContractorLoginComponent
+    ContractorLoginComponent,
+    ContractorSidebarComponent
   ],
   imports: [
     BrowserModule,
