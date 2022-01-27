@@ -1,1 +1,10 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+.marginMaker {
+	margin-left: 15px;
+  margin-right: 15px;
+}
+
+.helvetica {
+  font: Helvetica;
+}
+
