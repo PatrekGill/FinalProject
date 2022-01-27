@@ -1,6 +1,7 @@
 package com.skilldistillery.monkeywrench.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,9 +25,28 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 	}
 
 	@Override
-	public ServiceCall updateServiceCallById(ServiceCall serviceCall, int serviceCallId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ServiceCall updateServiceCallById(ServiceCall sCall, int scId) {
+		Optional<ServiceCall> sCallOpt = serviceCallRepo.findById(scId);
+		ServiceCall updatedCall = null;
+		if(sCallOpt.isPresent()) {
+			updatedCall.setAddress(sCall.getAddress());
+			updatedCall.setProblem(sCall.getProblem());
+			updatedCall.setSolution(sCall.getSolution());
+			updatedCall.setProblemDescription(sCall.getProblemDescription());
+			updatedCall.setDateCreated(sCall.getDateCreated());
+			updatedCall.setDateScheduled(sCall.getDateScheduled());
+			updatedCall.setCompleted(sCall.isCompleted());
+			updatedCall.setTotalCost(sCall.getTotalCost());
+			updatedCall.setEstimate(sCall.isEstimate());
+			updatedCall.setHoursLabor(sCall.getHoursLabor());
+			updatedCall.setContractorNotes(sCall.getContractorNotes());
+			updatedCall.setBusiness(sCall.getBusiness());
+			updatedCall.setUser(sCall.getUser());
+			updatedCall.setCustomerRating(sCall.getCustomerRating());
+			updatedCall.setCustomerRatingComment(sCall.getCustomerRatingComment());
+			serviceCallRepo.saveAndFlush(updatedCall);
+		}
+		return updatedCall;
 	}
 	
 	@Override

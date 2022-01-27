@@ -45,12 +45,10 @@ public class ServiceCall {
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
-//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "problem_id")
 	private Problem problem;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "solution_id")
 	private Solution solution;
@@ -69,6 +67,12 @@ public class ServiceCall {
 
 	private boolean completed;
 	private boolean estimate;
+	
+	@JoinColumn(name = "customer_rating")
+	private Integer customerRating;
+	
+	@JoinColumn(name = "customer_rating_comment")
+	private String customerRatingComment;
 
 	/* ----------------------------------------------------------------------------
 		Constructors
@@ -231,6 +235,26 @@ public class ServiceCall {
 	}
 	public void setBusiness(Business business) {
 		this.business = business;
+	}
+
+
+	public Integer getCustomerRating() {
+		return customerRating;
+	}
+
+
+	public void setCustomerRating(Integer customerRating) {
+		this.customerRating = customerRating;
+	}
+
+
+	public String getCustomerRatingComment() {
+		return customerRatingComment;
+	}
+
+
+	public void setCustomerRatingComment(String customerRatingComment) {
+		this.customerRatingComment = customerRatingComment;
 	}
 
 

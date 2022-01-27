@@ -6,4 +6,5 @@ import com.skilldistillery.monkeywrench.entities.ServiceCall;
 
 public interface ServiceCallRepository extends JpaRepository<ServiceCall, Integer> {
 
+	
 }
