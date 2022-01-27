@@ -40,11 +40,11 @@ public class Solution {
 		this.description = description;
 	}
 
-	public List<ServiceCall> getServices() {
+	public List<ServiceCall> getServiceCalls() {
 		return serviceCalls;
 	}
 
-	public void setServices(List<ServiceCall> serviceCalls) {
+	public void setServiceCalls(List<ServiceCall> serviceCalls) {
 		this.serviceCalls = serviceCalls;
 	}
 
