@@ -34,6 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/api/serviceCalls/**").permitAll()
         .antMatchers("/api/user/**").permitAll()
         .antMatchers("/api/users/**").permitAll()
+        .antMatchers("/api/model/**").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/business").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/business/**").permitAll()
+        .antMatchers(HttpMethod.DELETE,"/api/business/**").authenticated()
+        .antMatchers(HttpMethod.PUT,"/api/business/**").authenticated()
+        .antMatchers(HttpMethod.POST,"/api/business").authenticated()
         .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
         .anyRequest().permitAll()               // All other requests are allowed without authorization.
         .and()

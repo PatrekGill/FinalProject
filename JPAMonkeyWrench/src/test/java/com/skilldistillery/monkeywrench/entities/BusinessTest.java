@@ -43,15 +43,47 @@ class BusinessTest {
 	@Test
 	void test_Business_name_mapping() {
 		assertNotNull(business);
-		assertEquals("CJ's", business.getBusinessName());
+		assertEquals("CJ's", business.getName());
 	}
 	
 	@Test
 	void test_Business_CreatedDate_mapping() {
 		assertNotNull(business);
-		assertEquals(07 , business.getCreatedDate().getDayOfMonth());
-		assertEquals(01, business.getCreatedDate().getMonthValue());
+		assertEquals(7 , business.getCreatedDate().getDayOfMonth());
+		assertEquals(1, business.getCreatedDate().getMonthValue());
 		assertEquals(2022, business.getCreatedDate().getYear());
+	}
+	
+	@Test
+	void test_Business_UpdatedDate_mapping() {
+		assertNotNull(business);
+		assertEquals(7, business.getUpdatedDate().getDayOfMonth());
+	}
+	
+	@Test
+	void test_Business_logo_mapping() {
+		assertNotNull(business);
+		assertTrue(business.getLogoUrl().contains("https"));
+	}
+	
+	@Test
+	void test_Business_enabled_mapping() {
+		assertNotNull(business);
+		assertTrue(business.isEnabled());
+	}
+	
+	@Test
+	void test_Business_users_mapping() {
+		assertNotNull(business);
+		assertNotNull(business.getUsers());
+		assertFalse(business.getUsers().isEmpty());
+	}
+	
+	@Test
+	void test_Business_serviceTypes_mapping() {
+		assertNotNull(business);
+		assertNotNull(business.getServiceTypes());
+		assertFalse(business.getServiceTypes().isEmpty());
 	}
 	
 }

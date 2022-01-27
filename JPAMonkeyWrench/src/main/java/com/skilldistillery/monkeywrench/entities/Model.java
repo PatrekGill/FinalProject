@@ -21,6 +21,8 @@ public class Model {
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	private String name;
+	
 	@Column( name = "model_number")
 	private String modelNumber;
 	
@@ -44,6 +46,14 @@ public class Model {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getModelNumber() {

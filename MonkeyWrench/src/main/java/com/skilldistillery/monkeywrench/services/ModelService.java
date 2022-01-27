@@ -8,11 +8,11 @@ public interface ModelService {
 	
 	List<Model> findAllModels();
 	
-	Model createNewModel();
+	Model createNewModel(Model model);
 	
-	Model updateModel();
+	Model updateModel(Model model, int modelId);
 	
-	boolean deleteModel();
+	boolean deleteModel(int modelId);
 	
 	
 
