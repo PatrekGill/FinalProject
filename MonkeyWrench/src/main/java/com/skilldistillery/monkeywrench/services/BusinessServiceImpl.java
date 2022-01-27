@@ -38,8 +38,8 @@ public class BusinessServiceImpl implements BusinessService {
 		if (user != null) {
 			if (business.getId() > 0) {
 				business.setId(0);
-			} 
-			
+			}
+			business.setEnabled(true);
 			business.setUser(user);
 			business = businessRepo.saveAndFlush(business);
 			
