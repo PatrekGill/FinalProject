@@ -32,6 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
         .antMatchers("/api/equipment/**").permitAll()
         .antMatchers("/api/serviceCalls/**").permitAll()
+        .antMatchers("/api/user/**").permitAll()
+        .antMatchers("/api/users/**").permitAll()
         .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
         .anyRequest().permitAll()               // All other requests are allowed without authorization.
         .and()
