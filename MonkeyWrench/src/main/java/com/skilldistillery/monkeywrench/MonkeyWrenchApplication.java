@@ -12,7 +12,7 @@ public class MonkeyWrenchApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MonkeyWrenchApplication.class, args);
 //		PasswordEncoder encoder = new BCryptPasswordEncoder();
-//		System.out.println(encoder.encode("test"));
+//		System.out.println(encoder.encode("admin"));
 	}
 	
 	@Bean

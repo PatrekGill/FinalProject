@@ -82,7 +82,7 @@ public class AddressServiceImpl implements AddressService {
 					managed.setNotes(address.getNotes());
 				}
 				
-				addressRepo.saveAndFlush(managed);
+				managed = addressRepo.saveAndFlush(managed);
 			}
 		}
 		
