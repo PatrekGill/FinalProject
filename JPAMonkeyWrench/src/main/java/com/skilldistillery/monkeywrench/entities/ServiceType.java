@@ -12,10 +12,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="service_type")
 public class ServiceType {
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "business_service_type",
 			   joinColumns = @JoinColumn(name = "contractor_id"),
