@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,7 +54,25 @@ public class ServiceCallController {
 	}
 	
 	// put mapping (PUT)
-	
+	@PutMapping("serviceCalls/{scId}")
+	public ServiceCall updateServiceCall(
+			@PathVariable int scId, 
+			@RequestBody ServiceCall servCall,
+			HttpServletRequest req, 
+			HttpServletResponse res
+			) {		
+		try {
+			servCall = sCallSvc.updateServiceCallById(servCall, scId);
+			if(servCall == null) {
+				res.setStatus(404);
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		return servCall;
+	}
 	
 	// delete mapping (DELETE)
 	
