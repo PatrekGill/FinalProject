@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './component/home/home.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { ContractorLoginComponent } from './component/contractor-login/contractor-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavBarComponent
+    NavBarComponent,
+    ContractorLoginComponent
   ],
   imports: [
     BrowserModule,
