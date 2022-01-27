@@ -21,7 +21,7 @@ public class BusinessServiceImpl implements BusinessService {
 	private OptionalRetriever<Business> businessRetriever;
 
 	@Override
-	public List<Business> index(String username) {
+	public List<Business> index() {
 		return businessRepo.findAll();
 	}
 
