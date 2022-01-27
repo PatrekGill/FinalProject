@@ -45,12 +45,10 @@ public class ServiceCall {
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
-//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "problem_id")
 	private Problem problem;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "solution_id")
 	private Solution solution;
