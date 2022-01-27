@@ -39,6 +39,13 @@ public class AddressServiceImpl implements AddressService {
 			if (address.getId() > 0) {
 				address.setId(0);
 			}
+			
+			address.setUser(user);
+			boolean isContractor = user.getRole().toLowerCase().equals("contractor");
+			if (!isContractor) {
+				address.setNotes(null);
+			}
+			
 			address = addressRepo.saveAndFlush(address);
 			
 		} else {
@@ -54,9 +61,11 @@ public class AddressServiceImpl implements AddressService {
 		User user = userRepo.findByUsername(username);
 		Address managed = null;
 		if (existsById(id) && user != null) {
+			
 			managed = findById(id);
 			boolean isContractor = user.getRole().toLowerCase().equals("contractor");
-			boolean isAddressOwner = user != managed.getUser();
+			boolean isAddressOwner = user == managed.getUser();
+			
 			if (!isAddressOwner && !isContractor) {
 				managed = null;
 				
@@ -72,6 +81,8 @@ public class AddressServiceImpl implements AddressService {
 				if (isContractor) {
 					managed.setNotes(address.getNotes());
 				}
+				
+				addressRepo.saveAndFlush(managed);
 			}
 		}
 		
