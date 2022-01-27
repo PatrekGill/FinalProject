@@ -7,16 +7,16 @@ import com.skilldistillery.monkeywrench.entities.ServiceCall;
 public interface ServiceCallService {
 
 	// Get List of Services(All)
-	public List<ServiceCall> getAllServiceCall();
+	List<ServiceCall> getAllServiceCall();
 	
 	// Find by Service ID
-	public ServiceCall getServiceCallById(int serviceCallId);
+	ServiceCall getServiceCallById(int serviceCallId);
 	
 	// Create Service
-	
+	ServiceCall createNewServiceCall(ServiceCall serviceCall);
 	
 	// Update Service
-	public ServiceCall updateServiceCallById(ServiceCall serviceCall, int serviceCallId);
+	ServiceCall updateServiceCallById(ServiceCall serviceCall, int serviceCallId);
 	
 	// Delete Service
 	boolean deleteServiceCall(int serviceCallId);

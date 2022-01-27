@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -51,8 +51,22 @@ public class Business {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "business")
+	private List<ServiceCall> serviceCalls;
+
+
+/* ----------------------------------------------------------------------------
+	Constructors
+---------------------------------------------------------------------------- */
+	public Business() {}	
+	
+
+/* ----------------------------------------------------------------------------
+	Getters/Setters
+---------------------------------------------------------------------------- */
+
 	public int getId() {
 		return id;
 	}
@@ -124,6 +138,16 @@ public class Business {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	public List<ServiceCall> getServiceCalls() {
+		return serviceCalls;
+	}
+
+
+	public void setServiceCalls(List<ServiceCall> serviceCalls) {
+		this.serviceCalls = serviceCalls;
+	}
+
 
 	@Override
 	public int hashCode() {

@@ -28,12 +28,21 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public ServiceCall createNewServiceCall(ServiceCall serviceCall) {
+		serviceCall.setEstimate(false);
+		serviceCall.setCompleted(false);
+		return serviceCallRepo.save(serviceCall);
+	}
 
 	@Override
 	public boolean deleteServiceCall(int serviceCallId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 
 

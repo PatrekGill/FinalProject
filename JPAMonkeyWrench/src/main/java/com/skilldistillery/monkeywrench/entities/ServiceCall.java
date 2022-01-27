@@ -58,8 +58,11 @@ public class ServiceCall {
 	@JsonIgnore
 	@OneToMany(mappedBy = "serviceCall")
 	private List<ServiceComment> comments;
-	
-	@JsonIgnore
+		
+	@ManyToOne
+	@JoinColumn(name = "business_id")
+	private Business business;
+	 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -218,6 +221,16 @@ public class ServiceCall {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+/* ----------------------------------------------------------------------------
+	Get/Set business
+---------------------------------------------------------------------------- */
+	public Business getBusiness() {
+		return business;
+	}
+	public void setBusiness(Business business) {
+		this.business = business;
 	}
 
 
