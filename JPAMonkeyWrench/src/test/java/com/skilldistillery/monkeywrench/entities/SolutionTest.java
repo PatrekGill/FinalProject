@@ -49,8 +49,8 @@ class SolutionTest {
 	@Test
 	void test_Solution_To_Service_mapping() {
 		assertNotNull(solution);
-		assertNotNull(solution.getServices());
-		assertTrue(solution.getServices().size() > 0);
+		assertNotNull(solution.getServiceCalls());
+		assertTrue(solution.getServiceCalls().size() > 0);
 	}
 
 }

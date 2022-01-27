@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.monkeywrench.entities.ServiceCall;
 import com.skilldistillery.monkeywrench.repositories.ServiceCallRepository;
 
-@org.springframework.stereotype.Service
+@Service
 public class ServiceCallServiceImpl implements ServiceCallService{
 
 	@Autowired
@@ -21,32 +22,16 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 	
 	@Override
 	public ServiceCall getServiceCallById(int serviceCallId) {
-		return serviceCallRepo.getById(serviceCallId);
+		return serviceCallRepo.findById(serviceCallId).get();
 	}
 
 	@Override
 	public ServiceCall updateServiceCallById(ServiceCall sCall, int scId) {
-		Optional<ServiceCall> sCallOpt = serviceCallRepo.findById(scId);
-		ServiceCall updatedCall = null;
-		if(sCallOpt.isPresent()) {
-			updatedCall.setAddress(sCall.getAddress());
-			updatedCall.setProblem(sCall.getProblem());
-			updatedCall.setSolution(sCall.getSolution());
-			updatedCall.setProblemDescription(sCall.getProblemDescription());
-			updatedCall.setDateCreated(sCall.getDateCreated());
-			updatedCall.setDateScheduled(sCall.getDateScheduled());
-			updatedCall.setCompleted(sCall.isCompleted());
-			updatedCall.setTotalCost(sCall.getTotalCost());
-			updatedCall.setEstimate(sCall.isEstimate());
-			updatedCall.setHoursLabor(sCall.getHoursLabor());
-			updatedCall.setContractorNotes(sCall.getContractorNotes());
-			updatedCall.setBusiness(sCall.getBusiness());
-			updatedCall.setUser(sCall.getUser());
-			updatedCall.setCustomerRating(sCall.getCustomerRating());
-			updatedCall.setCustomerRatingComment(sCall.getCustomerRatingComment());
-			serviceCallRepo.saveAndFlush(updatedCall);
+		sCall.setId(scId);
+		if(serviceCallRepo.existsById(scId)) {
+			return serviceCallRepo.saveAndFlush(sCall);
 		}
-		return updatedCall;
+		return null;
 	}
 	
 	@Override
@@ -57,9 +42,15 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 	}
 
 	@Override
-	public boolean deleteServiceCall(int serviceCallId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteServiceCall(int scId) {
+		boolean deleted = false;
+		Optional<ServiceCall> op = serviceCallRepo.findById(scId);
+		if(op.isPresent()) {
+			ServiceCall sCall = op.get();
+			serviceCallRepo.delete(sCall);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 
