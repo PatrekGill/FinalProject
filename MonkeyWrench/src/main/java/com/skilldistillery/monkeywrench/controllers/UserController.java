@@ -27,7 +27,7 @@ public class UserController {
 	@Autowired
 	private UserService userServ;
 	
-	@GetMapping("users")
+	@GetMapping("user")
 	public List<User> index() {
 		return userServ.getAllUsers();
 	}
