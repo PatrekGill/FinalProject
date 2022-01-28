@@ -11,14 +11,21 @@ export class AuthService {
 
   // private baseUrl = 'http://localhost:8085/';
   private baseUrl = environment.baseUrl;
+  private loggedInUser: User | undefined;
 
   constructor(
     private http: HttpClient
-    ) { }
+    ) {}
+
+  getLoggedInUser(): User | undefined {
+    return this.loggedInUser;
+  }
 
   login(username: string, password: string) {
     // Make credentials
     const credentials = this.generateBasicAuthCredentials(username, password);
+    console.log(credentials);
+
     // Send credentials as Authorization header (this is spring security convention for basic auth)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -33,6 +40,8 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          console.log(credentials);
+
           return res;
         }),
         catchError((err: any) => {

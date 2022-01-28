@@ -10,6 +10,7 @@ import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { ContractorLoginComponent } from './component/contractor-login/contractor-login.component';
 import { ContractorSidebarComponent } from './component/contractor-sidebar/contractor-sidebar.component';
 import { BusinessComponent } from './component/business/business.component';
+import { BusinessService } from './services/business.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BusinessComponent } from './component/business/business.component';
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    BusinessService
   ],
   bootstrap: [AppComponent]
 })
