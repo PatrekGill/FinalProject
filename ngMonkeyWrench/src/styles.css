@@ -12,6 +12,10 @@
   font: Helvetica;
 }
 
+.navbar{
+  padding-left: 15px;
+  padding-right: 15px;
+}
 /* The side navigation menu */
 .sidebar {
   margin: 0;
@@ -19,6 +23,7 @@
   width: var(--sidebarwidth);
   background-color: #f1f1f1;
   position: fixed;
+  margin-top: 56px;
   height: 100%;
   overflow: auto;
 }
@@ -31,6 +36,9 @@
   text-decoration: none;
 }
 
+.loginLocation{
+  padding-right: 15px;
+}
 /* Active/current link */
 .sidebar a.active {
   background-color: #24A0ED;
@@ -52,7 +60,7 @@ div.content {
   padding: 1px 16px;
   height: 1000px;
   text-align: center;
-  padding-top: 25px;
+  padding-top: 81px;
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
@@ -117,4 +125,9 @@ font-size: 25.5px;
 
 .homeSpacer {
   padding-left: 20px;
+}
+
+.positionAbsolute{
+position: relative;
+
 }
