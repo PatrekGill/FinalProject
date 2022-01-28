@@ -17,7 +17,7 @@ import { BusinessComponent } from './component/business/business.component';
     HomeComponent,
     NavBarComponent,
     ContractorLoginComponent,
-    ContractorSidebarComponent
+    ContractorSidebarComponent,
     BusinessComponent
   ],
   imports: [
