@@ -28,6 +28,9 @@ export class UserComponent implements OnInit {
   currentUser: User = new User();
   editUser: boolean = false;
   editAddress: boolean = false;
+  pwUndo: string | undefined = '';
+
+
 
 
 
@@ -43,6 +46,9 @@ export class UserComponent implements OnInit {
   //     }
   //   });
   // }
+  decode(pw: string) {
+    return window.atob(pw);
+  }
 
   getUser(userId: number) {
     this.userService.show(userId).subscribe ({

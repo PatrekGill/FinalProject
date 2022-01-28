@@ -1,9 +1,9 @@
 <app-contractor-sidebar>Loading...</app-contractor-sidebar>
-<div class="content">
+<div class="userContent">
 
   <h1>Users Page - Under Construction</h1>
   <br>
-  <div class='wrapper container-fluid'>
+  <div class='wrapper'>
       <!-- <div>
         <div >
           <ul *ngFor="let user of users">Users
@@ -15,7 +15,8 @@
 
       </div> -->
 
-    <div class="border-radius: 2em " style="padding:10px;background:skyblue" >
+    <!-- <div class="border-radius: 2em " style="padding:10px;background:skyblue" > -->
+    <div class="clientListBox" >
       <div *ngIf="!editUser">
         <button (click)="editUser = true">Edit</button>
         <p>ID: {{currentUser.id}}</p>
