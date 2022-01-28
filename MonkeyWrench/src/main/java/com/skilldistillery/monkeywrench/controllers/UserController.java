@@ -33,7 +33,7 @@ public class UserController {
 	}
 	
 	@GetMapping("user/{userId}")
-	public User getUserById(@PathVariable Integer userId,
+	public User getUserById(@PathVariable int userId,
 			HttpServletResponse res) {
 		User user = userServ.getUserById(userId);
 		if(user == null) {
@@ -88,6 +88,15 @@ public class UserController {
 			e.printStackTrace();
 			res.setStatus(400);
 		}
+	}
+	
+	@GetMapping("username/{username}")
+	public User getUserByUsername(@PathVariable String username, HttpServletResponse res) {
+		User user = userServ.getByUsername(username);
+		if(user == null) {
+			res.setStatus(404);
+		}
+		return user;
 	}
 	
 	
