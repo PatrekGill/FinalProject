@@ -34,13 +34,17 @@ export class UserComponent implements OnInit {
 
 
 
-  loadUsers() {
-    this.userService.index().subscribe (
-      data => this.users = data,
-
-      err => console.log('Observer got an error ' + err)
-    )
-  };
+  // loadUsers() {
+  //   this.userService.index().subscribe ({
+  //     next: (users) => {
+  //       this.users = data;
+  //     },
+  //     error: (wrong) => {
+  //       console.error('UserComponent.getUser(): Error retreiving user.');
+  //       console.error(wrong);
+  //     }
+  //   });
+  // }
 
   getUser(userId: number) {
     this.userService.show(userId).subscribe ({
