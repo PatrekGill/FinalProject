@@ -2,4 +2,39 @@
 <!-- Page content -->
 <div class="content">
   <H1>Service Requests:</H1>
+  <br>
+  <div class="wrapper">
+    <div class="clientListBox container-fluid">
+      <h2>In Progress:</h2>
+    </div>
+    <div *ngIf="expandedBox">
+      <table>
+        <thead>
+
+        </thead>
+          <tbody *ngFor="testServiceCall">
+
+          </tbody>
+
+      </table>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div class="wrapper">
+      <div class="clientListBox container-fluid">
+        <h2>Completed:</h2>
+      </div>
+      <div *ngIf="expandedBox">
+        <table>
+          <thead>
+
+          </thead>
+            <tbody *ngFor="testServiceCall">
+
+            </tbody>
+
+        </table>
+  </div>
+</div>
 </div>
