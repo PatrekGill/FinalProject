@@ -13,17 +13,18 @@ export class User {
   updateDate: Date;
 
   constructor(
-    id: number,
-  	firstName: string,
-  	lastName: string,
+    id: number = 0,
+  	firstName: string = '',
+  	lastName: string = '',
   	phoneNumber: number,
-    role: string,
-    enabled: boolean,
-  	notes: string,
-    username: string,
-    password: string,
+    role: string = '',
+    enabled: boolean = true,
+  	notes: string = '',
+    username: string = '',
+    password: string = '',
     createdDate: Date,
     updateDate: Date
+
   ) {
     this.id = id;
     this.firstName = firstName;
