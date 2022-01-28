@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Business } from 'src/app/models/business';
+import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { BusinessService } from 'src/app/services/business.service';
 export class BusinessComponent implements OnInit {
 
   selectedBusiness: Business | undefined;
+  newBusiness: Business | undefined;
 
   constructor(
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -33,4 +36,15 @@ export class BusinessComponent implements OnInit {
       }
     )
   }
+
+
+  create(business:Business) {
+    business.user = auth;
+    const httpOptions = this.authService.getBasicHttpOptions();
+    return this.http.post<Todo>(this.url, todo, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 }
