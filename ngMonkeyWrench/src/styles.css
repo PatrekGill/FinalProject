@@ -131,3 +131,22 @@ font-size: 25.5px;
 position: relative;
 
 }
+
+.datePipeSelectionBtn{
+  min-width: 50px;
+  min-height: 20px;
+  max-width: 50px;
+  max-height: 35px;
+  margin: 0 auto;
+  background-color: #24A0ED;
+  position: relative;
+  padding-top: 10px;
+  color: white;
+  font: helvetica;
+  border-radius: 2em;
+}
+
+.datePipeSelectionBtn a {
+vertical-align: center;
+
+}
