@@ -113,7 +113,7 @@ div.content {
 font-size: 25.5px;
 }
 
-/* .orangeBG {
+.orangeBG {
   margin: -15px;
   padding-top: 9px;
   padding-bottom: 9px;
@@ -121,7 +121,7 @@ font-size: 25.5px;
   background-color: #EF9E60;
   width: 200px;
   position: relative;
-} */
+}
 
 .homeSpacer {
   padding-left: 20px;
