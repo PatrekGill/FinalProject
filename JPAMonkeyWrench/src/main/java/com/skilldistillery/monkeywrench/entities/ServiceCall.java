@@ -68,10 +68,10 @@ public class ServiceCall {
 	private boolean completed;
 	private boolean estimate;
 	
-	@JoinColumn(name = "customer_rating")
-	private Integer customerRating;
+	@Column(name = "customer_rating")
+	private int customerRating;
 	
-	@JoinColumn(name = "customer_rating_comment")
+	@Column(name = "customer_rating_comment")
 	private String customerRatingComment;
 
 	/* ----------------------------------------------------------------------------
@@ -226,10 +226,10 @@ public class ServiceCall {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-/* ----------------------------------------------------------------------------
-	Get/Set business
----------------------------------------------------------------------------- */
+	
+	/* ----------------------------------------------------------------------------
+		Get/Set business
+	---------------------------------------------------------------------------- */
 	public Business getBusiness() {
 		return business;
 	}
@@ -238,21 +238,23 @@ public class ServiceCall {
 	}
 
 
-	public Integer getCustomerRating() {
+	/* ----------------------------------------------------------------------------
+		Get/Set customer rating
+	---------------------------------------------------------------------------- */
+	public int getCustomerRating() {
 		return customerRating;
 	}
-
-
 	public void setCustomerRating(Integer customerRating) {
 		this.customerRating = customerRating;
 	}
 
 
+	/* ----------------------------------------------------------------------------
+		Get/Set customer rating comment
+	---------------------------------------------------------------------------- */
 	public String getCustomerRatingComment() {
 		return customerRatingComment;
 	}
-
-
 	public void setCustomerRatingComment(String customerRatingComment) {
 		this.customerRatingComment = customerRatingComment;
 	}
