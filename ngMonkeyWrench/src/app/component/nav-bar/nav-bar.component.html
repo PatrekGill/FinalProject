@@ -12,10 +12,20 @@
           <a class="nav-item nav-link" href="#">Equipment</a>
           <a class="nav-item nav-link" href="#">Service History</a>
           <a class="nav-item nav-link" href="#">Support</a>
-          <div class="loginLocation">
-            <a class="btn btnColor" href="#" role="button">Login</a>
 
+          <div *ngIf="!loggedIn()">
+          <div class="loginLocation">
+            <a class="btn btnColor" href="#" [routerLink]="" role="button">Login</a>
           </div>
+          <!--need to add routing information for register page-->
+          <div class="registerLocation">
+            <a class="btn btnColor" href="#" [routerLink]="" role="button">Register</a>
+          </div>
+        </div>
+        <div class='logout' *ngIf="loggedIn()">
+          <a class="btn btnColor" href="#" (click)="logout()" role="button">Log Out</a>
+        </div>
+
         </div>
       </div>
     </nav>
