@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './component/home/home.component';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { ContractorLoginComponent } from './component/contractor-login/contractor-login.component';
+import { ContractorSidebarComponent } from './component/contractor-sidebar/contractor-sidebar.component';
 import { BusinessComponent } from './component/business/business.component';
 
 @NgModule({
@@ -14,6 +16,8 @@ import { BusinessComponent } from './component/business/business.component';
     AppComponent,
     HomeComponent,
     NavBarComponent,
+    ContractorLoginComponent,
+    ContractorSidebarComponent
     BusinessComponent
   ],
   imports: [
