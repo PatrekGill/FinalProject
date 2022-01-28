@@ -1,0 +1,9 @@
+.registerLocation{
+  position: absolute;
+  right: 100px;
+}
+
+.logout{
+  position: absolute;
+  right: 10px;
+}

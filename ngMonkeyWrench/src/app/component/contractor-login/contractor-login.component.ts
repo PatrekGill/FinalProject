@@ -9,6 +9,7 @@ import { ServiceCall } from 'src/app/models/service-call';
 export class ContractorLoginComponent implements OnInit {
 
   expandedBox: boolean = false;
+
   // testServiceCall: ServiceCall[] = [{
   //   problemDescription: "No fridge or furnace",
   //   dateCreated: "2022-01-15T10:00:00",
