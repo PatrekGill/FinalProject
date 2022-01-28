@@ -27,7 +27,7 @@ public class ServiceCommentController {
 	@Autowired
 	private ServiceCommentService serviceCommentServ;
 	
-	@GetMapping("servicecomments")
+	@GetMapping("servicecomment")
 	public List<ServiceComment> index() {
 		return serviceCommentServ.getAllServiceComments();
 	}
