@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError } from 'rxjs';
 import { Business } from 'src/app/models/business';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
@@ -9,7 +10,6 @@ import { BusinessService } from 'src/app/services/business.service';
   styleUrls: ['./business.component.css']
 })
 export class BusinessComponent implements OnInit {
-
   selectedBusiness: Business | undefined;
   newBusiness: Business | undefined;
 
@@ -20,7 +20,6 @@ export class BusinessComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 
   setSelected(id:number | string) {
     this.businessService.show(id).subscribe(
@@ -41,10 +40,9 @@ export class BusinessComponent implements OnInit {
   create(business:Business) {
     business.user = auth;
     const httpOptions = this.authService.getBasicHttpOptions();
-    return this.http.post<Todo>(this.url, todo, httpOptions)
+    return this.http.post<Business>(this.url, business, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
-
 }

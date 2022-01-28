@@ -47,11 +47,12 @@ class ServiceTypeTest {
 		assertEquals("HVAC Maintenance & Repair", serviceType.getName());
 	}
 	
-//DESCRIPTION IS NULL IN DB	
-//	@Test
-//	void test_User_password_mapping() {
-//		assertNotNull(serviceType);
-//		assertEquals("", serviceType.getDescription());
-//	}
+
+	@Test
+	void test_servicetype_to_business_mapping() {
+		assertNotNull(serviceType);
+		assertNotNull(serviceType.getBusinesses());
+		assertTrue(serviceType.getBusinesses().size() > 0);
+	}
 	
 }

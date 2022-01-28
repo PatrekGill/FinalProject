@@ -50,7 +50,7 @@ class UserTest {
 	@Test
 	void test_User_password_mapping() {
 		assertNotNull(user);
-		assertEquals("johndoe",user.getPassword());
+		assertEquals("$2a$10$RRdxemmcZudAaoLiaevK8.L77H1tfgBxWcAOgHrcjwqFy3puA6xM2",user.getPassword());
 	}
 	
 	@Test
