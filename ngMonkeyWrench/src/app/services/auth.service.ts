@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap, catchError, throwError } from 'rxjs';
+import { tap, catchError, throwError, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient
-    ) { }
+  ) { }
 
   login(username: string, password: string) {
     // Make credentials
@@ -33,6 +34,8 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          console.log(this.getLoggedInUser());
+
           return res;
         }),
         catchError((err: any) => {
@@ -42,6 +45,28 @@ export class AuthService {
           );
         })
       );
+  }
+
+  showUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${environment.baseUrl}/username/${username}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error(
+          'UserService.getUser(): error retrieving user by username: ' + err
+          )
+        );
+      })
+    );
+  }
+
+  getLoggedInUser(): Observable<User> | undefined {
+    const username = this.getLoggedInUsername();
+    if (username) {
+      return this.showUsername(username);
+    }
+
+    return undefined;
   }
 
   register(user: User) {
@@ -66,6 +91,17 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  getLoggedInUsername(): string | null {
+    const credentials = this.getCredentials();
+    let username = null;
+    if (credentials) {
+      const decodedCredentials = atob(credentials);
+      username = decodedCredentials.split(":")[0];
+    }
+
+    return username;
   }
 
   generateBasicAuthCredentials(username: string, password: string) {
