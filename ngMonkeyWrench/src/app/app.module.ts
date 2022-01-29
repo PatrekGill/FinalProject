@@ -11,6 +11,9 @@ import { ContractorLoginComponent } from './component/contractor-login/contracto
 import { ContractorSidebarComponent } from './component/contractor-sidebar/contractor-sidebar.component';
 import { BusinessComponent } from './component/business/business.component';
 import { BusinessService } from './services/business.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './component/user/user.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { BusinessService } from './services/business.service';
     NavBarComponent,
     ContractorLoginComponent,
     ContractorSidebarComponent,
-    BusinessComponent
+    BusinessComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    FormsModule
   ],
   providers: [
     AuthService,

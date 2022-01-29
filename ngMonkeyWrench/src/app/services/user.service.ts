@@ -41,12 +41,12 @@ export class UserService {
   }
 
   show(userId: number): Observable<User> {
-    return this.http.get<User>(this.url, this.getHttpOption()).pipe(
+    return this.http.get<User>(this.url + '/' + userId).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
             () => new Error(
-            'UserService.show(): error retrieving user: ' + err
+            'UserService.getUser(): error retrieving user: ' + err
             )
           );
         })
@@ -70,7 +70,7 @@ export class UserService {
   }
 
   update(user: User): Observable<User> {
-    return this.http.put<User>(this.url + "/" + user.id, user, this.getHttpOption()).pipe(
+    return this.http.put<User>(this.url + "/" + user.id, user).pipe(
       catchError( (error: any) => {
         console.error('UserService.update(): error updating user: ');
         console.error(error);
