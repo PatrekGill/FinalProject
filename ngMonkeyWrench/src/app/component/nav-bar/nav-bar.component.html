@@ -44,7 +44,7 @@
             <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Cancel</button>
           </span>
 
-          <button type="button" class="btn btn-success" (click)="login(loginUser)">Login</button>
+          <button type="button" class="btn btn-success"  (click)="login(loginUser); modal.close('Close click')">Login</button>
         </div>
 
       </ng-template>
@@ -94,7 +94,7 @@
             <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Cancel</button>
           </span>
 
-          <button type="button" class="btn btn-success" (click)="createAccount(createUser)">Create</button>
+          <button type="button" class="btn btn-success" (click)="createAccount(createUser); modal.close('Close click')">Create</button>
         </div>
 
       </ng-template>

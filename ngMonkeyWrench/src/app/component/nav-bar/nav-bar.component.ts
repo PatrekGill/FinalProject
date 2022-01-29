@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
@@ -88,7 +88,7 @@ export class NavBarComponent implements OnInit {
         this.auth.showUsername(user.username).subscribe({
           next: (user) => {
             this.loggedInUser = user;
-            if(this.loggedInUser.role === 'contractor'){
+            if(this.loggedInUser.role === 'business'){
               this.router.navigateByUrl('/contractor');
             }
             else{
