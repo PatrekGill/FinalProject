@@ -7,3 +7,17 @@
   position: absolute;
   right: 10px;
 }
+
+.navbar-siteTitle-div {
+  margin: -15px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 15px;
+  background-color: #EF9E60;
+  width: 200px;
+  position: relative;
+}
+
+.navbar-spacer {
+  font-size: 25.5px;
+}

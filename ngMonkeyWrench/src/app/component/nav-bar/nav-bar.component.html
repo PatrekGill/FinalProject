@@ -1,16 +1,18 @@
   <!-- <div class="marginMaker helvetica"> -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-      <div class="orangeBG">
+      <div class="navbar-siteTitle-div">
         <a class="navbar-brand navbar-spacer" href="#">MonkeyWrench</a>
       </div>
+
       <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
             aria-expanded="false"
             aria-label="Toggle navigation"
             (click)="isCollapsed = !isCollapsed"
             [attr.aria-expanded]="!isCollapsed">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
       <div class="collapse navbar-collapse homeSpacer" id="navbarNavAltMarkup" [ngbCollapse] = 'isCollapsed'>
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="#">Home <span class="sr-only"></span></a>
