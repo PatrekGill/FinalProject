@@ -18,6 +18,13 @@ export class BusinessService {
     private authService: AuthService
   ) { }
 
+  handleError(error: any) {
+    console.error('Error with Business Service');
+    return throwError(
+      () => new Error(error.json().error || 'Server Error')
+    );
+  }
+
   getAll(): Observable<Business[]> {
     return this.http.get<Business[]>(this.url)
     .pipe(
@@ -37,5 +44,14 @@ export class BusinessService {
         return throwError(() => 'index error');
       })
     );
+  }
+
+
+  create(business:Business) {
+    const httpOptions = this.authService.getBasicHttpOptions();
+    return this.http.post<Business>(this.url, business, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }

@@ -12,7 +12,7 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private currentRoute: ActivatedRoute,
+    private currentRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {

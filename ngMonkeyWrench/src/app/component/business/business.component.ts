@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { BusinessService } from 'src/app/services/business.service';
 
 @Component({
   selector: 'app-business',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusinessComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private businessService: BusinessService
+  ) { }
 
   ngOnInit(): void {
+
   }
+
 
 }
