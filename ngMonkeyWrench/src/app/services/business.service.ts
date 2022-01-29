@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Business } from '../models/business';
+import { User } from '../models/user';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -46,12 +47,14 @@ export class BusinessService {
     );
   }
 
-
   create(business:Business) {
     const httpOptions = this.authService.getBasicHttpOptions();
-    return this.http.post<Business>(this.url, business, httpOptions)
+    this.authService.doWithLoggedInUser((user: User) => {
+      business.user = user;
+      return this.http.post<Business>(this.url, business, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
+    })
   }
 }

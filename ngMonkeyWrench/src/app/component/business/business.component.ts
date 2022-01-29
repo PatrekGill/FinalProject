@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Business } from 'src/app/models/business';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
 
@@ -15,7 +16,13 @@ export class BusinessComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.authService.checkLogin()) {
+      let business = new Business();
+      business.name = "testBusiness";
+      business.logoUrl = "test";
+      this.businessService.create(business)
 
+    }
   }
 
 

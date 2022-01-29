@@ -58,13 +58,21 @@ export class AuthService {
     );
   }
 
-  getLoggedInUser(): Observable<User> | undefined {
+  doWithLoggedInUser(onGet: Function) {
     const username = this.getLoggedInUsername();
     if (username) {
-      return this.showUsername(username);
+      this.showUsername(username).subscribe(
+        {
+          next: onGet(User),
+          error: (error) => {
+            console.error("AuthService: doWithLoggedInUser(): Encountered error");
+            console.log(error);
+          }
+        }
+      );
+    } else {
+      console.error("AuthService: onGettingLoggedInUser(): No current user found");
     }
-
-    return undefined;
   }
 
   register(user: User) {
