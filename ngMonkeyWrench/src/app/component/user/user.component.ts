@@ -48,6 +48,7 @@ export class UserComponent implements OnInit {
     this.userService.show(this.currentUser.id).subscribe(
       { // OBJECT
         next: (user) => {
+          this.editUser = false;
           this.currentUser = user;
         },
         error: (wrong) => {
@@ -86,7 +87,7 @@ export class UserComponent implements OnInit {
         this.reload();
       },
       error: (soSad) => {
-        console.error('TodoListComponent.updateTodo(): error on update');
+        console.error('UserComponent.updateUser(): error on update');
         console.error(soSad);
       }
     });
