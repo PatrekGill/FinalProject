@@ -41,8 +41,8 @@ public class AddressServiceImpl implements AddressService {
 			}
 			
 			address.setUser(user);
-			boolean isContractor = user.getRole().toLowerCase().equals("contractor");
-			if (!isContractor) {
+			boolean isBusiness = user.getRole().toLowerCase().equals("business");
+			if (!isBusiness) {
 				address.setNotes(null);
 			}
 			
@@ -63,10 +63,10 @@ public class AddressServiceImpl implements AddressService {
 		if (existsById(id) && user != null) {
 			
 			managed = findById(id);
-			boolean isContractor = user.getRole().toLowerCase().equals("contractor");
+			boolean isBusiness = user.getRole().toLowerCase().equals("business");
 			boolean isAddressOwner = user == managed.getUser();
 			
-			if (!isAddressOwner && !isContractor) {
+			if (!isAddressOwner && !isBusiness) {
 				managed = null;
 				
 			} else {
@@ -78,7 +78,7 @@ public class AddressServiceImpl implements AddressService {
 					managed.setZipCode(address.getZipCode());
 				}
 				
-				if (isContractor) {
+				if (isBusiness) {
 					managed.setNotes(address.getNotes());
 				}
 				
