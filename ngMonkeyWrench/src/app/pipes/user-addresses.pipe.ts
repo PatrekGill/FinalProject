@@ -1,12 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Address } from 'cluster';
+import { User } from '../models/user';
 
 @Pipe({
   name: 'userAddresses'
 })
 export class UserAddressesPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(addresses: Address[], userId: User): Address[] {
+    const result: Address[] = [];
+
+      // addresses.forEach((address) => {
+      //   address.address.
+
+      // })
+
+    return result;
   }
 
 }

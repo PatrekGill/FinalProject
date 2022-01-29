@@ -14,8 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './component/user/user.component';
 import { FormsModule } from '@angular/forms';
 import { BusinessService } from './services/business.service';
-import { UserAddressesPipe } from './pipes/user-addresses.pipe';
-
+import { ContactComponent } from './component/contact/contact.component';
+import { ClientListComponent } from './component/client-list/client-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { UserAddressesPipe } from './pipes/user-addresses.pipe';
     ContractorSidebarComponent,
     BusinessComponent,
     UserComponent,
-    UserAddressesPipe
+    ContactComponent,
+    ClientListComponent,
   ],
   imports: [
     BrowserModule,

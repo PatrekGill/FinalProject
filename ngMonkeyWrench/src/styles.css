@@ -4,11 +4,11 @@
 }
 
 .helvetica {
-  font: Helvetica;
+  font: Georgia;
 }
 
 .btnColor {
-  background-color: #24A0ED;
+  background-color: #283891;
   color: white;
 }
 
@@ -18,11 +18,11 @@
   min-height: 150px;
   max-width: 600px;
   margin: 0 auto;
-  background-color: #24A0ED;
+  background-color: #283891;
   position: relative;
   padding-top: 10px;
   color: white;
-  font: helvetica;
+  font-family: Georgia;
   border-radius: 2em;
 }
 
@@ -46,11 +46,11 @@
   max-width: 50px;
   max-height: 35px;
   margin: 0 auto;
-  background-color: #24A0ED;
+  background-color: #283891;
   position: relative;
   padding-top: 10px;
   color: white;
-  font: helvetica;
+  font-family: Georgia;
   border-radius: 2em;
 }
 

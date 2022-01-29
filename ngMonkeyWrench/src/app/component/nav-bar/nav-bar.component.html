@@ -15,10 +15,9 @@
 
   <div class="collapse navbar-collapse homeSpacer" id="navbarNavAltMarkup" [ngbCollapse] = 'isCollapsed'>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" href="#">Equipment</a>
-      <a class="nav-item nav-link" href="#">Service History</a>
-      <a class="nav-item nav-link" href="#">Support</a>
+      <a class="nav-item nav-link active" href="#" [routerLink]="['/home']" >Home <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="#" [routerLink]="['/contact']">Contact</a>
+      <a class="nav-item nav-link" href="#" >About</a>
 
     <!-- modal for login -->
     <div class="navbar-not-logged-in" *ngIf="!loggedIn()">
@@ -45,7 +44,7 @@
             <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Cancel</button>
           </span>
 
-          <button type="button" class="btn btn-success" (click)="login(loginUser)">Login</button>
+          <button type="button" class="btn btn-success"  (click)="login(loginUser); modal.close('Close click')">Login</button>
         </div>
 
       </ng-template>
@@ -80,7 +79,7 @@
               <div class="form-role-checkbox">
                 <p>What will this account used as:</p>
                 <div class="business-role-creation">
-                  <input type="radio" class="role-control" id="registerRoleBusiness" name="role" value="business" [(ngModel)]="createUser.role" checked>
+                  <input type="radio" class="role-control" id="registerRoleBusiness" name="role" value="contractor" [(ngModel)]="createUser.role" checked>
                   <label for="registerRoleBusiness">Business</label>
                 </div>
                 <div class="customer-role-creation">
@@ -95,7 +94,7 @@
             <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Cancel</button>
           </span>
 
-          <button type="button" class="btn btn-success" (click)="createAccount(createUser)">Create</button>
+          <button type="button" class="btn btn-success" (click)="createAccount(createUser); modal.close('Close click')">Create</button>
         </div>
 
       </ng-template>
