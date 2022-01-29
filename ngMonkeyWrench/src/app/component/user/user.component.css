@@ -11,7 +11,7 @@ label {
   width: 150px;
   text-align: right;
 }
- div.clientListBox {
+ div.userInfoListBox {
    min-width: 1000px;
    padding-left: 30px;
  }

@@ -61,6 +61,10 @@ export class AuthService {
   getLoggedInUser(): Observable<User> | undefined {
     const username = this.getLoggedInUsername();
     if (username) {
+      console.log('anything');
+      console.log(username);
+
+
       return this.showUsername(username);
     }
 
@@ -96,8 +100,11 @@ export class AuthService {
     let username = null;
     if (credentials) {
       const decodedCredentials = atob(credentials);
+      console.log(decodedCredentials);
+
       username = decodedCredentials.split(":")[0];
     }
+      console.log(username);
 
     return username;
   }

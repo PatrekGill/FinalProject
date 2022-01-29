@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
+import { AddressService } from 'src/app/services/address.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,19 +14,14 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private currentRoute: ActivatedRoute,
+    private authService: AuthService,
+    private addyService: AddressService
   ) { }
 
-  ngOnInit(): void {
-    // this.loadUsers();
-    // this.initUser = this.getUser(1);
-    this.initUser = this.getUser(1);
-    // console.log(this.users);
-    // this.setUser();
-  }
+
 
   users: User[] = [];
-  initUser: User | null | void = null;
+  initUser: Observable<User> | undefined = new Observable<User>();
   currentUser: User = new User();
   editUser: boolean = false;
   editedUser: User | null = new User();
@@ -32,17 +29,6 @@ export class UserComponent implements OnInit {
   pwUndo: string | undefined = '';
 
 
-  // loadUsers() {
-  //   this.userService.index().subscribe ({
-  //     next: (users) => {
-  //       this.users = data;
-  //     },
-  //     error: (wrong) => {
-  //       console.error('UserComponent.getUser(): Error retreiving user.');
-  //       console.error(wrong);
-  //     }
-  //   });
-  // }
 
   reload() {
     this.userService.show(this.currentUser.id).subscribe(
@@ -50,6 +36,7 @@ export class UserComponent implements OnInit {
         next: (user) => {
           this.editUser = false;
           this.currentUser = user;
+
         },
         error: (wrong) => {
           console.error('TodoListComponent.reload(): Error retreiving todos');
@@ -61,16 +48,28 @@ export class UserComponent implements OnInit {
   }
 
 
-  getUser(userId: number) {
-    this.userService.show(userId).subscribe ({
-      next: (user) => {
-        this.currentUser = user;
-      },
-      error: (wrong) => {
-        console.error('UserComponent.getUser(): Error retreiving user.');
-        console.error(wrong);
-      }
-    });
+  getUser() {
+    console.log('in GETUSER');
+    const username = this.authService.getLoggedInUsername();
+    console.log('username');
+    console.log(username);
+
+    if(username !== null) {
+    this.authService.showUsername(username).subscribe ({
+        next: (user) => {
+          this.currentUser = user;
+          console.log('in getUser');
+
+    console.log(this.currentUser);
+
+        },
+        error: (wrong) => {
+          console.error('UserComponent.getUser(): Error retreiving user.');
+          console.error(wrong);
+        }
+      });
+    }
+    // return user;
   }
 
   setEditUser() {
@@ -93,5 +92,12 @@ export class UserComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+
+    this.getUser();
+    console.log(this.currentUser);
+
+
+  }
 
 }
