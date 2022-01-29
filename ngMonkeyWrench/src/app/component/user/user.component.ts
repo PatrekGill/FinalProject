@@ -12,55 +12,85 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private currentRoute: ActivatedRoute
+    private currentRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.loadUsers();
-    console.log(this.users);
-
-    // this.showUser(this.userId);
-
-    let userIdStr = this.currentRoute.snapshot.paramMap.get('id');
-    if (userIdStr) {
-      let userId = Number.parseInt(userIdStr);
-      if( !isNaN(userId)){
-        this.userService.show(userId).subscribe({
-          next: (todo) => {
-            this.selected = todo;
-          },
-          error: (fail) => {
-            console.error('TodoListComponent.ngOnInit(): invalid todoId ' + userId);
-            // this.router.navigateByUrl('todonotfound');
-          }
-        });
-      } else {
-        // this.router.navigateByUrl('invalidTodoId');
-      }
-    }
-
-
+    // this.loadUsers();
+    // this.initUser = this.getUser(1);
+    this.initUser = this.getUser(1);
+    // console.log(this.users);
+    // this.setUser();
   }
 
   users: User[] = [];
-  // user: User = new User;
-  // userId: number | undefined = this.user.id;
-  selected: User | null = null;
+  initUser: User | null | void = null;
+  currentUser: User = new User();
+  editUser: boolean = false;
+  editedUser: User | null = new User();
+  editAddress: boolean = false;
+  pwUndo: string | undefined = '';
 
-  loadUsers() {
-    this.userService.index().subscribe (
-      data => this.users = data,
 
-      err => console.log('Observer got an error ' + err)
-    )
-  };
-
-  // showUser(userId: number) {
-  //   this.userService.show(userId).subscribe (
-  //     data => this.user = data,
-
-  //     err => console.log('Observer got an error ' + err)
-  //   )
+  // loadUsers() {
+  //   this.userService.index().subscribe ({
+  //     next: (users) => {
+  //       this.users = data;
+  //     },
+  //     error: (wrong) => {
+  //       console.error('UserComponent.getUser(): Error retreiving user.');
+  //       console.error(wrong);
+  //     }
+  //   });
   // }
+
+  reload() {
+    this.userService.show(this.currentUser.id).subscribe(
+      { // OBJECT
+        next: (user) => {
+          this.currentUser = user;
+        },
+        error: (wrong) => {
+          console.error('TodoListComponent.reload(): Error retreiving todos');
+          console.error(wrong);
+        },
+        complete: () => { }
+      } // END OF OBJECT
+    );
+  }
+
+
+  getUser(userId: number) {
+    this.userService.show(userId).subscribe ({
+      next: (user) => {
+        this.currentUser = user;
+      },
+      error: (wrong) => {
+        console.error('UserComponent.getUser(): Error retreiving user.');
+        console.error(wrong);
+      }
+    });
+  }
+
+  setEditUser() {
+    this.editedUser = Object.assign({}, this.currentUser);;
+  }
+
+  updateUser(user: User, goToDetails = true) {
+    this.userService.update(user).subscribe({
+      next: (t) => {
+        this.editedUser = null;
+        if(goToDetails) {
+          this.currentUser = t;
+        }
+        this.reload();
+      },
+      error: (soSad) => {
+        console.error('TodoListComponent.updateTodo(): error on update');
+        console.error(soSad);
+      }
+    });
+  }
+
 
 }

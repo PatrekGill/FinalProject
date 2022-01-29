@@ -1,33 +1,46 @@
-<h1>Users Page - Under Construction</h1>
+<app-contractor-sidebar>Loading...</app-contractor-sidebar>
+<div class="userContent">
 
-<div>
-  <div >
-    <ul *ngFor="let user of users">Users
-      <li>{{user.id}}</li>
-      <li>{{user.firstName}}</li>
-      <li>{{user.lastName}}</li>
-    </ul>
+  <h1>Users Page - Under Construction</h1>
+  <br>
+  <div class='wrapper'>
+      <!-- <div>
+        <div >
+          <ul *ngFor="let user of users">Users
+            <li>{{user.id}}</li>
+            <li>{{user.firstName}}</li>
+            <li>{{user.lastName}}</li>
+          </ul>
+        </div>
+
+      </div> -->
+
+    <!-- <div class="border-radius: 2em " style="padding:10px;background:skyblue" > -->
+    <div class="clientListBox" >
+      <div *ngIf="!editUser">
+        <button (click)="editUser = true">Edit</button>
+        <p>ID: {{currentUser.id}}</p>
+        <p>Fist name: {{currentUser.firstName}}</p>
+        <p>Last name: {{currentUser.lastName}}</p>
+        <p>Phone #: {{currentUser.phoneNumber}}</p>
+        <p>Notes: {{currentUser.notes}}</p>
+        <p>Username: {{currentUser.username}}</p>
+        <p>Password: {{currentUser.password}}</p>
+      </div>
+
+      <div *ngIf="editUser">
+        ID: <input type="text" name="id" [(ngModel)]="currentUser.id"><br>
+        Fist name: <input type="text" name="firstName" [(ngModel)]="currentUser.firstName"><br>
+        Last name: <input type="text" name="lastName" [(ngModel)]="currentUser.lastName"><br>
+        Phone #: <input type="text" name="phoneNumber" [(ngModel)]="currentUser.phoneNumber"><br>
+        Notes: <input type="text" name="notes" [(ngModel)]="currentUser.notes"><br>
+        Username: <input type="text" name="username" [(ngModel)]="currentUser.username"><br>
+        Password: <input type="text" name="password" [(ngModel)]="currentUser.password"><br>
+        <button (click)="editUser=false">Cancel</button>
+        <button (click)="updateUser(currentUser)">Save</button>
+      </div>
+
+
+    </div>
   </div>
-
-</div>
-
-
-<div>
-  <!-- ID: <input type="text" name="id" [(ngModel)]="user?.id"><br>
-  Name: <input type="text" name="firstName" [(ngModel)]="user?.firstName"><br>
-  Height: <input type="text" name="lastName" [(ngModel)]="user?.lastName"><br>
-  Weight: <input type="text" name="phoneNumber" [(ngModel)]="user?.phoneNumber"><br>
-  Description: <input type="text" name="notes" [(ngModel)]="user?.notes"><br>
-  Description: <input type="text" name="username" [(ngModel)]="user?.username"><br>
-  Description: <input type="text" name="password" [(ngModel)]="user?.password"><br> -->
-
-  <!-- <p>ID: {{user.id}}</p>
-  <p>Name: {{user.firstName}}</p>
-  <p>Height: {{user.lastName}}</p>
-  <p>Weight: {{user.phoneNumber}}</p>
-  <p>Description: {{user.notes}}</p>
-  <p>Description: {{user.username}}</p>
-  <p>Description: {{user.password}}</p> -->
-
-
 </div>

@@ -41,12 +41,12 @@ export class UserService {
   }
 
   show(userId: number): Observable<User> {
-    return this.http.get<User>(this.url, this.getHttpOption()).pipe(
+    return this.http.get<User>(this.url + '/' + userId).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
             () => new Error(
-            'UserService.show(): error retrieving user: ' + err
+            'UserService.getUser(): error retrieving user: ' + err
             )
           );
         })
