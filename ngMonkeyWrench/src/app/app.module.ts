@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
     ContractorLoginComponent,
     ContractorSidebarComponent,
     BusinessComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     BrowserModule,

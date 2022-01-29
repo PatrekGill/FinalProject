@@ -5,3 +5,9 @@ div.userContent {
   text-align: left;
   padding-top: 81px;
 }
+
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+}

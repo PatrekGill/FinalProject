@@ -12,7 +12,7 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private currentRoute: ActivatedRoute
+    private currentRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -27,12 +27,9 @@ export class UserComponent implements OnInit {
   initUser: User | null | void = null;
   currentUser: User = new User();
   editUser: boolean = false;
+  editedUser: User | null = new User();
   editAddress: boolean = false;
   pwUndo: string | undefined = '';
-
-
-
-
 
 
   // loadUsers() {
@@ -46,9 +43,22 @@ export class UserComponent implements OnInit {
   //     }
   //   });
   // }
-  decode(pw: string) {
-    return window.atob(pw);
+
+  reload() {
+    this.userService.show(this.currentUser.id).subscribe(
+      { // OBJECT
+        next: (user) => {
+          this.currentUser = user;
+        },
+        error: (wrong) => {
+          console.error('TodoListComponent.reload(): Error retreiving todos');
+          console.error(wrong);
+        },
+        complete: () => { }
+      } // END OF OBJECT
+    );
   }
+
 
   getUser(userId: number) {
     this.userService.show(userId).subscribe ({
@@ -62,6 +72,25 @@ export class UserComponent implements OnInit {
     });
   }
 
+  setEditUser() {
+    this.editedUser = Object.assign({}, this.currentUser);;
+  }
+
+  updateUser(user: User, goToDetails = true) {
+    this.userService.update(user).subscribe({
+      next: (t) => {
+        this.editedUser = null;
+        if(goToDetails) {
+          this.currentUser = t;
+        }
+        this.reload();
+      },
+      error: (soSad) => {
+        console.error('TodoListComponent.updateTodo(): error on update');
+        console.error(soSad);
+      }
+    });
+  }
 
 
 }

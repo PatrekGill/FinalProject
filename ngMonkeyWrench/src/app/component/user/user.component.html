@@ -37,7 +37,7 @@
         Username: <input type="text" name="username" [(ngModel)]="currentUser.username"><br>
         Password: <input type="text" name="password" [(ngModel)]="currentUser.password"><br>
         <button (click)="editUser=false">Cancel</button>
-        <button>Save</button>
+        <button (click)="updateUser(currentUser)">Save</button>
       </div>
 
 
