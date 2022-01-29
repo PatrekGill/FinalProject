@@ -27,7 +27,7 @@ import { ClientListComponent } from './component/client-list/client-list.compone
     BusinessComponent,
     UserComponent,
     ContactComponent,
-    ClientListComponent,
+    ClientListComponent
   ],
   imports: [
     BrowserModule,
