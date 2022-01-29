@@ -14,6 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,9 +33,11 @@ public class Business {
 	@Column(name = "logo_url")
 	private String logoUrl;
 	
+	@CreationTimestamp
 	@Column(name = "created_date")
 	private LocalDateTime createdDate;
 	
+	@UpdateTimestamp
 	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 	

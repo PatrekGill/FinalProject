@@ -50,9 +50,61 @@
 
       </ng-template>
 
-      <button class="btn btnColor">Register</button>
-      <button class="btn btn-outline-primary" (click)="openVerticallyCentered(content)">Login</button>
+      <!-- modal for register  -->
+      <ng-template #register let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Create Account</h4>
+        </div>
+          <div class="modal-body">
+            <div class="modal-body">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerFirstName" placeholder="First Name" [(ngModel)]="createUser.firstName">
+                <label for="registerFirstName">First Name</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerLastName" placeholder="Last Name" [(ngModel)]="createUser.lastName">
+                <label for="registerLastName">Last Name</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerPhoneNumber" placeholder="Phone Number" [(ngModel)]="createUser.phoneNumber">
+                <label for="registerPhoneNumber">Phone Number</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerUsername" placeholder="Username" [(ngModel)]="createUser.username" >
+                <label for="registerUsername">Username</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="password" class="form-control" id="registerPassword" placeholder="Password" [(ngModel)]="createUser.password">
+                <label for="registerPassword">Password</label>
+              </div><br>
+              <div class="form-role-checkbox">
+                <p>What will this account used as:</p>
+                <div class="business-role-creation">
+                  <input type="radio" class="role-control" id="registerRoleBusiness" name="role" value="Business" [(ngModel)]="createUser.role" checked>
+                  <label for="registerRoleBusiness">Business</label>
+                </div>
+                <div class="customer-role-creation">
+                  <input type="radio" class="role-control" id="registerRoleCustomer" name="role" value="Customer" [(ngModel)]="createUser.role" checked>
+                  <label for="registerRoleCustomer">Customer</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <span style="margin-right: auto;">
+            <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Cancel</button>
+          </span>
+
+          <button type="button" class="btn btn-success" (click)="createAccount(createUser)">Create</button>
+        </div>
+
+      </ng-template>
+
+      <button class="btn btnColor" (click)="openVerticallyCenteredRegister(register)">Register</button>
+      <button class="btn btn-outline-primary" (click)="openVerticallyCenteredLogin(content)">Login</button>
     </div>
+
+
 
     <div class='logout' *ngIf="loggedIn()">
       <a class="btn btnColor" href="#" (click)="logout()" role="button">Log Out</a>
