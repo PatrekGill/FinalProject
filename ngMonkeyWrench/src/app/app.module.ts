@@ -13,6 +13,7 @@ import { BusinessComponent } from './component/business/business.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './component/user/user.component';
 import { FormsModule } from '@angular/forms';
+import { BusinessService } from './services/business.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+  	BusinessService
   ],
   bootstrap: [AppComponent]
 })

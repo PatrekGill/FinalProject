@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -39,9 +42,11 @@ public class User {
 	
 	private String notes;
 	
+	@CreationTimestamp
 	@Column(name = "created_date")
 	private LocalDateTime createdDate;
 	
+	@UpdateTimestamp
 	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 	
