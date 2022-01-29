@@ -12,12 +12,12 @@ export class NavBarComponent implements OnInit {
 
   isCollapsed : boolean = false;
 
-  user : User = new User();
+  loginUser : User = new User();
 
   constructor(
     private auth: AuthService,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   ngOnInit(): void {
   }
@@ -34,8 +34,15 @@ export class NavBarComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
-  login(user : User){
+  resetLoginUser() {
+    this.loginUser = new User();
+  }
 
+  login(user : User){
+    this.resetLoginUser();
+    if (user.username && user.password) {
+      this.auth.login(user.username,user.password);
+    }
   }
 
 }

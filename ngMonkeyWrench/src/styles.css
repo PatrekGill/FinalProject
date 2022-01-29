@@ -7,21 +7,11 @@
   font: Helvetica;
 }
 
-
-.loginLocation{
-  padding-right: 15px;
-}
-
 .btnColor {
   background-color: #24A0ED;
   color: white;
 }
 
-
-.loginLocation{
-  position: absolute;
-  right: 0px;
-}
 
 .clientListBox{
   min-width: 300px;
