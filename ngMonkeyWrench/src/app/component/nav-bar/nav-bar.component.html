@@ -15,10 +15,9 @@
 
   <div class="collapse navbar-collapse homeSpacer" id="navbarNavAltMarkup" [ngbCollapse] = 'isCollapsed'>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" href="#">Equipment</a>
-      <a class="nav-item nav-link" href="#">Service History</a>
-      <a class="nav-item nav-link" href="#">Support</a>
+      <a class="nav-item nav-link active" href="#" [routerLink]="['/home']" >Home <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="#" [routerLink]="['/contact']">Contact</a>
+      <a class="nav-item nav-link" href="#" [routerLink]="['/about']">About</a>
 
     <!-- modal for login -->
     <div class="navbar-not-logged-in" *ngIf="!loggedIn()">
@@ -80,7 +79,7 @@
               <div class="form-role-checkbox">
                 <p>What will this account used as:</p>
                 <div class="business-role-creation">
-                  <input type="radio" class="role-control" id="registerRoleBusiness" name="role" value="business" [(ngModel)]="createUser.role" checked>
+                  <input type="radio" class="role-control" id="registerRoleBusiness" name="role" value="contractor" [(ngModel)]="createUser.role" checked>
                   <label for="registerRoleBusiness">Business</label>
                 </div>
                 <div class="customer-role-creation">

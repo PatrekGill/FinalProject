@@ -17,6 +17,8 @@ export class NavBarComponent implements OnInit {
 
   createUser : User = new User();
 
+  loggedInUser : User = new User();
+
   constructor(
     private auth: AuthService,
     private modalService: NgbModal,
@@ -47,16 +49,11 @@ export class NavBarComponent implements OnInit {
   }
 
   login(user : User){
-    this.resetLoginUser();
     if (user.username && user.password) {
       this.auth.login(user.username,user.password).subscribe({
         next: () => {
-          if(user.role === 'Busniess'){
-            this.router.navigateByUrl('/contractor');
-          }
-          else{
-            this.router.navigateByUrl('/user');
-          }
+          this.getLoggedInUser(user);
+          this.resetLoginUser();
         },
         error: () => {
           console.error("Error loggin in");
@@ -75,19 +72,7 @@ export class NavBarComponent implements OnInit {
       {
         next: () => {
           if(createUser.username && createUser.password){
-            this.auth.login(createUser.username, createUser.password).subscribe({
-              next: () => {
-                if(createUser.role === 'Busniess'){
-                  this.router.navigateByUrl('/contractor');
-                }
-                else{
-                  this.router.navigateByUrl('/user');
-                }
-              },
-              error: () => {
-                console.error("Error loggin in");
-                }
-              });
+            this.login(createUser)
             }
           },
           error: (fail) => {
@@ -97,4 +82,24 @@ export class NavBarComponent implements OnInit {
           }
         );
       }
+
+    getLoggedInUser(user : User) {
+      if(user.username !== undefined){
+        this.auth.showUsername(user.username).subscribe({
+          next: (user) => {
+            this.loggedInUser = user;
+            if(this.loggedInUser.role === 'contractor'){
+              this.router.navigateByUrl('/contractor');
+            }
+            else{
+              this.router.navigateByUrl('/user');
+            }
+          },
+          error: (wrong) => {
+            console.error("navbarComponent.getLoggedInUser(): failed to retrieve user")
+          }
+        });
+      }
+      }
+
 }
