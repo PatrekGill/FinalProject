@@ -1,29 +1,29 @@
 export class User {
 
   id: number;
-	firstName: string;
-	lastName: string;
-	phoneNumber: number;
-  role: string;
-  enabled: boolean;
-	notes: string;
-  username: string;
-  password: string;
-  createdDate: Date;
-  updateDate: Date;
+	firstName: string | undefined;
+	lastName: string | undefined;
+	phoneNumber: string | undefined;
+  role: string | undefined;
+  enabled: boolean | undefined;
+	notes: string | undefined;
+  username: string | undefined;
+  password: string | undefined;
+  createdDate: Date | undefined;
+  updateDate: Date | undefined;
 
   constructor(
     id: number = 0,
-  	firstName: string = '',
-  	lastName: string = '',
-  	phoneNumber: number,
-    role: string = '',
-    enabled: boolean = true,
-  	notes: string = '',
-    username: string = '',
-    password: string = '',
-    createdDate: Date,
-    updateDate: Date
+  	firstName?: string,
+  	lastName?: string,
+  	phoneNumber?: string,
+    role?: string,
+    enabled?: boolean,
+  	notes?: string,
+    username?: string,
+    password?: string,
+    createdDate?: Date,
+    updateDate?: Date
 
   ) {
     this.id = id;
