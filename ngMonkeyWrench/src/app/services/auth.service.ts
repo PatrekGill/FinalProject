@@ -34,18 +34,6 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
-          console.log(this.getLoggedInUser()?.subscribe(
-            {
-                next: (user) => {
-                  console.log(user);
-                },
-                error: () => {
-                  console.log("failed to get logged in user");
-
-                }
-            }
-          ));
-
           return res;
         }),
         catchError((err: any) => {
