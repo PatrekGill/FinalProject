@@ -21,3 +21,8 @@
 .navbar-spacer {
   font-size: 25.5px;
 }
+
+.navbar{
+  padding-left: 15px;
+  padding-right: 15px;
+}
