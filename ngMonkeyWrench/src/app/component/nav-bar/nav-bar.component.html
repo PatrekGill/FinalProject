@@ -1,57 +1,116 @@
-  <!-- <div class="marginMaker helvetica"> -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-      <div class="orangeBG">
-        <a class="navbar-brand navbar-spacer" href="#">MonkeyWrench</a>
-      </div>
-      <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-      <div class="collapse navbar-collapse homeSpacer" id="navbarNavAltMarkup" [ngbCollapse] = 'isCollapsed'>
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only"></span></a>
-          <a class="nav-item nav-link" href="#">Equipment</a>
-          <a class="nav-item nav-link" href="#">Service History</a>
-          <a class="nav-item nav-link" href="#">Support</a>
 
-          <!-- modal for login -->
-          <div *ngIf="!loggedIn()">
-          <div class="loginLocation">
-            <ng-template #content let-modal>
-              <div class="modal-header">
-                <h4 class="modal-title">Login</h4>
-                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <input type="text" name="username" placeholder="Username" [(ngModel)]="user.username"> <br>
-                  <input type="text" name="password" placeholder="Password" [(ngModel)]="user.password"> <br>
-                  <input type="submit" (click)="login(user)" value="Login">
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-              </div>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <div class="navbar-siteTitle-div">
+    <a class="navbar-brand navbar-siteTitle-text" href="#">MonkeyWrench</a>
+  </div>
 
-            </ng-template>
-            <button class="btn btn-outline-primary mb-2 mr-2" (click)="openVerticallyCentered(content)">Login</button>
-          </div>
-          <!--need to add routing information for register page-->
-          <div class="registerLocation">
-            <a class="btn btnColor" href="#" [routerLink]="" role="button">Register</a>
+  <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse homeSpacer" id="navbarNavAltMarkup" [ngbCollapse] = 'isCollapsed'>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="#">Equipment</a>
+      <a class="nav-item nav-link" href="#">Service History</a>
+      <a class="nav-item nav-link" href="#">Support</a>
+
+    <!-- modal for login -->
+    <div class="navbar-not-logged-in" *ngIf="!loggedIn()">
+
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Enter Login Info</h4>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="loginUsername" placeholder="Username" [(ngModel)]="loginUser.username" >
+              <label for="loginUsername">Username</label>
+            </div>
+            <br/>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="loginPassword" placeholder="password" [(ngModel)]="loginUser.password">
+              <label for="loginPassword">Password</label>
+            </div>
           </div>
         </div>
-        <div class='logout' *ngIf="loggedIn()">
-          <a class="btn btnColor" href="#" (click)="logout()" role="button">Log Out</a>
+        <div class="modal-footer">
+          <span style="margin-right: auto;">
+            <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Cancel</button>
+          </span>
+
+          <button type="button" class="btn btn-success" (click)="login(loginUser)">Login</button>
         </div>
 
+      </ng-template>
+
+      <!-- modal for register  -->
+      <ng-template #register let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Create Account</h4>
         </div>
-      </div>
-    </nav>
-  <!-- </div> -->
+          <div class="modal-body">
+            <div class="modal-body">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerFirstName" placeholder="First Name" [(ngModel)]="createUser.firstName">
+                <label for="registerFirstName">First Name</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerLastName" placeholder="Last Name" [(ngModel)]="createUser.lastName">
+                <label for="registerLastName">Last Name</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerPhoneNumber" placeholder="Phone Number" [(ngModel)]="createUser.phoneNumber">
+                <label for="registerPhoneNumber">Phone Number</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="registerUsername" placeholder="Username" [(ngModel)]="createUser.username" >
+                <label for="registerUsername">Username</label>
+              </div><br>
+              <div class="form-floating">
+                <input type="password" class="form-control" id="registerPassword" placeholder="Password" [(ngModel)]="createUser.password">
+                <label for="registerPassword">Password</label>
+              </div><br>
+              <div class="form-role-checkbox">
+                <p>What will this account used as:</p>
+                <div class="business-role-creation">
+                  <input type="radio" class="role-control" id="registerRoleBusiness" name="role" value="Business" [(ngModel)]="createUser.role" checked>
+                  <label for="registerRoleBusiness">Business</label>
+                </div>
+                <div class="customer-role-creation">
+                  <input type="radio" class="role-control" id="registerRoleCustomer" name="role" value="Customer" [(ngModel)]="createUser.role" checked>
+                  <label for="registerRoleCustomer">Customer</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <span style="margin-right: auto;">
+            <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Cancel</button>
+          </span>
+
+          <button type="button" class="btn btn-success" (click)="createAccount(createUser)">Create</button>
+        </div>
+
+      </ng-template>
+
+      <button class="btn btnColor" (click)="openVerticallyCenteredRegister(register)">Register</button>
+      <button class="btn btn-outline-primary" (click)="openVerticallyCenteredLogin(content)">Login</button>
+    </div>
+
+
+
+    <div class='logout' *ngIf="loggedIn()">
+      <a class="btn btnColor" href="#" (click)="logout()" role="button">Log Out</a>
+    </div>
+
+    </div>
+  </div>
+</nav>
+

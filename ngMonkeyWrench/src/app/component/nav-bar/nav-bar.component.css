@@ -1,9 +1,36 @@
-.registerLocation{
-  position: absolute;
-  right: 100px;
-}
-
 .logout{
   position: absolute;
   right: 10px;
+}
+
+.navbar-siteTitle-div {
+  margin: -15px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 15px;
+  background-color: #EF9E60;
+  width: 200px;
+  position: relative;
+}
+
+.navbar-siteTitle-text {
+  font-size: 25.5px;
+}
+
+.navbar{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* required to for buttons with margin-left: auto to be placed right */
+.navbar-nav {
+  width: 100%;
+}
+
+.navbar-not-logged-in {
+  margin-left: auto;
+  padding-right: 1rem;
+}
+.navbar-not-logged-in button {
+  margin-left: 1rem;
 }

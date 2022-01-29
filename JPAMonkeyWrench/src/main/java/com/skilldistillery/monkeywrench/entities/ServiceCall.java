@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -26,6 +28,7 @@ public class ServiceCall {
 	@Column(name = "problem_description")
 	private String problemDescription;
 	
+	@CreationTimestamp
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
 	
