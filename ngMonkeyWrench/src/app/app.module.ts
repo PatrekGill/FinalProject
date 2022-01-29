@@ -10,6 +10,7 @@ import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { ContractorLoginComponent } from './component/contractor-login/contractor-login.component';
 import { ContractorSidebarComponent } from './component/contractor-sidebar/contractor-sidebar.component';
 import { BusinessComponent } from './component/business/business.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './component/user/user.component';
 import { FormsModule } from '@angular/forms';
 
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
     FormsModule
   ],
   providers: [
