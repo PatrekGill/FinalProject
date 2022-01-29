@@ -3,11 +3,6 @@
   --sidebarwidth: 200px;
 }
 
-.marginMaker {
-	margin-left: 15px;
-  margin-right: 15px;
-}
-
 .helvetica {
   font: Helvetica;
 }
@@ -51,7 +46,7 @@
 }
 
 .positionAbsolute{
-position: relative;
+  position: relative;
 
 }
 
@@ -70,7 +65,7 @@ position: relative;
 }
 
 .datePipeSelectionBtn a {
-vertical-align: center;
+  vertical-align: center;
 
 }
 
