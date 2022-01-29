@@ -21,6 +21,9 @@ public interface ServiceCallService {
 	// Delete Service
 	boolean deleteServiceCall(int serviceCallId);
 	
+	// Find by User id
+	List<ServiceCall> findCallsByUserId(int userId);
+	
 	// Find list by like in problem_description
 	// Find list by like in contractor_notes
 	// Find list by like in customer_comment
