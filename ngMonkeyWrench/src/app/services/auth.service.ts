@@ -34,7 +34,17 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
-          console.log(this.getLoggedInUser());
+          console.log(this.getLoggedInUser()?.subscribe(
+            {
+                next: (user) => {
+                  console.log(user);
+                },
+                error: () => {
+                  console.log("failed to get logged in user");
+
+                }
+            }
+          ));
 
           return res;
         }),
@@ -48,12 +58,12 @@ export class AuthService {
   }
 
   showUsername(username: string): Observable<User> {
-    return this.http.get<User>(`${environment.baseUrl}/username/${username}`).pipe(
+    return this.http.get<User>(`${environment.baseUrl}api/username/${username}`).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
           () => new Error(
-          'UserService.getUser(): error retrieving user by username: ' + err
+          'Authservice.showUsername(): error retrieving user by username: ' + err
           )
         );
       })
