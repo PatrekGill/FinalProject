@@ -88,7 +88,7 @@ export class NavBarComponent implements OnInit {
         this.auth.showUsername(user.username).subscribe({
           next: (user) => {
             this.loggedInUser = user;
-            if(this.loggedInUser.role === 'contractor'){
+            if(this.loggedInUser.role === 'business'){
               this.router.navigateByUrl('/contractor');
             }
             else{
