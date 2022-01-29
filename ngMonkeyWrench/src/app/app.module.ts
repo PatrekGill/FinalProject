@@ -14,6 +14,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './component/user/user.component';
 import { FormsModule } from '@angular/forms';
 import { BusinessService } from './services/business.service';
+import { ContactComponent } from './component/contact/contact.component';
+import { AboutComponent } from './component/about/about.component';
+import { ClientListComponent } from './component/client-list/client-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { BusinessService } from './services/business.service';
     ContractorSidebarComponent,
     BusinessComponent,
     UserComponent,
+    ContactComponent,
+    AboutComponent,
+    ClientListComponent,
   ],
   imports: [
     BrowserModule,
