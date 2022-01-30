@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { EquipmentType } from '../models/equipment-type';
 import { ServiceCall } from '../models/service-call';
 
 @Injectable({
@@ -80,4 +79,14 @@ export class ServiceCallService {
       })
     )
   }
+
+  getServiceCallsByBusinessId(businessId : number): Observable<ServiceCall[]>{
+    return this.http.get<ServiceCall[]>(this.url + "/business/" + businessId).pipe(
+      catchError( (error: any) => {
+        console.error("ServiceCallService.getServiceCallsByBusinessId(): error finding service calls");
+        return throwError(() => new Error("ServiceCallService.getServiceCallsByBusinessId(): error finding service calls"))
+      })
+    )
+  }
+
 }

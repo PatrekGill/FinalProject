@@ -18,6 +18,15 @@ export class BusinessService {
   ) { }
 
 
+  getBusinessesByUserId(userId : number): Observable<Business[]>{
+    return this.http.get<Business[]>(this.url + "/user/" + userId).pipe(
+      catchError( (error: any) => {
+        console.error("BusinessService.getBusinessesByUserId(): failed to get businesses");
+        return throwError(() => new Error("BusinessService.getBusinessesByUserId(): failed to get businesses"))
+      })
+    )
+  }
+
   getHttpOption() {
     let options = {
       headers: {
@@ -27,7 +36,6 @@ export class BusinessService {
     };
   return options
   }
-
 
   getAll(): Observable<Business[]> {
     return this.http.get<Business[]>(this.url, this.getHttpOption()).pipe(

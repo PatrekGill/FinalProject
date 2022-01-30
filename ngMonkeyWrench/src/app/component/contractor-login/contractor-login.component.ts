@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Directive } from '@angular/core';
+import { Business } from 'src/app/models/business';
 import { ServiceCall } from 'src/app/models/service-call';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
+import { BusinessService } from 'src/app/services/business.service';
+import { ServiceCallService } from 'src/app/services/service-call.service';
+
 
 @Component({
   selector: 'app-contractor-login',
@@ -8,37 +14,71 @@ import { ServiceCall } from 'src/app/models/service-call';
 })
 export class ContractorLoginComponent implements OnInit {
 
-  expandedBox: boolean = false;
+  expandedBox: boolean = true;
 
-  // testServiceCall: ServiceCall[] = [{
-  //   problemDescription: "No fridge or furnace",
-  //   dateCreated: "2022-01-15T10:00:00",
-  //   dateScheduled: "2022-01-16T11:00:00",
-  //   hoursLabor: 0,
-  //   totalCost: 1.99,
-  //   contractorNotes: null,
-  //   address: {
-  //       id: 2
-  //   },
-  //   problem: {
-  //       id: 2
-  //   },
-  //   busines: {
-  //       id: 1
-  //   },
-  //   user: {
-  //       id: 1
-  //   },
-  //   completed: false,
-  //   estimate: true,
-  //   customerRating: null,
-  //   customerRatingComment: null
-  // }]
-  // contractorServiceCallsInProgress: ServiceCall[];
+  userBusinesses : Business[] = [];
 
-  constructor() { }
+  serviceCalls : ServiceCall[] = [];
+
+  businessId : number = 0;
+
+  showCalls: boolean = false;
+
+  currentUser : User = new User();
+
+  businessSelected : Business = new Business();
+
+  constructor(private authService : AuthService,
+              private callService: ServiceCallService,
+              private businessService : BusinessService) { }
+
+
 
   ngOnInit(): void {
+    this.getBusinessesByUserId();
   }
+
+  getBusinessesByUserId(){
+    this.authService.doWithLoggedInUser((user : User) => {
+      this.currentUser = user;
+      this.businessService.getBusinessesByUserId(user.id).subscribe({
+        next: (businesses) => {
+          this.userBusinesses = businesses;
+        },
+        error: (fail) => {
+          console.error("ContractorLoginComponent.getBusinessesByUserId(): failed to get businesses");
+        }
+      })
+    });
+  }
+
+  getServiceCallsByBusinessId(business: Business): ServiceCall[]{
+    this.businessSelected = business;
+    this.showCalls = true;
+    this.callService.getServiceCallsByBusinessId(business.id).subscribe({
+      next: (calls) => {
+        this.serviceCalls = calls;
+        console.log(this.serviceCalls);
+      },
+      error: (fail) => {
+        console.error("ContractorLoginComponent.getServiceCallsByBusinessId(): failed to get service calls")
+      }
+    });
+    return this.serviceCalls;
+  }
+
+  completeServiceCall(call: ServiceCall): void {
+    call.completed = true;
+    this.callService.updateServiceCall(call).subscribe({
+      next: (updatedCall) => {
+        this.getServiceCallsByBusinessId(this.businessSelected);
+      },
+      error: (fail) => {
+        console.error("contractorLogin.completeServiceCall(): failed to complete service call")
+      }
+    });
+  }
+
+
 
 }
