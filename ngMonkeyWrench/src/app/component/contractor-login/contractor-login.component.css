@@ -1,0 +1,7 @@
+.radioDatePipe {
+display: inline-block;
+}
+
+.radioDatePipe label {
+  padding-right: 5px;
+}
