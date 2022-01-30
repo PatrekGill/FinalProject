@@ -19,6 +19,7 @@ import { ClientListComponent } from './component/client-list/client-list.compone
 import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
 import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
+import { DatePipe } from './pipes/date.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.comp
     UserDashboardComponent,
     UserAddressesPipe,
     UserSidebarComponent,
+    DatePipe,
   ],
   imports: [
     BrowserModule,
