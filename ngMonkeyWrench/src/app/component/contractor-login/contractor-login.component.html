@@ -45,7 +45,7 @@
               <th scope="col">Completed</th>
             </tr>
           </thead>
-          <tbody *ngFor='let call of serviceCalls | activeCalls:!showComplete'>
+          <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete'>
             <tr>
               <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
               <td>{{call.problem?.description}}</td>
