@@ -20,6 +20,7 @@ import { UserDashboardComponent } from './component/user-dashboard/user-dashboar
 import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
 import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
+import { ActiveCallsPipe } from './pipes/active-calls.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
     UserAddressesPipe,
     UserSidebarComponent,
     UserBusinessesPipe,
+    ActiveCallsPipe,
   ],
   imports: [
     BrowserModule,
