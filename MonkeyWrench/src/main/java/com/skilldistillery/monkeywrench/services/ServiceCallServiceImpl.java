@@ -58,6 +58,11 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 		return serviceCallRepo.findByUserId(userId);
 	}
 
+	@Override
+	public List<ServiceCall> findCallsByBusinessId(int businessId) {
+		return serviceCallRepo.findByBusinessId(businessId);
+	}
+
 
 
 
