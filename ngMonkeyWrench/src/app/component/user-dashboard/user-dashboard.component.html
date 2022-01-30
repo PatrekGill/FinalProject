@@ -1,26 +1,40 @@
-<app-user-sidebar></app-user-sidebar>
+<app-user-sidebar>Loading...</app-user-sidebar>
 <div class="content">
+
   <H1>Service Requests:</H1>
     <br>
-    <br>
-    <br>
+    <div class="wrapper radioDatePipe">
+      <form action="">
+        <input type="radio" id="day" name="datePipe" value="day">
+        <label for="day"> Day</label>
+        <input type="radio" id="week" name="datePipe" value="week">
+        <label for="week"> Week</label>
+        <input type="radio" id="month" name="datePipe" value="month">
+        <label for="month"> Month</label>
+        <input type="radio" id="all" name="datePipe" value="all">
+        <label for="All">  All</label>
+      </form>
+      <br>
+      </div>
     <div class="clientListBox container-fluid">
       <h2>In Progress:</h2>
-
-    <div *ngIf="expandedBox">
-      <table>
-        <thead>
-          <th>Problem</th>
-          <th>Address</th>
-          <th>Date Scheduled</th>
-        </thead>
+      <div *ngIf="expandedBox" class="tableElements">
+        <table>
+          <tr>
+            <th>Problem</th>
+            <th>Address</th>
+            <th>Date Scheduled</th>
+          </tr>
           <tbody *ngFor="let call of serviceCalls">
-            <td>{{call.problem?.description}}</td>
-            <td>{{call.address?.street}} {{call.address?.city}} {{call.address?.stateAbbv}}</td>
-            <td>{{call.dateScheduled}}</td>
+
+              <tr>
+                <td class="tableElementsSpecific">{{call.problem?.description}}</td>
+                <td class="tableElementsSpecific">{{call.address?.street}} {{call.address?.city}}, {{call.address?.stateAbbv}}</td>
+                <td class="tableElementsSpecific">{{call.dateScheduled}}</td>
+              </tr>
           </tbody>
 
-      </table>
+        </table>
+      </div>
+      </div>
     </div>
-  </div>
-</div>
