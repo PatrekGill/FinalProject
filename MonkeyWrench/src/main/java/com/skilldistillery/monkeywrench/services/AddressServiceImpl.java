@@ -76,6 +76,7 @@ public class AddressServiceImpl implements AddressService {
 				
 			} else {
 				if (isAddressOwner) {
+					managed.setUser(address.getUser());
 					managed.setCity(address.getCity());
 					managed.setStateAbbv(address.getStateAbbv());
 					managed.setStreet(address.getStreet());
