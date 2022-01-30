@@ -11,20 +11,19 @@ import { BusinessService } from 'src/app/services/business.service';
 export class BusinessComponent implements OnInit {
 
   constructor(
-    private authService: AuthService,
     private businessService: BusinessService
   ) { }
 
   ngOnInit(): void {
-    if (this.authService.checkLogin()) {
-      console.log("creating");
+    // if (this.authService.checkLogin()) {
+    //   console.log("creating");
 
-      let business = new Business();
-      business.name = "testBusiness";
-      business.logoUrl = "test";
-      this.businessService.create(business)
+    //   let business = new Business();
+    //   business.name = "testBusiness";
+    //   business.logoUrl = "test";
+    //   this.businessService.create(business)
 
-    }
+    // }
   }
 
 
