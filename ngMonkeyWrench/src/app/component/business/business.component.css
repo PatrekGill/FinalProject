@@ -19,6 +19,7 @@
 }
 .business-search {
   margin: 0 auto;
+  margin-bottom: 20px;
   max-width: 500px;
   max-height: 50px;
   display: flex;
