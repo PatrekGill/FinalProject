@@ -31,6 +31,11 @@ public class AddressServiceImpl implements AddressService {
 			addressRepo.findById(id)
 		);
 	}
+	
+	@Override
+	public List<Address> findByUserId(int userId) {
+		return addressRepo.findByUser_Id(userId);
+	}
 
 	@Override
 	public Address create(String username, Address address) {

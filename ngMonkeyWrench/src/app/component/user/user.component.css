@@ -1,6 +1,14 @@
+.userWrapper {
+  /* display: flex; */
+  /* display: inline-block; */
+  display: flex;
+  flex-direction: column;
+
+}
+
 div.userContent {
   margin-left: 200px;
-  padding: 1px 16px;
+  padding: px 16px;
   height: 1000px;
   text-align: left;
   padding-top: 81px;
@@ -11,7 +19,36 @@ label {
   width: 150px;
   text-align: right;
 }
- div.clientListBox {
+
+div.userListBox {
+  min-width: 60%;
+  min-height: 150px;
+  max-width: 60%;
+  margin: 0 auto;
+  background-color: #283891;
+  position: relative;
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: white;
+  font-family: Georgia;
+  border-radius: 2em;
+/*
    min-width: 1000px;
-   padding-left: 30px;
- }
+   padding-left: 30px; */
+}
+
+div.addressListBox {
+  min-width: 60%;
+  min-height: 150px;
+  max-width: 60%;
+  margin: 0 auto;
+  background-color: #283891;
+  position: relative;
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: white;
+  font-family: Georgia;
+  border-radius: 2em;
+}
