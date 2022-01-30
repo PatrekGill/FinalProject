@@ -17,6 +17,15 @@ export class BusinessService {
     private authService: AuthService
   ) { }
 
+  getBusinessesByUserId(userId : number): Observable<Business[]>{
+    return this.http.get<Business[]>(this.url + "/user/" + userId).pipe(
+      catchError( (error: any) => {
+        console.error("BusinessService.getBusinessesByUserId(): failed to get businesses");
+        return throwError(() => new Error("BusinessService.getBusinessesByUserId(): failed to get businesses"))
+      })
+    )
+  }
+
   getAll(): Observable<Business[]> {
     return this.http.get<Business[]>(this.url)
     .pipe(
