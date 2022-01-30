@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Business } from 'src/app/models/business';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
 
@@ -9,10 +10,13 @@ import { BusinessService } from 'src/app/services/business.service';
   styleUrls: ['./business.component.css']
 })
 export class BusinessComponent implements OnInit {
-
+  userRole: string | undefined;
   constructor(
+    private authService: AuthService,
     private businessService: BusinessService
-  ) { }
+  ) {
+    this.setUserRole();
+  }
 
   ngOnInit(): void {
     // if (this.authService.checkLogin()) {
@@ -24,6 +28,20 @@ export class BusinessComponent implements OnInit {
     //   this.businessService.create(business)
 
     // }
+  }
+
+  setUserRole() {
+    this.authService.doWithLoggedInUser(
+      (user: User) => {
+        if (user) {
+          this.userRole = user.role;
+        } else {
+          this.userRole = undefined;
+        }
+        console.log(this.userRole);
+
+      }
+    );
   }
 
 

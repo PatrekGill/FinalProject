@@ -1,0 +1,50 @@
+.main-business-div {
+  margin-top: 100px;
+}
+
+.business-card {
+  max-width: 540px;
+  border-color: darkblue;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+  max-height: 177px;
+}
+
+.business-card-image {
+
+}
+
+.business-card-body {
+  max-height: 72px;
+  margin-bottom: 5px;
+  overflow-y: auto;
+}
+.business-card-body p {
+  font-size: small;
+  border-radius: 5px;
+}
+.business-card-body p:hover {
+  background-color: rgba(0, 0, 0, 0.01);
+
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 5px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+::-webkit-scrollbar-track:hover {
+  background: #f1f1f160;
+}
