@@ -28,19 +28,19 @@ export class UserComponent implements OnInit {
 
   }
 
-  users: User[] = [];
+  currentUserId: number = 0;
   currentUser: User = new User();
-  addresses: Address[] = [];
-
+  users: User[] = [];
   editUser: boolean = false;
   editedUser: User | null = new User();
+
+  addresses: Address[] = [];
+  currentAddress: Address = new Address();
   editAddress: boolean = false;
+
   pwUndo: string | undefined = '';
 
   chosenUserId: number = 0;
-  // currentUserId: number = this.currentUser.id;
-  currentUserId: number = 0;
-
 
 
   reload() {
@@ -116,6 +116,10 @@ export class UserComponent implements OnInit {
       } // END OF OBJECT
     );
 
+  }
+
+  setEditAddress() {
+    this.editAddress = Object.assign({}, this.editAddress);;
   }
 
 
