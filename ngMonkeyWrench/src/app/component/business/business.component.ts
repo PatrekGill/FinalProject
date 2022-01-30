@@ -17,6 +17,8 @@ export class BusinessComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.checkLogin()) {
+      console.log("creating");
+
       let business = new Business();
       business.name = "testBusiness";
       business.logoUrl = "test";
