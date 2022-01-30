@@ -15,8 +15,9 @@
 
   <div class="collapse navbar-collapse homeSpacer" id="navbarNavAltMarkup" [ngbCollapse] = 'isCollapsed'>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#" [routerLink]="['/home']" >Home <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" href="#" [routerLink]="['/contact']">Contact</a>
+      <a class="nav-item nav-link active" href="#" (click)='navToDashboard()' >Dashboard <span class="sr-only"></span></a>
+      <a class="nav-item nav-link" href="#">Profile</a>
+      <a class="nav-item nav-link" href="#">Support</a>
       <a class="nav-item nav-link" href="#" >About</a>
 
     <!-- modal for login -->

@@ -5,6 +5,7 @@ import { ClientListComponent } from './component/client-list/client-list.compone
 import { ContactComponent } from './component/contact/contact.component';
 import { ContractorLoginComponent } from './component/contractor-login/contractor-login.component';
 import { HomeComponent } from './component/home/home.component';
+import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
 import { UserComponent } from './component/user/user.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'business', component: BusinessComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'clientList', component: ClientListComponent },
+  { path: 'userDashboard', component: UserDashboardComponent },
   { path: '**', component: HomeComponent }
 ];
 
