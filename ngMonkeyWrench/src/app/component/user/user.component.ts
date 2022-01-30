@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
   }
 
   currentUserId: number = 0;
+  chosenUserId: number = 0;
 
   users: User[] = [];
   currentUser: User = new User();
@@ -46,8 +47,6 @@ export class UserComponent implements OnInit {
   businesses: Business[] = [];
 
   pwUndo: string | undefined = '';
-
-  chosenUserId: number = 0;
 
 
   reload() {

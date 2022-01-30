@@ -2,11 +2,7 @@
 <div class="userContent">
 
   <h1>Users Page - Under Construction</h1>
-  <br><br><br>
 
-
-
-  <br><br><br>
   <div class='userWrapper'>
     <div class="userListBox" >
       <div *ngIf="!editUser" >
@@ -18,13 +14,11 @@
       </div>
 
       <div *ngIf="editUser">
-        ID: <input type="text" name="id" [(ngModel)]="currentUser.id"><br>
-        Fist name: <input type="text" name="firstName" [(ngModel)]="currentUser.firstName"><br>
-        Last name: <input type="text" name="lastName" [(ngModel)]="currentUser.lastName"><br>
+        Name: <input type="text" name="firstName" [(ngModel)]="currentUser.firstName" placeholder="First name">
+        <input type="text" name="lastName" [(ngModel)]="currentUser.lastName" placeholder="Last name"><br>
         Phone #: <input type="text" name="phoneNumber" [(ngModel)]="currentUser.phoneNumber"><br>
         Notes: <input type="text" name="notes" [(ngModel)]="currentUser.notes"><br>
         Username: <input type="text" name="username" [(ngModel)]="currentUser.username"><br>
-        Password: <input type="text" name="password" [(ngModel)]="currentUser.password"><br>
         <button (click)="editUser=false">Cancel</button>
         <button (click)="updateUser(currentUser)">Save</button>
       </div>
