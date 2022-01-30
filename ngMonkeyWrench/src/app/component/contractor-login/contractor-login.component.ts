@@ -28,6 +28,8 @@ export class ContractorLoginComponent implements OnInit {
 
   businessSelected : Business = new Business();
 
+  showComplete: boolean = false;
+
   constructor(private authService : AuthService,
               private callService: ServiceCallService,
               private businessService : BusinessService) { }
@@ -57,8 +59,14 @@ export class ContractorLoginComponent implements OnInit {
     this.showCalls = true;
     this.callService.getServiceCallsByBusinessId(business.id).subscribe({
       next: (calls) => {
+        // need to test this sorting function
         this.serviceCalls = calls;
-        console.log(this.serviceCalls);
+        this.serviceCalls.sort(function(a, b) {
+          if(a.dateScheduled && b.dateScheduled) {
+            return <any>new Date(a.dateScheduled) - <any>new Date(b.dateScheduled);
+          }
+          return -2;
+        })
       },
       error: (fail) => {
         console.error("ContractorLoginComponent.getServiceCallsByBusinessId(): failed to get service calls")

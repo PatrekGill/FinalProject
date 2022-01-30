@@ -45,12 +45,12 @@
               <th scope="col">Completed</th>
             </tr>
           </thead>
-          <tbody *ngFor='let call of serviceCalls'>
+          <tbody *ngFor='let call of serviceCalls | activeCalls:!showComplete'>
             <tr>
-              <th scope="row">1</th>
+              <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
               <td>{{call.problem?.description}}</td>
               <td>{{call.address?.street}} {{call.address?.city}} {{call.address?.stateAbbv}}</td>
-              <td>{{call.dateScheduled}}</td>
+              <td>{{call.dateScheduled | date  : 'short'}} </td>
               <td><input type="checkbox" name="completed" (change)="completeServiceCall(call)"><br></td>
             </tr>
           </tbody>
