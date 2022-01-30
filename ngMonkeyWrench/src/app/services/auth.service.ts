@@ -57,18 +57,32 @@ export class AuthService {
     );
   }
 
-  doWithLoggedInUser(onGet: Function) {
+  doWithLoggedInUser(onGet: Function, subscribeTo = false) {
     const username = this.getLoggedInUsername();
     if (username) {
-      this.showUsername(username).subscribe(
-        {
-          next: (user) => {onGet(user).subscribe()},
-          error: (error) => {
-            console.error("AuthService: doWithLoggedInUser(): Encountered error");
-            console.log(error);
+      if (subscribeTo) {
+        this.showUsername(username).subscribe(
+          {
+            next: (user) => {onGet(user).subscribe()},
+            error: (error) => {
+              console.error("AuthService: doWithLoggedInUser(): Encountered error");
+              console.log(error);
+            }
           }
-        }
-      );
+        );
+      } else {
+        this.showUsername(username).subscribe(
+          {
+            next: (user) => {onGet(user)},
+            error: (error) => {
+              console.error("AuthService: doWithLoggedInUser(): Encountered error");
+              console.log(error);
+            }
+          }
+        );
+      }
+
+
     } else {
       console.error("AuthService: onGettingLoggedInUser(): No current user found");
     }
