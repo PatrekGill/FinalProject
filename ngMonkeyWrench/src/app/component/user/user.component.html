@@ -2,20 +2,12 @@
 <div class="userContent">
 
   <h1>Users Page - Under Construction</h1>
-  <br>
+  <br><br><br>
+
+
+
+  <br><br><br>
   <div class='userWrapper'>
-      <!-- <div>
-        <div >
-          <ul *ngFor="let user of users">Users
-            <li>{{user.id}}</li>
-            <li>{{user.firstName}}</li>
-            <li>{{user.lastName}}</li>
-          </ul>
-        </div>
-
-      </div> -->
-
-    <!-- <div class="border-radius: 2em " style="padding:10px;background:skyblue" > -->
     <div class="userListBox" >
       <div *ngIf="!editUser" >
         <button (click)="editUser = true">Edit</button>
@@ -47,15 +39,15 @@
           <thead class="table-danger">
             <tr>
               <th>Owner Name</th>
-              <th>Address</th>
+              <th>Busness Name</th>
               <th class="editAddressBtn"></th>
             </tr>
           </thead>
           <tbody class=" table-info">
-            <tr *ngFor="let userAddress of addresses">
+            <tr *ngFor="let business of businesses">
               <!-- <label for=""></label><td></td> -->
-              <td>{{userAddress.user?.firstName}} {{userAddress.user?.lastName}}</td>
-              <td>{{userAddress.street}} {{userAddress.city}}, {{userAddress.stateAbbv}} {{userAddress.zipCode}}</td>
+              <td>{{currentUser.firstName}} {{currentUser.lastName}}</td>
+              <td>Biz name: {{business.name}} | Type: {{business.serviceTypes}} | Enabled: {{business.enabled}}</td>
               <td ><button class="action" >Remove</button></td>  <!-- Removes userId from address or puts at user ID 1 which can be an admin user which cares for unassigned-->
             </tr>
           </tbody>
@@ -81,7 +73,7 @@
           <tr *ngFor="let userAddress of addresses">
             <td>{{userAddress.user?.firstName}} {{userAddress.user?.lastName}}</td>
             <td>{{userAddress.street}} {{userAddress.city}}, {{userAddress.stateAbbv}} {{userAddress.zipCode}}</td>
-            <td ><button class="action" >Remove</button></td>  <!-- Removes userId from address or puts at user ID 1 which can be an admin user which cares for unassigned-->
+            <td ><button (click)="udpateAddress(userAddress)" >Remove</button></td>  <!-- Removes userId from address or puts at user ID 1 which can be an admin user which cares for unassigned-->
           </tr>
         </tbody>
         <br>
