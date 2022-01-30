@@ -53,6 +53,11 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 		return deleted;
 	}
 
+	@Override
+	public List<ServiceCall> findCallsByUserId(int userId) {
+		return serviceCallRepo.findByUserId(userId);
+	}
+
 
 
 

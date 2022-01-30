@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { tap, catchError, throwError, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,13 +57,35 @@ export class AuthService {
     );
   }
 
-  getLoggedInUser(): Observable<User> | undefined {
+  doWithLoggedInUser(onGet: Function, subscribeTo = false) {
     const username = this.getLoggedInUsername();
     if (username) {
-      return this.showUsername(username);
-    }
+      if (subscribeTo) {
+        this.showUsername(username).subscribe(
+          {
+            next: (user) => {onGet(user).subscribe()},
+            error: (error) => {
+              console.error("AuthService: doWithLoggedInUser(): Encountered error");
+              console.log(error);
+            }
+          }
+        );
+      } else {
+        this.showUsername(username).subscribe(
+          {
+            next: (user) => {onGet(user)},
+            error: (error) => {
+              console.error("AuthService: doWithLoggedInUser(): Encountered error");
+              console.log(error);
+            }
+          }
+        );
+      }
 
-    return undefined;
+
+    } else {
+      console.error("AuthService: onGettingLoggedInUser(): No current user found");
+    }
   }
 
   register(user: User) {
@@ -111,7 +132,7 @@ export class AuthService {
   }
 
   getBasicHttpOptions() {
-    const credentials = this.getCredentials;
+    const credentials = this.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Basic ${credentials}`,

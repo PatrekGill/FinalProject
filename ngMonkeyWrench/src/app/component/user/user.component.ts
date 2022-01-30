@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Address } from 'src/app/models/address';
 import { User } from 'src/app/models/user';
 import { AddressService } from 'src/app/services/address.service';
@@ -14,6 +16,7 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private currentRoute: ActivatedRoute,
     private authService: AuthService,
     private addyService: AddressService,
   ) { }
