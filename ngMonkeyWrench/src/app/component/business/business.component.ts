@@ -12,13 +12,13 @@ import { BusinessService } from 'src/app/services/business.service';
 })
 export class BusinessComponent implements OnInit {
   userRole: string | undefined;
-
+  allBusinesses: Business[] = [];
   constructor(
     private authService: AuthService,
     private modalService: NgbModal,
     private businessService: BusinessService
   ) {
-    this.setUserRole();
+
   }
 
   ngOnInit(): void {
@@ -30,8 +30,8 @@ export class BusinessComponent implements OnInit {
     //   business.logoUrl = "test";
     //   this.businessService.create(business)
     // }
-
-    this.getAllBusinesses();
+    this.setUserRole();
+    this.setAllBusinesses();
   }
 
   isRoleBusiness(): boolean {
@@ -62,25 +62,18 @@ export class BusinessComponent implements OnInit {
     );
   }
 
-  getAllBusinesses() {
+  setAllBusinesses() {
     this.businessService.getAll().subscribe(
-      { // OBJECT
+      {
         next: (businessList) => {
-          this.businesses = businessList;
-
-          console.log('in User getBusinesses');
-          console.log(this.businesses);
-
+          this.allBusinesses = businessList;
         },
         error: (wrong) => {
           console.error('UserComponent.getBusinesses(): Error retreiving all businesses');
           console.error(wrong);
         },
         complete: () => { }
-      } // END OF OBJECT
+      }
     );
   }
-
-  businesses: Business[] = [];
-
 }

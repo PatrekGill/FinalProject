@@ -4,6 +4,13 @@
 .business-table {
   margin: 0 auto;
 }
+.business-table tbody {
+  display: block;
+  max-height: 1000px;
+  overflow: auto;
+  padding-right: 10px;
+}
+
 .business-search-bar {
   float: right;
   margin-bottom: 0;
@@ -32,7 +39,7 @@
 }
 
 .business-card-image {
-
+  height: 100%;
 }
 
 .business-card-body {
@@ -52,6 +59,9 @@
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+}
+tbody::-webkit-scrollbar {
+  padding-left: 25px;
 }
 /* Track */
 ::-webkit-scrollbar-track {

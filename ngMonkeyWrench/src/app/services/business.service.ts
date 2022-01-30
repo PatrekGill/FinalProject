@@ -16,22 +16,13 @@ export class BusinessService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) { }
+  ) {
 
-
-  getHttpOption() {
-    let options = {
-      headers: {
-      Authorization: 'Basic ' + this.authService.getCredentials(),
-      'X-Requested-With': 'XMLHttpRequest'
-      }
-    };
-  return options
   }
 
 
   getAll(): Observable<Business[]> {
-    return this.http.get<Business[]>(this.url, this.getHttpOption()).pipe(
+    return this.http.get<Business[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => 'business getAll error');

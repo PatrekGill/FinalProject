@@ -3,13 +3,13 @@
   <div>
     <h1 style="text-align: center;">Businesses</h1>
 
-    <div class="business-search">
-
-      <button class="btn btn-primary" (click)="openCenteredModal(content)"><i class="glyphicon glyphicon-plus"></i></button>
+    <div class="business-search input-group">
+      <button class="btn btn-outline-primary" (click)="openCenteredModal(createBusinessContent)"><i class="bi bi-plus"></i></button>
+      <button class="btn btn-secondary" (click)="openCenteredModal(filterContent)"><i class="bi bi-filter"></i></button>
 
       <div class="business-search-bar form-floating">
         <input type="search" class="form-control" id="searchByName" placeholder="Search">
-        <label for="searchByName">Search For Name</label>
+        <label for="searchByName">Search...</label>
       </div>
 
     </div>
@@ -19,17 +19,17 @@
         <th></th>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let business of allBusinesses">
           <td>
 
             <div class="card mb-3 business-card">
               <div class="row g-0">
-                <div class="col-md-4 business-card-image">
-                  <img src="" class="img-fluid rounded-start" alt="business logo">
+                <div class="col-md-4">
+                  <img [src]="business.logoUrl" class="business-card-image img-fluid rounded-start" alt="business logo">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">{{business.name}}</h5>
                     <div class="business-card-body">
                       <p class="card-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
                     </div>
@@ -49,7 +49,33 @@
 </div>
 
 
-<ng-template #content let-modal>
+<ng-template #createBusinessContent let-modal>
+  <div>
+    <div class="modal-header">
+      <h1>Create Business</h1>
+    </div>
+    <div class="modal-body">
+      <div class="form-floating">
+        <textarea rows="5" style="height: 100%;" type="text" class="form-control" id="descriptionEdit" placeholder="Description" ></textarea>
+        <label for="descriptionEdit">Description</label>
+      </div>
+      <br/>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="imageEdit" placeholder="URL">
+        <label for="imageEdit">Image URL</label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <span style="float: left;">
+        <button class="btn btn-primary">Save Changes</button>
+      </span>
+      <button type="button" class="btn btn-warning">Close</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #filterContent let-modal>
   <div>
     <div class="modal-header">
       <div class="form-floating" style="width: 100%;">
