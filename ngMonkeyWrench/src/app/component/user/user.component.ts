@@ -127,8 +127,6 @@ export class UserComponent implements OnInit {
 
   udpateAddress(address: Address, goToDetails = true) {
     if(this.currentUser.id == address.user?.id || this.currentUser.id == 1) {
-      console.log('userID for address pre set');
-      console.log(address.user.id);
 
       address.user.id = 3;
 
@@ -157,8 +155,6 @@ export class UserComponent implements OnInit {
       { // OBJECT
         next: (business) => {
           this.businesses = business;
-          console.log('BUSINESSES');
-          console.log(this.businesses);
         },
         error: (wrong) => {
           console.error('TodoListComponent.reload(): Error retreiving todos');
