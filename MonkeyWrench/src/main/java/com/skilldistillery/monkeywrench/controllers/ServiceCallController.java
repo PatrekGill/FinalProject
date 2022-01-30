@@ -95,5 +95,10 @@ public class ServiceCallController {
 		}
 	}
 	
+		//get service calls by user
+		@GetMapping("serviceCalls/user/{userId}")
+		public List<ServiceCall> getServiceCallByUserId(@PathVariable int userId) {
+			return sCallSvc.findCallsByUserId(userId);
+		}
 
 }

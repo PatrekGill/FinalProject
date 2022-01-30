@@ -1,0 +1,20 @@
+.radioDatePipe {
+  display: inline-block;
+  }
+
+  .radioDatePipe label {
+    padding-right: 5px;
+  }
+
+  .tableElements {
+    justify-content: center;
+    display:inline-block;
+  }
+
+  .tableElementsSpecific{
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+

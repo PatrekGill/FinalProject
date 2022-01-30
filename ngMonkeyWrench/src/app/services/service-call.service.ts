@@ -71,4 +71,13 @@ export class ServiceCallService {
       })
     )
   }
+
+  getServiceCallsByUserId(userId : number): Observable<ServiceCall[]>{
+    return this.http.get<ServiceCall[]>(this.url + "/user/" + userId).pipe(
+      catchError( (error: any) => {
+        console.error("ServiceCallService.getServiceCallsByUserId(): error finding service calls");
+        return throwError(() => new Error("ServiceCallService.getServiceCallsByUserId(): error finding service calls"))
+      })
+    )
+  }
 }

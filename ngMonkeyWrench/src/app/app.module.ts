@@ -16,7 +16,10 @@ import { FormsModule } from '@angular/forms';
 import { BusinessService } from './services/business.service';
 import { ContactComponent } from './component/contact/contact.component';
 import { ClientListComponent } from './component/client-list/client-list.component';
+import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
 import { UserAddressesPipe } from './pipes/user-addresses.pipe';
+import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
+import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { UserAddressesPipe } from './pipes/user-addresses.pipe';
     UserComponent,
     ContactComponent,
     ClientListComponent,
-    UserAddressesPipe
+    UserDashboardComponent,
+    UserAddressesPipe,
+    UserSidebarComponent,
+    UserBusinessesPipe,
   ],
   imports: [
     BrowserModule,
