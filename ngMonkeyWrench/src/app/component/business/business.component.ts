@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Business } from 'src/app/models/business';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,8 +12,10 @@ import { BusinessService } from 'src/app/services/business.service';
 })
 export class BusinessComponent implements OnInit {
   userRole: string | undefined;
+
   constructor(
     private authService: AuthService,
+    private modalService: NgbModal,
     private businessService: BusinessService
   ) {
     this.setUserRole();
@@ -30,6 +33,21 @@ export class BusinessComponent implements OnInit {
     // }
   }
 
+  isRoleBusiness(): boolean {
+    return this.userRole === "business";
+  }
+  isRoleCustomer(): boolean {
+    return this.userRole === "customer";
+  }
+  isRoleUndefined(): boolean {
+    return this.userRole === undefined;
+  }
+
+
+  openCenteredModal(content : any) {
+    this.modalService.open(content, { centered: true });
+  }
+
   setUserRole() {
     this.authService.doWithLoggedInUser(
       (user: User) => {
@@ -39,7 +57,6 @@ export class BusinessComponent implements OnInit {
           this.userRole = undefined;
         }
         console.log(this.userRole);
-
       }
     );
   }

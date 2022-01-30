@@ -1,6 +1,28 @@
 .main-business-div {
   margin-top: 100px;
 }
+.business-table {
+  margin: 0 auto;
+}
+.business-search-bar {
+  float: right;
+  margin-bottom: 0;
+  font-size: medium;
+  flex-grow: 1;
+}
+.business-search {
+  margin: 0 auto;
+  max-width: 500px;
+  max-height: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: auto;
+}
+.business-search input {
+  width: 100%;
+  max-height: 50px;
+}
 
 .business-card {
   max-width: 540px;
@@ -23,7 +45,7 @@
   border-radius: 5px;
 }
 .business-card-body p:hover {
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: rgba(0, 0, 0, 0.02);
 
 }
 
