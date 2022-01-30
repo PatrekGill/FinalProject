@@ -102,4 +102,8 @@ export class NavBarComponent implements OnInit {
       }
     }
 
+    navToDashboard(){
+      //get the role of logged in user and direct to user dashboard or contractor login
+    }
+
 }

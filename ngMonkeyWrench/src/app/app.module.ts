@@ -18,6 +18,7 @@ import { ContactComponent } from './component/contact/contact.component';
 import { ClientListComponent } from './component/client-list/client-list.component';
 import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
 import { UserAddressesPipe } from './pipes/user-addresses.pipe';
+import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserAddressesPipe } from './pipes/user-addresses.pipe';
     ContactComponent,
     ClientListComponent,
     UserDashboardComponent,
-    UserAddressesPipe
+    UserAddressesPipe,
+    UserSidebarComponent,
   ],
   imports: [
     BrowserModule,

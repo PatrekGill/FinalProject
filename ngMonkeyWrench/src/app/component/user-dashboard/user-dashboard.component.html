@@ -1,6 +1,26 @@
+<app-user-sidebar></app-user-sidebar>
+<div class="content">
+  <H1>Service Requests:</H1>
+    <br>
+    <br>
+    <br>
+    <div class="clientListBox container-fluid">
+      <h2>In Progress:</h2>
 
+    <div *ngIf="expandedBox">
+      <table>
+        <thead>
+          <th>Problem</th>
+          <th>Address</th>
+          <th>Date Scheduled</th>
+        </thead>
+          <tbody *ngFor="let call of serviceCalls">
+            <td>{{call.problem?.description}}</td>
+            <td>{{call.address?.street}} {{call.address?.city}} {{call.address?.stateAbbv}}</td>
+            <td>{{call.dateScheduled}}</td>
+          </tbody>
 
-
-<br><br><br><br><br><br>
-
-<p>user-dashboard works!</p>
+      </table>
+    </div>
+  </div>
+</div>

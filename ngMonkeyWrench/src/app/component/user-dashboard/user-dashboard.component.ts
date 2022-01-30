@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceCall } from 'src/app/models/service-call';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { ServiceCallService } from 'src/app/services/service-call.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -11,27 +13,36 @@ export class UserDashboardComponent implements OnInit {
 
   currentUser: User = new User();
 
+  serviceCalls: ServiceCall[] = [];
+
+  expandedBox: boolean = true;
+
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private servService: ServiceCallService
+
   ) { }
 
-  getUser() {
-    const username = this.authService.getLoggedInUsername();
-    if(username !== null) {
-    this.authService.showUsername(username).subscribe ({
-        next: (user) => {
-          this.currentUser = user;
+  getUsersServiceCalls() {
+    this.authService.doWithLoggedInUser((user : User) => {
+      this.servService.getServiceCallsByUserId(user.id).subscribe({
+        next: (calls) => {
+          this.serviceCalls = calls;
+
         },
-        error: (wrong) => {
-          console.error('UserComponent.getUser(): Error retreiving user.');
-          console.error(wrong);
+        error: (fail) => {
+          console.error("userDashboard.getUsersServiceCalls(): failed to find service calls");
         }
-      });
-    }
+      })
+    });
   }
 
   ngOnInit(): void {
-    this.getUser();
+    this.getUsersServiceCalls();
+  }
+
+  reload(){
+
   }
 
 }
