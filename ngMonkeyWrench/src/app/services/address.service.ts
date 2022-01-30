@@ -71,4 +71,24 @@ export class AddressService {
       })
     )
   }
+
+  getAddressByUserId(userId: number): Observable<Address[]>{
+    // return this.http.get<Address[]>(`${this.url}/user/${userId}`).pipe(
+      console.log('in addyservice');
+      console.log('userID is' + userId);
+
+
+    return this.http.get<Address[]>(this.url + '/user/' + userId)
+    .pipe(
+      catchError( (error: any) => {
+        console.error(error);
+        return throwError(
+          () => new Error(
+            "AddressService.getAddressByUserId(): failed to get addresses by UserId " + error
+          )
+        )
+      })
+    );
+  }
+
 }

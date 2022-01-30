@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { BusinessService } from './services/business.service';
 import { ContactComponent } from './component/contact/contact.component';
 import { ClientListComponent } from './component/client-list/client-list.component';
+import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ClientListComponent } from './component/client-list/client-list.compone
     BusinessComponent,
     UserComponent,
     ContactComponent,
-    ClientListComponent
+    ClientListComponent,
+    UserAddressesPipe
   ],
   imports: [
     BrowserModule,
