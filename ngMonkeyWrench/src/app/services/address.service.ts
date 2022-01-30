@@ -4,6 +4,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Address } from '../models/address';
 import { EquipmentType } from '../models/equipment-type';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,19 @@ export class AddressService {
   private url = environment.baseUrl + 'api/address';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
+
+  getHttpOption() {
+    let options = {
+      headers: {
+      Authorization: 'Basic ' + this.authService.getCredentials(),
+      'X-Requested-With': 'XMLHttpRequest'
+      }
+    };
+  return options
+  }
 
   getAddresses(): Observable<Address[]>{
     return this.http.get<Address[]>(this.url)
@@ -45,7 +57,7 @@ export class AddressService {
   }
 
   updateAddress(address: Address): Observable<Address> {
-    return this.http.put<Address>(this.url + "/" + address.id, address).pipe(
+    return this.http.put<Address>(this.url + "/" + address.id, address, this.getHttpOption()).pipe(
       catchError( (error: any) => {
         console.error("AddressService.updateAddress(): error updating address");
         console.error(error);

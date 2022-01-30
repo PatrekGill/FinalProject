@@ -17,6 +17,7 @@ export class BusinessService {
     private authService: AuthService
   ) { }
 
+
   getBusinessesByUserId(userId : number): Observable<Business[]>{
     return this.http.get<Business[]>(this.url + "/user/" + userId).pipe(
       catchError( (error: any) => {
@@ -26,9 +27,18 @@ export class BusinessService {
     )
   }
 
+  getHttpOption() {
+    let options = {
+      headers: {
+      Authorization: 'Basic ' + this.authService.getCredentials(),
+      'X-Requested-With': 'XMLHttpRequest'
+      }
+    };
+  return options
+  }
+
   getAll(): Observable<Business[]> {
-    return this.http.get<Business[]>(this.url)
-    .pipe(
+    return this.http.get<Business[]>(this.url, this.getHttpOption()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => 'business getAll error');

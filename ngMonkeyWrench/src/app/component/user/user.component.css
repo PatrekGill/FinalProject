@@ -52,3 +52,16 @@ div.addressListBox {
   font-family: Georgia;
   border-radius: 2em;
 }
+
+
+.editAddressBtn {
+  width: 35px;
+}
+
+.action {
+  display: none;
+}
+
+tr:hover .action {
+  display: inline-flex;
+}
