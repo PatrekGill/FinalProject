@@ -24,8 +24,29 @@ export class BusinessComponent implements OnInit {
       business.logoUrl = "test";
       this.businessService.create(business)
 
+      this.getAllBusinesses();
     }
   }
 
+  getAllBusinesses() {
+    this.businessService.getAll().subscribe(
+      { // OBJECT
+        next: (businessList) => {
+          this.businesses = businessList;
+
+          console.log('in User getBusinesses');
+          console.log(this.businesses);
+
+        },
+        error: (wrong) => {
+          console.error('UserComponent.getBusinesses(): Error retreiving all businesses');
+          console.error(wrong);
+        },
+        complete: () => { }
+      } // END OF OBJECT
+    );
+  }
+
+  businesses: Business[] = [];
 
 }
