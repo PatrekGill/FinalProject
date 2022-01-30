@@ -93,7 +93,6 @@ public class UserController {
 	@GetMapping("username/{username}")
 	public User getUserByUsername(@PathVariable String username, HttpServletResponse res) {
 		User user = userServ.getByUsername(username);
-		System.out.println(user);
 		if(user == null) {
 			res.setStatus(404);
 		}

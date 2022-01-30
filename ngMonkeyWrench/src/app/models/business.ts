@@ -13,8 +13,8 @@ export class Business {
   serviceTypes: ServiceType[] | undefined;
 
   constructor(
-    id: number,
-    enabled: boolean,
+    id: number = 0,
+    enabled: boolean = true,
     name?: string,
     logoUrl?: string,
     createdDate?: Date,

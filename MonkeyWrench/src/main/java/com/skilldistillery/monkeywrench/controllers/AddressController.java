@@ -60,6 +60,21 @@ public class AddressController {
 	}
 	
 	
+/* ----------------------------------------------------------------------------
+	GET address by UserId
+---------------------------------------------------------------------------- */
+@GetMapping("address/user/{userId}")
+public List<Address> findByUserId(
+	@PathVariable int userId,
+	HttpServletResponse res
+) {
+	List<Address> addresses = null;
+		addresses = addressService.findByUserId(userId);
+		
+
+	return addresses;
+}
+	
 
 	/* ----------------------------------------------------------------------------
 		POST create address

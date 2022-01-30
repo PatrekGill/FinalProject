@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Address } from 'src/app/models/address';
 import { User } from 'src/app/models/user';
 import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,19 +16,30 @@ export class UserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private currentRoute: ActivatedRoute,
     private authService: AuthService,
-    private addyService: AddressService
+    private addyService: AddressService,
   ) { }
 
+  ngOnInit(): void {
 
+    this.getUser();
+    // this.getAddresses();
+
+  }
 
   users: User[] = [];
-  initUser: Observable<User> | undefined = new Observable<User>();
   currentUser: User = new User();
+  addresses: Address[] = [];
+
   editUser: boolean = false;
   editedUser: User | null = new User();
   editAddress: boolean = false;
   pwUndo: string | undefined = '';
+
+  chosenUserId: number = 0;
+  // currentUserId: number = this.currentUser.id;
+  currentUserId: number = 0;
 
 
 
@@ -47,21 +60,13 @@ export class UserComponent implements OnInit {
     );
   }
 
-
   getUser() {
-    console.log('in GETUSER');
     const username = this.authService.getLoggedInUsername();
-    console.log('username');
-    console.log(username);
-
     if(username !== null) {
     this.authService.showUsername(username).subscribe ({
         next: (user) => {
           this.currentUser = user;
-          console.log('in getUser');
-
-    console.log(this.currentUser);
-
+          this.getAddresses();
         },
         error: (wrong) => {
           console.error('UserComponent.getUser(): Error retreiving user.');
@@ -69,7 +74,6 @@ export class UserComponent implements OnInit {
         }
       });
     }
-    // return user;
   }
 
   setEditUser() {
@@ -92,12 +96,27 @@ export class UserComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
 
-    this.getUser();
-    console.log(this.currentUser);
+  getAddresses() {
+    this.currentUserId = this.currentUser.id;
+    this.addyService.getAddressByUserId(this.currentUserId).subscribe(
+      { // OBJECT
+        next: (addressList) => {
+          this.addresses = addressList;
 
+          console.log('in User getAddresses');
+          console.log(this.addresses);
+
+        },
+        error: (wrong) => {
+          console.error('UserComponent.getAddressses(): Error retreiving addresses by UserId');
+          console.error(wrong);
+        },
+        complete: () => { }
+      } // END OF OBJECT
+    );
 
   }
+
 
 }
