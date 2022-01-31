@@ -29,16 +29,6 @@ export class BusinessService {
     )
   }
 
-  getHttpOption() {
-    let options = {
-      headers: {
-      Authorization: 'Basic ' + this.authService.getCredentials(),
-      'X-Requested-With': 'XMLHttpRequest'
-      }
-    };
-    return options
-  }
-
   getAll(): Observable<Business[]> {
     return this.http.get<Business[]>(this.url).pipe(
       catchError((err: any) => {

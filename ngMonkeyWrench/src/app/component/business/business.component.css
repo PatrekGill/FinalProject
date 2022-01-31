@@ -41,6 +41,14 @@
 
 .business-card-image {
   height: 100%;
+  width: 100%;
+}
+.business-card-image-div {
+  position: relative;
+  overflow-x: hidden;
+  padding-right: 0%;
+  height: 155px;
+  max-height: 155px;
 }
 
 .business-card-body {

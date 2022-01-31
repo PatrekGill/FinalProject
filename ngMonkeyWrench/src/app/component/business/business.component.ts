@@ -4,6 +4,7 @@ import { Business } from 'src/app/models/business';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-business',
@@ -14,11 +15,13 @@ export class BusinessComponent implements OnInit {
   userRole: string | undefined;
   allBusinesses: Business[] = [];
   creatingBusiness: Business;
+  allContractors: User[] = [];
 
   constructor(
     private authService: AuthService,
     private modalService: NgbModal,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private userService: UserService
   ) {
     this.creatingBusiness = new Business();
   }
@@ -26,6 +29,7 @@ export class BusinessComponent implements OnInit {
   ngOnInit(): void {
     this.setUserRole();
     this.setAllBusinesses();
+    this.setAllContractors();
   }
 
   isRoleBusiness(): boolean {
@@ -57,9 +61,30 @@ export class BusinessComponent implements OnInit {
         } else {
           this.userRole = undefined;
         }
-        console.log(this.userRole);
       }
     );
+  }
+
+  setAllContractors() {
+    this.allContractors = [];
+    this.userService.getAll().subscribe(
+      {
+        next: (allUsers) => {
+          allUsers.forEach(
+            (user) => {
+              if (user.enabled && user.role === "business") {
+                this.allContractors.push(user);
+              }
+            }
+          )
+        },
+        error: (errorFound) => {
+          console.log("setAllContractors(): Error getting all users");
+          console.error(errorFound);
+
+        }
+      }
+    )
   }
 
   setAllBusinesses() {

@@ -20,8 +20,9 @@ import { UserDashboardComponent } from './component/user-dashboard/user-dashboar
 import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
 import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
-import { BusinessServiceTypesStringPipe } from './business-service-types-string.pipe';
+import { BusinessServiceTypesStringPipe } from './pipes/business-service-types-string.pipe';
 import { ActiveCallsPipe } from './pipes/active-calls.pipe';
+import { SearchByUsernamePipe } from './pipes/search-by-username.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ActiveCallsPipe } from './pipes/active-calls.pipe';
     UserSidebarComponent,
     UserBusinessesPipe,
     ActiveCallsPipe,
-    BusinessServiceTypesStringPipe
+    BusinessServiceTypesStringPipe,
+    SearchByUsernamePipe
   ],
   imports: [
     BrowserModule,

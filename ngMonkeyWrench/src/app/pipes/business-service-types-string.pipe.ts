@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Business } from './models/business';
+import { Business } from '../models/business';
 
 @Pipe({
   name: 'businessServiceTypesString'

@@ -24,10 +24,10 @@
 
             <div class="card mb-3 business-card">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <img [src]="business.logoUrl" class="business-card-image img-fluid rounded-start" alt="business logo">
+                <div class="col-4 business-card-image-div">
+                  <img [src]="business.logoUrl" class="business-card-image rounded-start" alt="business logo">
                 </div>
-                <div class="col-md-8">
+                <div class="col-8">
                   <div class="card-body">
                     <h5 class="card-title">{{business.name}}</h5>
                     <div class="business-card-body">
@@ -64,6 +64,7 @@
         <input type="text" class="form-control" id="logoUrlInput" placeholder="URL" [(ngModel)]="creatingBusiness.logoUrl">
         <label for="logoUrlInput">Image URL</label>
       </div>
+
     </div>
 
     <div class="modal-footer">
