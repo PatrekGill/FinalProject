@@ -31,26 +31,5 @@ export class Business {
     this.users = users;
     this.serviceTypes = serviceTypes;
   }
-
-  getServiceTypesAsString(): string {
-    let serviceTypesString = "";
-    console.log("here");
-    if (!this.serviceTypes) {
-      return serviceTypesString;
-    }
-
-    const numberOfServices = this.serviceTypes.length;
-    if (numberOfServices > 0) {
-      console.log("here");
-
-      this.serviceTypes.forEach(type => {
-        serviceTypesString += (type.name + ", ");
-      });
-
-      serviceTypesString.slice(serviceTypesString.length - 2, 2)
-    }
-
-    return serviceTypesString;
-  }
 }
 
