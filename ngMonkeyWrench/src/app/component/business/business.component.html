@@ -31,7 +31,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{business.name}}</h5>
                     <div class="business-card-body">
-                      <p class="card-text">{{businessServiceTypesString: business }}</p>
+                      <p class="card-text">{{business | businessServiceTypesString }}</p>
                     </div>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                   </div>
@@ -56,21 +56,21 @@
     </div>
     <div class="modal-body">
       <div class="form-floating">
-        <textarea rows="5" style="height: 100%;" type="text" class="form-control" id="descriptionEdit" placeholder="Description" ></textarea>
-        <label for="descriptionEdit">Description</label>
+        <input type="text" class="form-control" id="nameIntput" placeholder="name" [(ngModel)]="creatingBusiness.name">
+        <label for="nameIntput">Business Name</label>
       </div>
       <br/>
       <div class="form-floating">
-        <input type="text" class="form-control" id="imageEdit" placeholder="URL">
-        <label for="imageEdit">Image URL</label>
+        <input type="text" class="form-control" id="logoUrlInput" placeholder="URL" [(ngModel)]="creatingBusiness.logoUrl">
+        <label for="logoUrlInput">Image URL</label>
       </div>
     </div>
 
     <div class="modal-footer">
       <span style="float: left;">
-        <button class="btn btn-primary">Save Changes</button>
+        <button class="btn btn-primary" (click)="createBusiness(creatingBusiness); modal.close()">Create</button>
       </span>
-      <button type="button" class="btn btn-warning">Close</button>
+      <button type="button" class="btn btn-warning" (click)="modal.close()">Close</button>
     </div>
   </div>
 </ng-template>
@@ -100,7 +100,7 @@
       <span style="float: left;">
         <button class="btn btn-primary">Save Changes</button>
       </span>
-      <button type="button" class="btn btn-warning">Close</button>
+      <button type="button" class="btn btn-warning" (click)="modal.close()">Close</button>
     </div>
   </div>
 </ng-template>

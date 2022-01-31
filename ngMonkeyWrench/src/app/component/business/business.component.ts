@@ -13,23 +13,17 @@ import { BusinessService } from 'src/app/services/business.service';
 export class BusinessComponent implements OnInit {
   userRole: string | undefined;
   allBusinesses: Business[] = [];
+  creatingBusiness: Business;
+
   constructor(
     private authService: AuthService,
     private modalService: NgbModal,
     private businessService: BusinessService
   ) {
-
+    this.creatingBusiness = new Business();
   }
 
   ngOnInit(): void {
-    // if (this.authService.checkLogin()) {
-    //   console.log("creating");
-
-    //   let business = new Business();
-    //   business.name = "testBusiness";
-    //   business.logoUrl = "test";
-    //   this.businessService.create(business)
-    // }
     this.setUserRole();
     this.setAllBusinesses();
   }
@@ -47,6 +41,12 @@ export class BusinessComponent implements OnInit {
 
   openCenteredModal(content : any) {
     this.modalService.open(content, { centered: true });
+  }
+
+  createBusiness(business: Business) {
+    this.businessService.create(business);
+    this.creatingBusiness = new Business();
+    this.setAllBusinesses();
   }
 
   setUserRole() {

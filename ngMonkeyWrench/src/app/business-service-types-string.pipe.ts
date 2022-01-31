@@ -25,7 +25,8 @@ export class BusinessServiceTypesStringPipe implements PipeTransform {
         serviceTypesString += (type.name + ", ");
       });
 
-      serviceTypesString.slice(serviceTypesString.length - 2, 2)
+      // get rid of end comma
+      serviceTypesString = serviceTypesString.slice(0, serviceTypesString.length - 2);
     }
 
     return serviceTypesString;
