@@ -19,8 +19,10 @@ export class BusinessComponent implements OnInit {
   creatingBusiness: Business;
   allContractors: User[];
   usernameSearchText: string;
+  searchBusinessText: string;
   serviceTypeSearchText: string;
   allServiceTypes: ServiceType[];
+  editBusiness: Business | undefined;
 
   constructor(
     private authService: AuthService,
@@ -34,8 +36,10 @@ export class BusinessComponent implements OnInit {
     this.allContractors = [];
     this.allBusinesses = [];
     this.allServiceTypes = [];
+
     this.usernameSearchText = "";
     this.serviceTypeSearchText = "";
+    this.searchBusinessText = "";
   }
 
   ngOnInit(): void {
@@ -89,6 +93,10 @@ export class BusinessComponent implements OnInit {
     this.creatingBusiness = new Business();
   }
 
+  resetEditBusiness() {
+    this.editBusiness = undefined;
+  }
+
   createBusiness(business: Business) {
     this.businessService.create(
       business,
@@ -99,6 +107,20 @@ export class BusinessComponent implements OnInit {
     this.creatingBusiness = new Business();
   }
 
+
+  updateBusiness(business: Business) {
+    this.businessService.update(
+      business,
+      () => {
+        this.setAllBusinesses()
+      }
+    );
+    this.creatingBusiness = new Business();
+  }
+
+  setEditBusiness(business: Business) {
+    this.editBusiness = Object.assign({},business);
+  }
 
   resetServiceTypeSearchText() {
     this.serviceTypeSearchText = "";

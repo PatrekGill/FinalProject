@@ -67,8 +67,6 @@
 
 }
 
-.create-business-modal {
-}
 
 .add-users-section {
   /* border: 2px solid black */
@@ -81,7 +79,9 @@
   overflow-y: auto;
 }
 
-
+.modal-button-footer {
+  display: block;
+}
 
 /* width */
 ::-webkit-scrollbar {

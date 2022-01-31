@@ -9,8 +9,8 @@
       <button class="btn btn-secondary" (click)="openCenteredModal(filterContent)"><i class="bi bi-filter"></i></button>
 
       <div class="business-search-bar form-floating">
-        <input type="search" class="form-control" id="searchByName" placeholder="Search">
-        <label for="searchByName">Search...</label>
+        <input type="search" class="form-control" id="searchByName" placeholder="Search" [(ngModel)]="searchBusinessText">
+        <label for="searchByName">Search By Name...</label>
       </div>
 
     </div>
@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let business of allBusinesses">
+        <tr *ngFor="let business of allBusinesses | searchByBusinessName:searchBusinessText | orderBy:'name'">
           <td>
 
             <div class="card mb-3 business-card">
@@ -53,7 +53,7 @@
 
 <!-- create business modal -->
 <ng-template #createBusinessContent let-modal>
-  <div class="create-business-modal">
+  <div>
     <!-- modal header -->
     <div class="modal-header">
       <h1>Create Business</h1>
@@ -92,7 +92,7 @@
       <h6>Add Service Types</h6>
       <div class="form-floating">
         <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="serviceTypeSearchText">
-        <label for="usernameSearchInput">Search For Usernames</label>
+        <label for="usernameSearchInput">Search For Service Types</label>
       </div>
       <div class="add-users-section">
         <ul class="list-group">
@@ -104,11 +104,73 @@
       </div>
     </div>
 
-    <div class="modal-footer">
-      <span style="float: left;">
+    <div class="modal-footer modal-button-footer">
+      <button type="button" class="btn btn-warning" (click)="resetCreatingBusiness(); modal.close();">Close</button>
+      <span style="float: right;">
         <button class="btn btn-primary" (click)="createBusiness(creatingBusiness); modal.close()">Create</button>
       </span>
-      <button type="button" class="btn btn-warning" (click)="resetCreatingBusiness(); modal.close();">Close</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- update business modal -->
+<ng-template #updateBusinessContent let-modal>
+  <div *ngIf="editBusiness">
+    <!-- modal header -->
+    <div class="modal-header">
+      <h1>Update Business</h1>
+    </div>
+
+    <!-- modal body -->
+    <div class="modal-body">
+
+      <div class="form-floating">
+        <input type="text" class="form-control" id="nameIntput" placeholder="name" [(ngModel)]="editBusiness.name">
+        <label for="nameIntput">Business Name</label>
+      </div>
+
+      <br/>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="logoUrlInput" placeholder="URL" [(ngModel)]="editBusiness.logoUrl">
+        <label for="logoUrlInput">Image URL</label>
+      </div>
+
+      <br/>
+      <h6>Add Employees</h6>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="usernameSearchInput" placeholder="" [(ngModel)]="usernameSearchText">
+        <label for="usernameSearchInput">Search For Usernames</label>
+      </div>
+      <div class="add-users-section">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(editBusiness,user)" [checked]="editBusiness.users?.includes(user)" aria-label="...">
+            {{user.username}}
+          </li>
+        </ul>
+      </div>
+
+      <br/>
+      <h6>Add Service Types</h6>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="serviceTypeSearchText">
+        <label for="usernameSearchInput">Search For Service Types</label>
+      </div>
+      <div class="add-users-section">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let serviceType of allServiceTypes | searchByServicetypeName:serviceTypeSearchText | orderBy:'name'">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(editBusiness,serviceType)" [checked]="editBusiness.serviceTypes?.includes(serviceType)" aria-label="...">
+            {{serviceType.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="modal-footer modal-button-footer">
+      <button type="button" class="btn btn-warning" (click)="resetEditBusiness(); modal.close();">Cancel</button>
+      <span style="float: right;">
+        <button class="btn btn-primary" (click)="updateBusiness(editBusiness); modal.close()">Update</button>
+      </span>
     </div>
   </div>
 </ng-template>
@@ -135,11 +197,11 @@
       </div>
     </div>
 
-    <div class="modal-footer">
-      <span style="float: left;">
-        <button class="btn btn-primary">Save Changes</button>
-      </span>
+    <div class="modal-footer modal-button-footer">
       <button type="button" class="btn btn-warning" (click)="modal.close()">Close</button>
+      <!-- <span style="float: right;">
+        <button class="btn btn-primary">Save Changes</button>
+      </span> -->
     </div>
   </div>
 </ng-template>

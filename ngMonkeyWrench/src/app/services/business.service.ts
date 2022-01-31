@@ -87,7 +87,7 @@ export class BusinessService {
   }
 
 
-	update(edited: Business) {
+	update(edited: Business, onUpdate: Function) {
 		const httpOptions = this.authService.getBasicHttpOptions();
 		return this.http.put<Business>(this.url + `/${edited.id}`, edited, httpOptions)
 		  .pipe(
@@ -95,7 +95,11 @@ export class BusinessService {
 					console.error(err);
 					return throwError(() => 'Business update error');
 				})
-		  );
+		  ).subscribe(
+        {
+
+        }
+      )
   }
 
 
