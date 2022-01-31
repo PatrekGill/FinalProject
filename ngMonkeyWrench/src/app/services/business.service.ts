@@ -49,20 +49,27 @@ export class BusinessService {
     );
   }
 
-  create(business:Business) {
+  create(business:Business, onCreate: Function) {
     this.authService.doWithLoggedInUser(
       (user: User) => {
         business.user = user;
         const httpOptions = this.authService.getBasicHttpOptions();
 
-        return this.http.post<Business>(this.url, business, httpOptions)
+        const post =  this.http.post<Business>(this.url, business, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.error(err);
             return throwError(() => 'Business creation error');
           })
-        );
+        ).subscribe(
+          {
+            next: () => {
+              onCreate()
+            }
+          }
+        )
 
+        return post;
       },
       true
     )

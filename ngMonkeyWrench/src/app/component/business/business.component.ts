@@ -70,9 +70,13 @@ export class BusinessComponent implements OnInit {
   }
 
   createBusiness(business: Business) {
-    this.businessService.create(business);
+    this.businessService.create(
+      business,
+      () => {
+        this.setAllBusinesses()
+      }
+    );
     this.creatingBusiness = new Business();
-    this.setAllBusinesses();
   }
 
 
