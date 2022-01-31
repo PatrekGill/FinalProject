@@ -31,14 +31,11 @@ export class UserComponent implements OnInit {
 
     this.getUser();
     this.getAllAddresses();
-    // this.getBusinesses();
+    this.getBusinesses();
 
   }
 
-
-
   currentUserId: number = 0;
-  chosenUserId: number = 0;
 
   users: User[] = [];
   currentUser: User = new User();
@@ -52,12 +49,11 @@ export class UserComponent implements OnInit {
   addingAddress: boolean = false;
   addressError: boolean = false;
   addressErrorTxt: string = '';
+  stateAbbr: string = '';
 
   businesses: Business[] = [];
 
   pwUndo: string | undefined = '';
-
-
 
   reload() {
     this.userService.show(this.currentUser.id).subscribe(
@@ -147,7 +143,7 @@ export class UserComponent implements OnInit {
     );
   }
 
-  udpateAddress(address: Address) {
+  updateAddress(address: Address) {
     if(this.currentUser.id == address.user.id || this.currentUser.id == 1) {
 
       address.user.id = 3;
@@ -164,13 +160,19 @@ export class UserComponent implements OnInit {
     }
   }
 
+  setStateAbbr(abbr: string) {
+    this.newAddress.stateAbbv = abbr;
+  }
+
+  stateAbbreviations = [
+    'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA',
+    'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA',
+    'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
+    'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX',
+    'UT','VT','VA','WA','WV','WI','WY'
+   ];
+
   addAddress(address: Address) {
-
-    console.log('in addAddress');
-
-    if(this.currentUser.role == 'customer'){
-      address.user.id = this.currentUserId;
-    }
 
     if(address.street === ''
     || address.city === ''
@@ -194,10 +196,7 @@ export class UserComponent implements OnInit {
       console.log('ERROR ERROR');
       this.addressError = true;
       this.addressErrorTxt = 'Cannot add address. Address already on file. If this is an error please click the link to email the admin.'
-
     }
-
-
   }
 
   getBusinesses() {
@@ -216,18 +215,8 @@ export class UserComponent implements OnInit {
   }
 
 
-  abbv = {"abbreviation": {
-    "abbreviation": ''
-  }}
 
-  stateToSelect = this.abbv.abbreviation;
 
-  stateAbbreviations = [
-    'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA',
-    'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA',
-    'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
-    'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX',
-    'UT','VT','VA','WA','WV','WI','WY'
-   ];
+
 
 }
