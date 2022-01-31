@@ -16,6 +16,8 @@ export class ContractorLoginComponent implements OnInit {
 
   expandedBox: boolean = true;
 
+  filterBy : string = "all";
+
   userBusinesses : Business[] = [];
 
   serviceCalls : ServiceCall[] = [];
