@@ -21,6 +21,7 @@ import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
 import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
 import { ActiveCallsPipe } from './pipes/active-calls.pipe';
+import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ActiveCallsPipe } from './pipes/active-calls.pipe';
     UserAddressesPipe,
     UserSidebarComponent,
     UserBusinessesPipe,
-    ActiveCallsPipe
+    ActiveCallsPipe,
+    DuplicateAddressCheckPipe
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { ActiveCallsPipe } from './pipes/active-calls.pipe';
   providers: [
     AuthService,
   	BusinessService,
-    UserAddressesPipe
+    UserAddressesPipe,
+    DuplicateAddressCheckPipe
   ],
   bootstrap: [AppComponent]
 })

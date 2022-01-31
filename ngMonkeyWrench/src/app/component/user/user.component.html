@@ -73,14 +73,27 @@
         </tbody>
         <br>
       </table>
-      <!-- <div *ngIf="addingAddress"> -->
+      <div >
+        <span *ngIf="currentUser.role == 'business' || currentUser.role == 'admin' ">Client: <!-- SEARCH BY USER NAME LIST FNAME LNAME & PHONE#--> DISPLAY FNAME LNAME & PHONE#</span><br>
         Street: <input type="text" name="street" [(ngModel)]="newAddress.street" value="4321 Lowell St"><br>
         Street2: <input type="text" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3"><br>
         City: <input type="text" name="city" [(ngModel)]="newAddress.city" value="Denver"><br>
         State: <input type="text" name="stateAbbv" [(ngModel)]="newAddress.stateAbbv" value="CO"><br>
+        <!-- <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select Business</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngFor='let business of userBusinesses'>
+            <button ngbDropdownItem (click)='getServiceCallsByBusinessId(business)'>{{ business.name }}</button>
+          </div>
+        </div> -->
+      <br>
+
         Zip Code: <input type="number" name="zipCode" [(ngModel)]="newAddress.zipCode" value="87123"><br>
         <span *ngIf="currentUser.role == 'business' || currentUser.role ==  'admin' " >Notes: <input type="text" name="notes" [(ngModel)]="newAddress.notes" placeholder="A/C on roof, dog in yard..."></span><br>
         <button (click)="addAddress(newAddress)">Add</button>
+        <div class="duplicateAddress" *ngIf="addressError == true">
+          <span>{{addressErrorTxt}} </span>
+        </div>
+      </div>
 
         <br><br><br>
         <br><br><br>

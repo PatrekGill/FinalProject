@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
 import { User } from 'src/app/models/user';
+import { DuplicateAddressCheckPipe } from 'src/app/pipes/duplicate-address-check.pipe';
 import { UserAddressesPipe } from 'src/app/pipes/user-addresses.pipe';
 import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,7 +24,7 @@ export class UserComponent implements OnInit {
     private authService: AuthService,
     private addyService: AddressService,
     private businessService: BusinessService,
-    private addressCheck: UserAddressesPipe
+    private addressCheck: DuplicateAddressCheckPipe
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +34,8 @@ export class UserComponent implements OnInit {
     // this.getBusinesses();
 
   }
+
+
 
   currentUserId: number = 0;
   chosenUserId: number = 0;
@@ -47,10 +50,13 @@ export class UserComponent implements OnInit {
   newAddress: Address = new Address();
   editedAddress: Address | null = new Address();
   addingAddress: boolean = false;
+  addressError: boolean = false;
+  addressErrorTxt: string = '';
 
   businesses: Business[] = [];
 
   pwUndo: string | undefined = '';
+
 
 
   reload() {
@@ -61,6 +67,7 @@ export class UserComponent implements OnInit {
           this.currentUser = user;
           this.getAddresses();
           this.getAllAddresses();
+          this.addressError = false;
         },
         error: (wrong) => {
           console.error('TodoListComponent.reload(): Error retreiving todos');
@@ -158,14 +165,35 @@ export class UserComponent implements OnInit {
   }
 
   addAddress(address: Address) {
-    let dupAddress = false;
+
     console.log('in addAddress');
 
-    if(this.addressCheck.transform(this.allAddresses, address)){
-      console.log('UNIQUE ADDRESS');
+    if(this.currentUser.role == 'customer'){
+      address.user.id = this.currentUserId;
+    }
 
+    if(address.street === ''
+    || address.city === ''
+    || address.stateAbbv === ''
+    ) {
+      this.addressError = true;
+      this.addressErrorTxt = 'Please include the street address, city, and state';
+    }
+    else if(this.addressCheck.transform(this.allAddresses, address)){
+      console.log('UNIQUE ADDRESS');
+      this.addyService.createAddress(address).subscribe({
+        next: (addy) => {
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('UserComponent.addAddress(): Error creating address');
+          console.error(fail);
+        }
+      });
     } else {
       console.log('ERROR ERROR');
+      this.addressError = true;
+      this.addressErrorTxt = 'Cannot add address. Address already on file. If this is an error please click the link to email the admin.'
 
     }
 
@@ -186,5 +214,20 @@ export class UserComponent implements OnInit {
       } // END OF OBJECT
     );
   }
+
+
+  abbv = {"abbreviation": {
+    "abbreviation": ''
+  }}
+
+  stateToSelect = this.abbv.abbreviation;
+
+  stateAbbreviations = [
+    'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA',
+    'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA',
+    'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
+    'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX',
+    'UT','VT','VA','WA','WV','WI','WY'
+   ];
 
 }
