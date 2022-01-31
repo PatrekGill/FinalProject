@@ -48,7 +48,8 @@ import { ActiveCallsPipe } from './pipes/active-calls.pipe';
   ],
   providers: [
     AuthService,
-  	BusinessService
+  	BusinessService,
+    UserAddressesPipe
   ],
   bootstrap: [AppComponent]
 })

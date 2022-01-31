@@ -23,12 +23,13 @@ export class UserComponent implements OnInit {
     private authService: AuthService,
     private addyService: AddressService,
     private businessService: BusinessService,
-    // private addressCheck: UserAddressesPipe
+    private addressCheck: UserAddressesPipe
   ) { }
 
   ngOnInit(): void {
 
     this.getUser();
+    this.getAllAddresses();
     // this.getBusinesses();
 
   }
@@ -41,7 +42,8 @@ export class UserComponent implements OnInit {
   editedUser: User | null = new User();
   editUser: boolean = false;
 
-  addresses: Address[] = [];
+  allAddresses: Address[] = [];
+  userAddresses: Address[] = [];
   newAddress: Address = new Address();
   editedAddress: Address | null = new Address();
   addingAddress: boolean = false;
@@ -58,6 +60,7 @@ export class UserComponent implements OnInit {
           this.editUser = false;
           this.currentUser = user;
           this.getAddresses();
+          this.getAllAddresses();
         },
         error: (wrong) => {
           console.error('TodoListComponent.reload(): Error retreiving todos');
@@ -111,7 +114,7 @@ export class UserComponent implements OnInit {
     this.addyService.getAddressByUserId(this.currentUserId).subscribe(
       { // OBJECT
         next: (addressList) => {
-          this.addresses = addressList;
+          this.userAddresses = addressList;
         },
         error: (wrong) => {
           console.error('UserComponent.getAddressses(): Error retreiving addresses by UserId');
@@ -122,6 +125,20 @@ export class UserComponent implements OnInit {
     );
   }
 
+  getAllAddresses() {
+    this.addyService.getAddresses().subscribe(
+      { // OBJECT
+        next: (addressList) => {
+          this.allAddresses = addressList;
+        },
+        error: (wrong) => {
+          console.error('UserComponent.getAddressses(): Error retreiving addresses by UserId');
+          console.error(wrong);
+        },
+        complete: () => { }
+      } // END OF OBJECT
+    );
+  }
 
   udpateAddress(address: Address) {
     if(this.currentUser.id == address.user.id || this.currentUser.id == 1) {
@@ -144,13 +161,13 @@ export class UserComponent implements OnInit {
     let dupAddress = false;
     console.log('in addAddress');
 
-    // if(this.addressCheck.transform(this.addresses, address)){
-    //   console.log('UNIQUE ADDRESS');
+    if(this.addressCheck.transform(this.allAddresses, address)){
+      console.log('UNIQUE ADDRESS');
 
-    // } else {
-    //   console.log('ERROR ERROR');
+    } else {
+      console.log('ERROR ERROR');
 
-    // }
+    }
 
 
   }
