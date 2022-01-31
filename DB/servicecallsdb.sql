@@ -433,6 +433,8 @@ COMMIT;
 START TRANSACTION;
 USE `servicecallsdb`;
 INSERT INTO `equipment_type` (`id`, `type`) VALUES (1, 'Air Conditioner');
+INSERT INTO `equipment_type` (`id`, `type`) VALUES (2, 'Toilet');
+INSERT INTO `equipment_type` (`id`, `type`) VALUES (3, 'Solar Panel');
 
 COMMIT;
 
@@ -485,6 +487,10 @@ COMMIT;
 START TRANSACTION;
 USE `servicecallsdb`;
 INSERT INTO `service_type` (`id`, `description`, `name`) VALUES (1, NULL, 'HVAC Maintenance & Repair');
+INSERT INTO `service_type` (`id`, `description`, `name`) VALUES (2, NULL, 'Plumbing');
+INSERT INTO `service_type` (`id`, `description`, `name`) VALUES (3, NULL, 'Kitchen Refurbishing');
+INSERT INTO `service_type` (`id`, `description`, `name`) VALUES (4, NULL, 'Patios');
+INSERT INTO `service_type` (`id`, `description`, `name`) VALUES (5, NULL, 'Solar Panel Install, Repair, and Removal');
 
 COMMIT;
 
