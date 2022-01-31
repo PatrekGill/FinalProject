@@ -5,7 +5,7 @@
 
     <div class="business-search input-group">
       <button *ngIf="isRoleBusiness()" class="btn btn-outline-primary" (click)="openCenteredModal(createBusinessContent)"><i class="bi bi-plus"></i></button>
-      <button *ngIf="isRoleUndefined() || isRoleCustomer()" class="btn btn-primary" (click)="openCenteredModal(createBusinessContent)" disabled><i class="bi bi-plus"></i></button>
+      <button *ngIf="!isRoleBusiness()" class="btn btn-primary" (click)="openCenteredModal(createBusinessContent)" disabled><i class="bi bi-plus"></i></button>
       <button class="btn btn-secondary" (click)="openCenteredModal(filterContent)"><i class="bi bi-filter"></i></button>
 
       <div class="business-search-bar form-floating">
@@ -80,15 +80,27 @@
         <label for="usernameSearchInput">Search For Usernames</label>
       </div>
       <div class="add-users-section">
-        <div>
-          <ul class="list-group">
-            <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
-              <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(creatingBusiness,user)" [checked]="creatingBusiness.users?.includes(user)" aria-label="...">
-              {{user.username}}
-            </li>
-          </ul>
-        </div>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(creatingBusiness,user)" [checked]="creatingBusiness.users?.includes(user)" aria-label="...">
+            {{user.username}}
+          </li>
+        </ul>
+      </div>
 
+      <br/>
+      <h6>Add Service Types</h6>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="serviceTypeSearchText">
+        <label for="usernameSearchInput">Search For Usernames</label>
+      </div>
+      <div class="add-users-section">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let serviceType of allServiceTypes | searchByServicetypeName:serviceTypeSearchText | orderBy:'name'">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(creatingBusiness,serviceType)" [checked]="creatingBusiness.serviceTypes?.includes(serviceType)" aria-label="...">
+            {{serviceType.name}}
+          </li>
+        </ul>
       </div>
     </div>
 

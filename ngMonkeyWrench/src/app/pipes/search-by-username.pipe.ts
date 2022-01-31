@@ -10,7 +10,7 @@ export class SearchByUsernamePipe implements PipeTransform {
     let listOfUsers: User[] = [];
     users.forEach(
       (user) => {
-        if (user.username?.includes(text)) {
+        if (user.username?.toLowerCase().includes(text)) {
           listOfUsers.push(user);
         }
       }

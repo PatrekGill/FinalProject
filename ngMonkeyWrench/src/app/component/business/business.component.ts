@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Business } from 'src/app/models/business';
+import { ServiceType } from 'src/app/models/service-type';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
+import { ServiceTypeService } from 'src/app/services/service-type.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,24 +19,30 @@ export class BusinessComponent implements OnInit {
   creatingBusiness: Business;
   allContractors: User[];
   usernameSearchText: string;
+  serviceTypeSearchText: string;
+  allServiceTypes: ServiceType[];
 
   constructor(
     private authService: AuthService,
     private modalService: NgbModal,
     private businessService: BusinessService,
-    private userService: UserService
+    private userService: UserService,
+    private serviceTypeService: ServiceTypeService
   ) {
     this.creatingBusiness = new Business();
 
     this.allContractors = [];
     this.allBusinesses = [];
+    this.allServiceTypes = [];
     this.usernameSearchText = "";
+    this.serviceTypeSearchText = "";
   }
 
   ngOnInit(): void {
     this.setUserRole();
     this.setAllBusinesses();
     this.setAllContractors();
+    this.setAllServiceTypes();
   }
 
   isRoleBusiness(): boolean {
@@ -45,6 +53,21 @@ export class BusinessComponent implements OnInit {
   }
   isRoleUndefined(): boolean {
     return this.userRole === undefined;
+  }
+
+  handleServiceTypeOnBusiness(business: Business, serviceType: ServiceType) {
+    if (!business.serviceTypes) {
+      business.serviceTypes = [];
+    }
+
+    const indexOfItem = business.serviceTypes.indexOf(serviceType);
+    if (indexOfItem > -1) {
+      business.serviceTypes.splice(indexOfItem,1);
+
+    } else {
+      business.serviceTypes.push(serviceType);
+
+    }
   }
 
   handleUserOnBusiness(business: Business, user: User) {
@@ -60,7 +83,6 @@ export class BusinessComponent implements OnInit {
       business.users.push(user);
 
     }
-
   }
 
   resetCreatingBusiness() {
@@ -78,6 +100,9 @@ export class BusinessComponent implements OnInit {
   }
 
 
+  resetServiceTypeSearchText() {
+    this.serviceTypeSearchText = "";
+  }
   resetUsernameSearchText() {
     this.usernameSearchText = "";
   }
@@ -124,6 +149,21 @@ export class BusinessComponent implements OnInit {
         }
       }
     )
+  }
+
+  setAllServiceTypes() {
+    this.serviceTypeService.getAll().subscribe(
+      {
+        next: (serviceTypesList) => {
+          this.allServiceTypes = serviceTypesList;
+        },
+        error: (wrong) => {
+          console.error('BusinessComponent.setAllServiceTypes(): Error retreiving all ServiceTypes');
+          console.error(wrong);
+        },
+        complete: () => { }
+      }
+    );
   }
 
   setAllBusinesses() {
