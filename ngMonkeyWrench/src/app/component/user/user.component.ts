@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
 import { User } from 'src/app/models/user';
+import { UserAddressesPipe } from 'src/app/pipes/user-addresses.pipe';
 import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
+
 export class UserComponent implements OnInit {
 
   constructor(
@@ -21,7 +22,8 @@ export class UserComponent implements OnInit {
     private currentRoute: ActivatedRoute,
     private authService: AuthService,
     private addyService: AddressService,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    // private addressCheck: UserAddressesPipe
   ) { }
 
   ngOnInit(): void {
@@ -40,9 +42,9 @@ export class UserComponent implements OnInit {
   editUser: boolean = false;
 
   addresses: Address[] = [];
-  currentAddress: Address = new Address();
+  newAddress: Address = new Address();
   editedAddress: Address | null = new Address();
-  editAddress: boolean = false;
+  addingAddress: boolean = false;
 
   businesses: Business[] = [];
 
@@ -120,26 +122,14 @@ export class UserComponent implements OnInit {
     );
   }
 
-  // setEditAddress() {
-  //   this.editedAddress = Object.assign({}, this.currentAddress);
-  //   this.editedAddress.user.id = 3;
-  // }
 
-  udpateAddress(address: Address, goToDetails = true) {
-    if(this.currentUser.id == address.user?.id || this.currentUser.id == 1) {
+  udpateAddress(address: Address) {
+    if(this.currentUser.id == address.user.id || this.currentUser.id == 1) {
 
       address.user.id = 3;
 
-      console.log('userID for address post set');
-      console.log(address.user.id);
-
-
       this.addyService.updateAddress(address).subscribe({
         next: (t) => {
-          // this.editedAddress = null;
-          if(goToDetails) {
-            // this.currentAddress = t;
-          }
           this.reload();
         },
         error: (soSad) => {
@@ -148,6 +138,21 @@ export class UserComponent implements OnInit {
         }
       });
     }
+  }
+
+  addAddress(address: Address) {
+    let dupAddress = false;
+    console.log('in addAddress');
+
+    // if(this.addressCheck.transform(this.addresses, address)){
+    //   console.log('UNIQUE ADDRESS');
+
+    // } else {
+    //   console.log('ERROR ERROR');
+
+    // }
+
+
   }
 
   getBusinesses() {

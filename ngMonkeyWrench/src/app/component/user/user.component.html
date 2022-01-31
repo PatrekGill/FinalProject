@@ -52,9 +52,9 @@
     <br><br>
 
 
-    <!-- <div class="businessListBox" > -->
     <div class="addressListBox" >
-      <h1>Addresses:</h1>
+      <h1 class="addressTitle">Addresses:</h1>
+      <button (click)="addingAddress = true">New Address</button>
       <table class="table table-striped table-hover">
         <thead class="table-danger">
           <tr>
@@ -72,8 +72,35 @@
         </tbody>
         <br>
       </table>
-    </div>  <!-- end address div -->
+      <div *ngIf="addingAddress">
+        Street: <input type="text" name="street" [(ngModel)]="newAddress.street" placeholder="123 Something St"><br>
+        Street2: <input type="text" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3"><br>
+        City: <input type="text" name="city" [(ngModel)]="newAddress.city" placeholder="Denver"><br>
+        State: <input type="text" name="stateAbbv" [(ngModel)]="newAddress.stateAbbv" placeholder="CO"><br>
+        Zip Code: <input type="text" name="zipCode" [(ngModel)]="newAddress.zipCode" placeholder="87654"><br>
+        <span *ngIf="currentUser.role == 'business' || currentUser.role ==  'admin' " >Notes: <input type="text" name="notes" [(ngModel)]="newAddress.notes" placeholder="A/C on roof, dog in yard..."></span><br>
+        <button (click)="addAddress(newAddress)">Add</button>
 
+        <br><br><br>
+        <br><br><br>
+
+        <div class="form-floating mb-3 mt-3" *ngIf="addingAddress">
+          <input type="text" class="form-floating" id="street" name="street" [(ngModel)]="newAddress.street" placeholder="123 Something St"><br>
+          <label for="street">Street</label>
+          <input type="text" class="form-floating" id="street2" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3"><br>
+          <label for="street2">Street2</label>
+          <input type="text" class="form-floating" id="city" name="city" [(ngModel)]="newAddress.city" placeholder="Denver"><br>
+          <label for="city">City</label>
+          <input type="text" class="form-floating" id="stateAbbv" name="stateAbbv" [(ngModel)]="newAddress.stateAbbv" placeholder="CO"><br>
+          <label for="stateAbbv">State</label>
+          <input type="text" class="form-floating" id="zipCode" name="zipCode" [(ngModel)]="newAddress.zipCode" placeholder="87654"><br>
+          <label for="zipCode">Zip Code</label>
+          <span *ngIf="currentUser.role == 'business' || currentUser.role ==  'admin' " ><input type="text" class="form-floating" id="notes" name="notes" [(ngModel)]="newAddress.notes" placeholder="A/C on roof, dog in yard..."></span><br>
+          <label for="notes">Notes</label>
+          <button (click)="addAddress(newAddress)">Add</button>
+      </div>
+    </div>  <!-- end address div -->
 
   </div>    <!-- End class userWrapper   -->
 </div>   <!-- End class userContent   -->
+<br><br><br>
