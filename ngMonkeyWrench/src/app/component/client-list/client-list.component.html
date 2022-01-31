@@ -1,1 +1,16 @@
-<p>client-list works!</p>
+<div class="content">
+  <div class="form-floating">
+    <h1>Search Existing Customer</h1>
+    <input type="text" class="form-control" id="registerFirstName"
+      placeholder="First Name" [(ngModel)]="searchForUser.firstName"/>
+    <label for="registerFirstName">First Name</label>
+  </div><br />
+
+  <div class="form-floating">
+    <input type="text" class="form-control" id="searchLastName"
+    placeholder="Last Name" [(ngModel)]="searchForUser.lastName"/>
+    <label for="searchLastName">Last Name</label>
+    <input type="submit" class="form-control" id="submitSearch" >
+  </div>
+  <br />
+</div>
