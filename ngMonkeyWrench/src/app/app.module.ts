@@ -21,6 +21,9 @@ import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
 import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
 import { ActiveCallsPipe } from './pipes/active-calls.pipe';
+import { FirstNamePipe } from './pipes/first-name.pipe';
+import { LastNamePipe } from './pipes/last-name.pipe';
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { ActiveCallsPipe } from './pipes/active-calls.pipe';
     UserAddressesPipe,
     UserSidebarComponent,
     UserBusinessesPipe,
-    ActiveCallsPipe
+    ActiveCallsPipe,
+    FirstNamePipe,
+    LastNamePipe,
+    PhoneNumberPipe
   ],
   imports: [
     BrowserModule,

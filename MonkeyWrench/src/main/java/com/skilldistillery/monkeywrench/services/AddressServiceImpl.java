@@ -45,7 +45,7 @@ public class AddressServiceImpl implements AddressService {
 				address.setId(0);
 			}
 			
-			address.setUser(user);
+//			address.setUser(user); this prevents contractor from creating new address
 			boolean isBusiness = user.getRole().toLowerCase().equals("business");
 			if (!isBusiness) {
 				address.setNotes(null);
