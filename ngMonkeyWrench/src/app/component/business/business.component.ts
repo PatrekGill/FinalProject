@@ -13,9 +13,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class BusinessComponent implements OnInit {
   userRole: string | undefined;
-  allBusinesses: Business[] = [];
+  allBusinesses: Business[];
   creatingBusiness: Business;
-  allContractors: User[] = [];
+  allContractors: User[];
+  usernameSearchText: string;
 
   constructor(
     private authService: AuthService,
@@ -24,6 +25,10 @@ export class BusinessComponent implements OnInit {
     private userService: UserService
   ) {
     this.creatingBusiness = new Business();
+
+    this.allContractors = [];
+    this.allBusinesses = [];
+    this.usernameSearchText = "";
   }
 
   ngOnInit(): void {
@@ -42,9 +47,26 @@ export class BusinessComponent implements OnInit {
     return this.userRole === undefined;
   }
 
+  handleUserOnBusiness(business: Business, user: User) {
+    if (!business.users) {
+      business.users = [];
+    }
 
-  openCenteredModal(content : any) {
-    this.modalService.open(content, { centered: true });
+    const indexOfItem = business.users.indexOf(user);
+    if (indexOfItem > -1) {
+      business.users.splice(indexOfItem,1);
+      console.log("remove");
+
+    } else {
+      business.users.push(user);
+      console.log("add");
+
+    }
+
+  }
+
+  resetCreatingBusiness() {
+    this.creatingBusiness = new Business();
   }
 
   createBusiness(business: Business) {
@@ -52,6 +74,16 @@ export class BusinessComponent implements OnInit {
     this.creatingBusiness = new Business();
     this.setAllBusinesses();
   }
+
+
+  resetUsernameSearchText() {
+    this.usernameSearchText = "";
+  }
+
+  openCenteredModal(content : any) {
+    this.modalService.open(content, { centered: true });
+  }
+
 
   setUserRole() {
     this.authService.doWithLoggedInUser(
@@ -70,11 +102,16 @@ export class BusinessComponent implements OnInit {
     this.userService.getAll().subscribe(
       {
         next: (allUsers) => {
-          allUsers.forEach(
-            (user) => {
-              if (user.enabled && user.role === "business") {
-                this.allContractors.push(user);
-              }
+          // filtering logged in user
+          this.authService.doWithLoggedInUser(
+            (loggedInUser:User) => {
+              allUsers.forEach(
+                (user) => {
+                  if (user.username !== loggedInUser.username && (user.enabled && user.role === "business")) {
+                    this.allContractors.push(user);
+                  }
+                }
+              )
             }
           )
         },

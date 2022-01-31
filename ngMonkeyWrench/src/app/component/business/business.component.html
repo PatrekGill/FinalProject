@@ -16,14 +16,16 @@
 
     <table class="business-table">
       <thead>
-        <th></th>
+        <tr>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let business of allBusinesses">
           <td>
 
             <div class="card mb-3 business-card">
-              <div class="row g-0">
+              <div class="row">
                 <div class="col-4 business-card-image-div">
                   <img [src]="business.logoUrl" class="business-card-image rounded-start" alt="business logo">
                 </div>
@@ -48,34 +50,57 @@
 
 </div>
 
-
+<!-- create business modal -->
 <ng-template #createBusinessContent let-modal>
   <div>
+    <!-- modal header -->
     <div class="modal-header">
       <h1>Create Business</h1>
     </div>
+
+    <!-- modal body -->
     <div class="modal-body">
+
       <div class="form-floating">
         <input type="text" class="form-control" id="nameIntput" placeholder="name" [(ngModel)]="creatingBusiness.name">
         <label for="nameIntput">Business Name</label>
       </div>
+
       <br/>
       <div class="form-floating">
         <input type="text" class="form-control" id="logoUrlInput" placeholder="URL" [(ngModel)]="creatingBusiness.logoUrl">
         <label for="logoUrlInput">Image URL</label>
       </div>
 
+      <br/>
+      <h6>Add Employees</h6>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="usernameSearchText">
+        <label for="usernameSearchInput">Search For Usernames</label>
+      </div>
+      <div class="add-users-section">
+        <div>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText">
+              <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(creatingBusiness,user)" [checked]="creatingBusiness.users?.includes(user)" aria-label="...">
+              {{user.username}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </div>
 
     <div class="modal-footer">
       <span style="float: left;">
         <button class="btn btn-primary" (click)="createBusiness(creatingBusiness); modal.close()">Create</button>
       </span>
-      <button type="button" class="btn btn-warning" (click)="modal.close()">Close</button>
+      <button type="button" class="btn btn-warning" (click)="resetCreatingBusiness(); modal.close();">Close</button>
     </div>
   </div>
 </ng-template>
 
+<!-- filter business modal -->
 <ng-template #filterContent let-modal>
   <div>
     <div class="modal-header">

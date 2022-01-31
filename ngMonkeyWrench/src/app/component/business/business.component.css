@@ -2,10 +2,10 @@
   margin-top: 100px;
 }
 .business-table {
+  display: table;
   margin: 0 auto;
 }
 .business-table tbody {
-  display: block;
   max-height: 1000px;
   overflow: auto;
   padding-right: 10px;
@@ -33,7 +33,9 @@
 }
 
 .business-card {
+  width: 540px;
   max-width: 540px;
+  min-width: 350px;
   border-color: darkblue;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
   max-height: 177px;
@@ -64,6 +66,16 @@
   background-color: rgba(0, 0, 0, 0.02);
 
 }
+
+.add-users-section {
+  /* border: 2px solid black */
+  border-style: solid;
+  border-color: darkblue;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+
 
 /* width */
 ::-webkit-scrollbar {
