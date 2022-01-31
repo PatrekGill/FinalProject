@@ -101,10 +101,10 @@ public class ServiceCallController {
 			return sCallSvc.findCallsByUserId(userId);
 		}
 		
-		//get service calls by user
+		//get service calls by business
 		@GetMapping("serviceCalls/business/{businessId}")
 		public List<ServiceCall> getServiceCallByBusinessId(@PathVariable int businessId) {
-			return sCallSvc.findCallsByUserId(businessId);
+			return sCallSvc.findCallsByBusinessId(businessId);
 		}
 
 }

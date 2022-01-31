@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Address } from 'src/app/models/address';
+import { Business } from 'src/app/models/business';
 import { Problem } from 'src/app/models/problem';
 import { ServiceCall } from 'src/app/models/service-call';
 import { User } from 'src/app/models/user';
 import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { BusinessService } from 'src/app/services/business.service';
 import { ProblemService } from 'src/app/services/problem.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,7 +17,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ClientListComponent implements OnInit {
 
+  date : string = ""
+
+  time : string = ""
+
+  loggedInContractor : User = new User;
+
+  selectedBusiness : Business = new Business;
+
   clientAddresses : Address[] = [];
+
+  contractorsBusinesses : Business[] = [];
 
   serviceCallProblems: Problem[] = [];
 
@@ -25,9 +37,13 @@ export class ClientListComponent implements OnInit {
 
   viewCustomer : User | null = null;
 
+  selectedAddress : Address | null = null;
+
   newAddress : Address = new Address;
 
   newServiceCall : ServiceCall = new ServiceCall;
+
+  business : Business = new Business;
 
   clientList : User[] = [];
 
@@ -41,11 +57,14 @@ export class ClientListComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private addressService: AddressService,
-    private problemService: ProblemService
+    private problemService: ProblemService,
+    private businessService: BusinessService
   ) { }
 
   ngOnInit(): void {
     this.getAllCustomers();
+    this.getAllProblems();
+    this.getBusinessesByUserId();
   }
 
   getAllCustomers(){
@@ -71,7 +90,14 @@ export class ClientListComponent implements OnInit {
     })
   }
 
-  addServiceCallToAddress(address: Address){
+  addServiceCallToAddress(serviceCall: ServiceCall){
+    if(this.selectedAddress){
+      serviceCall.address = this.selectedAddress;
+    }
+    if(this.viewCustomer){
+      serviceCall.user = this.viewCustomer;
+    }
+
 
   }
 
@@ -99,10 +125,34 @@ export class ClientListComponent implements OnInit {
   getAllProblems(){
     this.problemService.getProblems().subscribe({
       next: (problems) => {
-
+        this.serviceCallProblems = problems;
+      },
+      error: (fail) => {
+        console.error("ClientListComponent.getAllProblems(): failed to get problems")
       }
     })
   }
+
+  serviceCallForm(address: Address) {
+    this.selectedAddress = address;
+    this.viewServiceCallForm = true;
+    this.getAllProblems;
+  }
+
+  getBusinessesByUserId(){
+    this.authService.doWithLoggedInUser((user : User) => {
+      this.loggedInContractor = user;
+      this.businessService.getBusinessesByUserId(user.id).subscribe({
+        next: (businesses) => {
+          this.contractorsBusinesses = businesses;
+        },
+        error: (fail) => {
+          console.error("ContractorLoginComponent.getBusinessesByUserId(): failed to get businesses");
+        }
+      })
+    });
+  }
+
 
 
 }

@@ -46,7 +46,7 @@ import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe'
     LastNamePipe,
     PhoneNumberPipe,
     DuplicateAddressCheckPipe
-    
+
   ],
   imports: [
     BrowserModule,
