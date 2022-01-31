@@ -29,6 +29,7 @@
 
     <!-- search results -->
     <div class="clientList">
+      <!-- <button class="btn btn-outline-primary">Add New Customer</button><br><br> -->
       <table class="table table-dark">
         <thead>
           <tr>
@@ -75,13 +76,13 @@
             <td>{{address.stateAbbv}}</td>
             <td>{{address.zipCode}}</td>
             <td>{{address.notes}}</td>
-            <td><button class="btn btn-outline-primary" (click)="viewServiceCallForm = true">Add Service Call</button> </td>
+            <td><button class="btn btn-outline-primary" (click)="serviceCallForm(address)">Add Service Call</button> </td>
           </tr>
         </tbody>
       </table>
     </div>
     <button class="btn btn-outline-success" (click)="viewAddressForm = true">Create New Address</button>
-    <button class="btn btn-outline-danger" (click)="viewCustomer = null">Back</button>
+    <button class="btn btn-outline-danger" (click)="viewCustomer = null; viewAddressForm = false">Back</button>
   </div>
 
   <!-- add new address form -->
@@ -117,42 +118,69 @@
       <label for="createAddressNotes">Notes</label>
     </div><br/>
     <button class="btn btn-outline-success" (click)="createNewAddress(newAddress)">Submit</button>
-  </div>
+  </div><br><br>
   <!-- end of new address form -->
 
-  <!-- new service call form -->
+  <!-- new service call form need fields for problem, estimate or call-->
   <div *ngIf='viewServiceCallForm'>
     <div class="form-floating">
-      <input type="text" class="form-control" id="createStreet"
-        placeholder="Street" [(ngModel)]="newAddress.street"/>
-      <label for="createStreet">Street</label>
+      <input type="text" class="form-control" id="createCallDescription"
+        placeholder="Problem Description" [(ngModel)]="newServiceCall.problemDescription"/>
+      <label for="createCallDescription">Problem Description</label>
     </div><br/>
     <div class="form-floating">
-      <input type="text" class="form-control" id="createStreet2"
-        placeholder="Street 2" [(ngModel)]="newAddress.street2"/>
-      <label for="createStreet2">Street 2 (optional)</label>
+      <input type="number" class="form-control" id="createCallNotes"
+        placeholder="Notes for Contractor" [(ngModel)]="newServiceCall.contractorNotes"/>
+      <label for="createCallNotes">Notes for Contractor</label>
     </div><br/>
     <div class="form-floating">
-      <input type="text" class="form-control" id="createCity"
-        placeholder="City" [(ngModel)]="newAddress.city"/>
-      <label for="createCity">City</label>
+      <input type="date" class="form-control" id="createCallScheduledDate"
+        placeholder="Scheduled Date" [(ngModel)]="date"/>
+      <label for="createCallScheduledDate">Scheduled Date</label>
+    </div><br/>
+
+    <div class="form-floating">
+      <input type="time" class="form-control" id="createCallTime"
+        placeholder="Time" [(ngModel)]="time"/>
+      <label for="createCallTime">Time</label>
+    </div><br/>
+
+
+    <div class="form-floating">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Problem</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem>Action - 1</button>
+            <button ngbDropdownItem>Another Action</button>
+            <button ngbDropdownItem>Something else is here</button>
+          </div>
+        </div>
+      </div>
     </div><br/>
     <div class="form-floating">
-      <input type="text" class="form-control" id="createState"
-        placeholder="State Abbv" [(ngModel)]="newAddress.stateAbbv"/>
-      <label for="createState">State Abbv</label>
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Estimate</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem>Action - 1</button>
+            <button ngbDropdownItem>Another Action</button>
+            <button ngbDropdownItem>Something else is here</button>
+          </div>
+        </div>
+      </div>
     </div><br/>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="createZip"
-        placeholder="Zip Code" [(ngModel)]="newAddress.zipCode"/>
-      <label for="createZip">Zip Code</label>
-    </div><br/>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="createAddressNotes"
-        placeholder="Notes" [(ngModel)]="newAddress.notes"/>
-      <label for="createAddressNotes">Notes</label>
-    </div><br/>
-    <button class="btn btn-outline-success" (click)="createNewAddress(newAddress)">Submit</button>
+    <div class='selectBusiness'>
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select Business</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngFor='let business of contractorsBusinesses'>
+            <button ngbDropdownItem (click)='selectedBusiness = business'>{{ business.name }}</button>
+          </div>
+        </div>
+      </div>
+    </div><br>
+    <button class="btn btn-outline-success" (click)="addServiceCallToAddress(newServiceCall)">Submit</button>
   </div>
   <!-- end of new address form -->
 
