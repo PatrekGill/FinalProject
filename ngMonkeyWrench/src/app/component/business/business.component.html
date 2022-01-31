@@ -53,7 +53,7 @@
 
 <!-- create business modal -->
 <ng-template #createBusinessContent let-modal>
-  <div>
+  <div class="create-business-modal">
     <!-- modal header -->
     <div class="modal-header">
       <h1>Create Business</h1>
@@ -82,7 +82,7 @@
       <div class="add-users-section">
         <div>
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText">
+            <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
               <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(creatingBusiness,user)" [checked]="creatingBusiness.users?.includes(user)" aria-label="...">
               {{user.username}}
             </li>

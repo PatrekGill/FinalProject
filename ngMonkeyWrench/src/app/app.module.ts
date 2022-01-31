@@ -23,6 +23,7 @@ import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
 import { BusinessServiceTypesStringPipe } from './pipes/business-service-types-string.pipe';
 import { ActiveCallsPipe } from './pipes/active-calls.pipe';
 import { SearchByUsernamePipe } from './pipes/search-by-username.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SearchByUsernamePipe } from './pipes/search-by-username.pipe';
     UserBusinessesPipe,
     ActiveCallsPipe,
     BusinessServiceTypesStringPipe,
-    SearchByUsernamePipe
+    SearchByUsernamePipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

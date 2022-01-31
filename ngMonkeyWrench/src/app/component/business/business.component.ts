@@ -55,11 +55,9 @@ export class BusinessComponent implements OnInit {
     const indexOfItem = business.users.indexOf(user);
     if (indexOfItem > -1) {
       business.users.splice(indexOfItem,1);
-      console.log("remove");
 
     } else {
       business.users.push(user);
-      console.log("add");
 
     }
 

@@ -67,12 +67,18 @@
 
 }
 
+.create-business-modal {
+}
+
 .add-users-section {
   /* border: 2px solid black */
   border-style: solid;
   border-color: darkblue;
   border-radius: 5px;
   border-width: 1px;
+  max-height: 200px;
+  min-width: 100%;
+  overflow-y: auto;
 }
 
 
