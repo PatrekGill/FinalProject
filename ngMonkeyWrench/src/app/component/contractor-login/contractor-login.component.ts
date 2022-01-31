@@ -14,6 +14,8 @@ import { ServiceCallService } from 'src/app/services/service-call.service';
 })
 export class ContractorLoginComponent implements OnInit {
 
+  filterBy : string = 'all';
+
   expandedBox: boolean = true;
 
   userBusinesses : Business[] = [];
