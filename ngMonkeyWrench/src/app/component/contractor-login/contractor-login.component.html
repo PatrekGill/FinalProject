@@ -18,13 +18,13 @@
   <br>
   <div class="wrapper radioDatePipe">
     <form action="">
-      <input [(ngModel)]="filterBy" type="radio" id="day" name="dateSorter" value="day">
+      <input [(ngModel)]="filterBy" type="radio" id="day" name="filterBy" value="day">
       <label for="day"> Day</label>
-      <input [(ngModel)]="filterBy" type="radio" id="week" name="dateSorter" value="week">
+      <input [(ngModel)]="filterBy" type="radio" id="week" name="filterBy" value="week">
       <label for="week"> Week</label>
-      <input [(ngModel)]="filterBy" type="radio" id="month" name="dateSorter" value="month">
+      <input [(ngModel)]="filterBy" type="radio" id="month" name="filterBy" value="month">
       <label for="month"> Month</label>
-      <input [(ngModel)]="filterBy" type="radio" id="all" name="dateSorter" value="all">
+      <input [(ngModel)]="filterBy" type="radio" id="all" name="filterBy" value="all">
       <label for="All">  All</label>
     </form>
     </div>
@@ -45,7 +45,7 @@
               <th scope="col">Completed</th>
             </tr>
           </thead>
-          <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete | callFilter: filterBy'>
+          <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete | callFilter:filterBy'>
             <tr>
               <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
               <td>{{call.problem?.description}}</td>
@@ -57,3 +57,4 @@
         </table>
     </div>
   </div>
+
