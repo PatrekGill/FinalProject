@@ -61,6 +61,8 @@ export class ContractorLoginComponent implements OnInit {
     this.showCalls = true;
     this.callService.getServiceCallsByBusinessId(business.id).subscribe({
       next: (calls) => {
+        console.log(calls);
+
         // need to test this sorting function
         this.serviceCalls = calls;
         this.serviceCalls.sort(function(a, b) {

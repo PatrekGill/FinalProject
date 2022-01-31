@@ -22,6 +22,10 @@ import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.comp
 import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
 import { ActiveCallsPipe } from './pipes/active-calls.pipe';
 import { CallFilterPipe } from './pipes/call-filter.pipe';
+import { FirstNamePipe } from './pipes/first-name.pipe';
+import { LastNamePipe } from './pipes/last-name.pipe';
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
+import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,10 @@ import { CallFilterPipe } from './pipes/call-filter.pipe';
     UserBusinessesPipe,
     ActiveCallsPipe,
     CallFilterPipe
+    FirstNamePipe,
+    LastNamePipe,
+    PhoneNumberPipe,
+    DuplicateAddressCheckPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,9 @@ import { CallFilterPipe } from './pipes/call-filter.pipe';
   ],
   providers: [
     AuthService,
-  	BusinessService
+  	BusinessService,
+    UserAddressesPipe,
+    DuplicateAddressCheckPipe
   ],
   bootstrap: [AppComponent]
 })
