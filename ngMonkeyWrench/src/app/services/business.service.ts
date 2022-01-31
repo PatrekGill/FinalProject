@@ -97,7 +97,13 @@ export class BusinessService {
 				})
 		  ).subscribe(
         {
-
+          next: () => {
+            onUpdate();
+          },
+          error: (errorFound) => {
+            console.log("BusinessService: update(): Error");
+            console.error(errorFound);
+          }
         }
       )
   }
