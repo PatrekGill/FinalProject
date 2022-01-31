@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-client-list',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
+
+  searchForUser : User = new User();
 
   constructor() { }
 
