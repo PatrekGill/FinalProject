@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Address } from '../models/address';
-import { EquipmentType } from '../models/equipment-type';
 import { AuthService } from './auth.service';
 
 @Injectable({
