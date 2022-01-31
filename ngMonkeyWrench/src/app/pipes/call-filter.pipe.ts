@@ -8,10 +8,8 @@ export class CallFilterPipe implements PipeTransform {
 
   transform(calls: ServiceCall[], filterBy:string): ServiceCall[] {
     let date = new Date();
-    console.log(date.getMonth());
-    console.log("why don't you like me")
     let month = date.getMonth();
-
+    let day = date.getDay();
 
     if(filterBy == "all"){
       return calls;
@@ -20,10 +18,8 @@ export class CallFilterPipe implements PipeTransform {
       let filteredCalls: ServiceCall[] = [];
       calls.forEach(ServiceCall => {
         if(ServiceCall.dateScheduled){
-          console.log(new Date(ServiceCall.dateScheduled));
           if(new Date(ServiceCall.dateScheduled).getMonth() === month){
             filteredCalls.push(ServiceCall);
-            console.log("is this working?")
           }
         }
         });
@@ -35,6 +31,13 @@ export class CallFilterPipe implements PipeTransform {
     }
     else if(filterBy == "day"){
       let filteredCalls: ServiceCall[] = [];
+      calls.forEach(ServiceCall =>{
+        if(ServiceCall.dateScheduled){
+          if(new Date(ServiceCall.dateScheduled).getDay() === day){
+            filteredCalls.push(ServiceCall);
+          }
+        }
+      })
       return filteredCalls;
     }
     else{
