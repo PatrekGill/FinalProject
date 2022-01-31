@@ -24,6 +24,7 @@ import { ActiveCallsPipe } from './pipes/active-calls.pipe';
 import { FirstNamePipe } from './pipes/first-name.pipe';
 import { LastNamePipe } from './pipes/last-name.pipe';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
+import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { PhoneNumberPipe } from './pipes/phone-number.pipe';
     ActiveCallsPipe,
     FirstNamePipe,
     LastNamePipe,
-    PhoneNumberPipe
+    PhoneNumberPipe,
+    DuplicateAddressCheckPipe
+    
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,9 @@ import { PhoneNumberPipe } from './pipes/phone-number.pipe';
   ],
   providers: [
     AuthService,
-  	BusinessService
+  	BusinessService,
+    UserAddressesPipe,
+    DuplicateAddressCheckPipe
   ],
   bootstrap: [AppComponent]
 })
