@@ -24,6 +24,9 @@ public interface ServiceCallService {
 	// Find by User id
 	List<ServiceCall> findCallsByUserId(int userId);
 	
+	// Find by Business id
+	List<ServiceCall> findCallsByBusinessId(int businessId);
+	
 	// Find list by like in problem_description
 	// Find list by like in contractor_notes
 	// Find list by like in customer_comment

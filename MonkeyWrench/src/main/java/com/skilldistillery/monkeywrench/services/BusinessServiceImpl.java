@@ -65,9 +65,7 @@ public class BusinessServiceImpl implements BusinessService {
 				managed.setLogoUrl(business.getLogoUrl());
 				managed.setServiceTypes(business.getServiceTypes());
 				managed.setUsers(business.getUsers());
-				
 				managed = businessRepo.saveAndFlush(managed);
-				
 			}
 		}
 		
@@ -86,13 +84,17 @@ public class BusinessServiceImpl implements BusinessService {
 				deleted = true;
 			}
 		}
-		
 		return deleted;
 	}
 
 	@Override
 	public boolean existsById(int id) {
 		return businessRepo.existsById(id);
+	}
+
+	@Override
+	public List<Business> findBusinessesByUserId(int id) {
+		return businessRepo.findByUserId(id);
 	}
 	
 	
