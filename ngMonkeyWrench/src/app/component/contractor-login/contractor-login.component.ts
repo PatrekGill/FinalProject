@@ -14,6 +14,8 @@ import { ServiceCallService } from 'src/app/services/service-call.service';
 })
 export class ContractorLoginComponent implements OnInit {
 
+  filterBy : string = 'all';
+
   expandedBox: boolean = true;
 
   filterBy : string = "all";
@@ -61,6 +63,8 @@ export class ContractorLoginComponent implements OnInit {
     this.showCalls = true;
     this.callService.getServiceCallsByBusinessId(business.id).subscribe({
       next: (calls) => {
+        console.log(calls);
+
         // need to test this sorting function
         this.serviceCalls = calls;
         this.serviceCalls.sort(function(a, b) {
