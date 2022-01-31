@@ -4,7 +4,8 @@
     <h1 style="text-align: center;">Businesses</h1>
 
     <div class="business-search input-group">
-      <button class="btn btn-outline-primary" (click)="openCenteredModal(createBusinessContent)"><i class="bi bi-plus"></i></button>
+      <button *ngIf="isRoleBusiness()" class="btn btn-outline-primary" (click)="openCenteredModal(createBusinessContent)"><i class="bi bi-plus"></i></button>
+      <button *ngIf="isRoleUndefined() || isRoleCustomer()" class="btn btn-primary" (click)="openCenteredModal(createBusinessContent)" disabled><i class="bi bi-plus"></i></button>
       <button class="btn btn-secondary" (click)="openCenteredModal(filterContent)"><i class="bi bi-filter"></i></button>
 
       <div class="business-search-bar form-floating">
