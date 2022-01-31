@@ -22,123 +22,113 @@ import com.skilldistillery.monkeywrench.services.BusinessService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost:4200"})
+@CrossOrigin({ "*", "http://localhost:4200" })
 public class BusinessController {
 	@Autowired
 	private BusinessService businessService;
 
-	/* ----------------------------------------------------------------------------
-		GET all Businesses
-	---------------------------------------------------------------------------- */
-	@GetMapping(path="business")
-	public List<Business> getAll(
-		HttpServletRequest req, 
-		HttpServletResponse res
-	) {
+	/*
+	 * ----------------------------------------------------------------------------
+	 * GET all Businesses
+	 * ----------------------------------------------------------------------------
+	 */
+	@GetMapping(path = "business")
+	public List<Business> getAll(HttpServletRequest req, HttpServletResponse res) {
 		return businessService.index();
 	}
-	
 
-	/* ----------------------------------------------------------------------------
-		GET business by id
-	---------------------------------------------------------------------------- */
+	/*
+	 * ----------------------------------------------------------------------------
+	 * GET business by id
+	 * ----------------------------------------------------------------------------
+	 */
 	@GetMapping("business/{id}")
-	public Business getById(
-		@PathVariable int id,
-		HttpServletResponse res
-	) {
+	public Business getById(@PathVariable int id, HttpServletResponse res) {
 		Business business = null;
 		if (businessService.existsById(id)) {
 			business = businessService.findById(id);
-			
+
 		} else {
 			res.setStatus(404);
-			
+
 		}
 
 		return business;
 	}
-	
 
-	/* ----------------------------------------------------------------------------
-		POST create business
-	---------------------------------------------------------------------------- */
-	@PostMapping(path="business")
-	public Business create(
-		HttpServletRequest req, 
-		HttpServletResponse res,
-		Principal principal,
-		@RequestBody Business business
-	) {
+	/*
+	 * ----------------------------------------------------------------------------
+	 * POST create business
+	 * ----------------------------------------------------------------------------
+	 */
+	@PostMapping(path = "business")
+	public Business create(HttpServletRequest req, HttpServletResponse res, Principal principal,
+			@RequestBody Business business) {
 		try {
-			business = businessService.create(principal.getName(),business);
+			business = businessService.create(principal.getName(), business);
 			res.setStatus(201);
-			
+
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(business.getId());
-			res.setHeader("Location",url.toString());
-			
+			res.setHeader("Location", url.toString());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("Invalid business sent to create");
 			res.setStatus(400);
 			business = null;
-			
+
 		}
-		
+
 		return business;
 	}
-	
 
-	/* ----------------------------------------------------------------------------
-		PUT update business
-	---------------------------------------------------------------------------- */
+	/*
+	 * ----------------------------------------------------------------------------
+	 * PUT update business
+	 * ----------------------------------------------------------------------------
+	 */
 	@PutMapping("business/{id}")
-	public Business update(
-		@PathVariable int id,
-		@RequestBody Business business,
-		HttpServletResponse res,
-		Principal principal
-	) {
+	public Business update(@PathVariable int id, @RequestBody Business business, HttpServletResponse res,
+			Principal principal) {
 		try {
 			business = businessService.update(principal.getName(), id, business);
 			if (business == null) {
 				res.setStatus(404);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("Invalid business sent to update");
 			res.setStatus(400);
 			business = null;
-			
+
 		}
-		
+
 		return business;
 	}
-	
-	/* ----------------------------------------------------------------------------
-		DELETE business
-	---------------------------------------------------------------------------- */
+
+	/*
+	 * ----------------------------------------------------------------------------
+	 * DELETE business
+	 * ----------------------------------------------------------------------------
+	 */
 	@DeleteMapping("business/{id}")
-	public void deleteBusiness(
-		@PathVariable int id,
-		HttpServletResponse res,
-		Principal principal
-	) {
+	public void deleteBusiness(@PathVariable int id, HttpServletResponse res, Principal principal) {
 		if (businessService.existsById(id)) {
-			if (businessService.deleteById(principal.getName(),id)) {
+			if (businessService.deleteById(principal.getName(), id)) {
 				res.setStatus(204);
-				
 			} else {
 				res.setStatus(409);
-				
 			}
-			
 		} else {
 			res.setStatus(404);
-			
 		}
-		
+	}
+	
+	// Get businesses by user id
+	@GetMapping("business/user/{userId}")
+	public List<Business> getBusinessesByUserId(@PathVariable int userId){
+		return businessService.findBusinessesByUserId(userId);
 	}
 }

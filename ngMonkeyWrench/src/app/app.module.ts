@@ -19,8 +19,10 @@ import { ClientListComponent } from './component/client-list/client-list.compone
 import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
 import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
+import { DatePipe } from './pipes/date.pipe';
 import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
 import { BusinessServiceTypesStringPipe } from './business-service-types-string.pipe';
+import { ActiveCallsPipe } from './pipes/active-calls.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { BusinessServiceTypesStringPipe } from './business-service-types-string.
     UserDashboardComponent,
     UserAddressesPipe,
     UserSidebarComponent,
+    DatePipe,
     UserBusinessesPipe,
+    ActiveCallsPipe,
     BusinessServiceTypesStringPipe
   ],
   imports: [

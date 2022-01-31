@@ -16,4 +16,6 @@ public interface BusinessService {
     public boolean existsById(int id);
 
 	boolean deleteById(String username, int id);
+	
+	public List<Business> findBusinessesByUserId(int id);
 }

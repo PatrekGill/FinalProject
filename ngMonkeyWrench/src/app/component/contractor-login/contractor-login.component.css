@@ -1,7 +1,30 @@
+
 .radioDatePipe {
 display: inline-block;
 }
 
 .radioDatePipe label {
   padding-right: 5px;
+}
+
+div.selectBusiness{
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: auto;
+  text-align: center;
+  padding-top: 81px;
+}
+
+.clientListBox{
+  min-width: 60%;
+  min-height: 150px;
+  max-width: 60%;
+  margin: 0 auto;
+  background-color: #283891;
+  position: relative;
+  padding-top: 10px;
+  color: white;
+  font-family: Georgia;
+  border-radius: 2em;
+  padding-bottom: 10px;
 }
