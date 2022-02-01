@@ -113,9 +113,7 @@ export class ClientListComponent implements OnInit {
     if(this.viewCustomer){
       serviceCall.user = this.viewCustomer;
     }
-    if(serviceCall.solution?.id === 0){
-      serviceCall.solution = undefined;
-    }
+
     serviceCall.problem = this.selectedProblem;
     let scheduledDate = new Date(this.date + ' ' + this.time)
     serviceCall.dateScheduled = scheduledDate;
