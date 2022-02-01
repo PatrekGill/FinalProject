@@ -43,7 +43,7 @@ import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe'
     UserSidebarComponent,
     UserBusinessesPipe,
     ActiveCallsPipe,
-    CallFilterPipe
+    CallFilterPipe,
     FirstNamePipe,
     LastNamePipe,
     PhoneNumberPipe,

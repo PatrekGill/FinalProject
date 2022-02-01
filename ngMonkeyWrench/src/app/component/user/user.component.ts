@@ -173,6 +173,7 @@ export class UserComponent implements OnInit {
    ];
 
   addAddress(address: Address) {
+    address.user.id = this.currentUserId;
 
     if(address.street === ''
     || address.city === ''
