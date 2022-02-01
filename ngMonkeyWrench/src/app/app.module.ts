@@ -30,6 +30,8 @@ import { FirstNamePipe } from './pipes/first-name.pipe';
 import { LastNamePipe } from './pipes/last-name.pipe';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe';
+import { FilterBusinessesByServiceTypesPipe } from './pipes/filter-businesses-by-service-types.pipe';
+import { FilterBusinessesByUserPipe } from './pipes/filter-businesses-by-user.pipe';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe'
     FirstNamePipe,
     LastNamePipe,
     PhoneNumberPipe,
-    DuplicateAddressCheckPipe
+    DuplicateAddressCheckPipe,
+    FilterBusinessesByServiceTypesPipe,
+    FilterBusinessesByUserPipe
   ],
   imports: [
     BrowserModule,

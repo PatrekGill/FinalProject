@@ -25,6 +25,8 @@ export class BusinessComponent implements OnInit {
   editBusiness: Business | undefined;
   loggedInUser: User = new User();
   serviceTypeFilters: number[] = [];
+  showOnlyMyBusinesses: boolean = false;
+  mustHaveAllServiceTypeFilters: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -66,6 +68,20 @@ export class BusinessComponent implements OnInit {
   }
 
 
+  setShowOnlyMyBusinesses() {
+    if (this.showOnlyMyBusinesses) {
+      this.showOnlyMyBusinesses = false;
+    } else {
+      this.showOnlyMyBusinesses = true;
+    }
+  }
+  setMustHaveAllFilters() {
+    if (this.mustHaveAllServiceTypeFilters) {
+      this.mustHaveAllServiceTypeFilters = false;
+    } else {
+      this.mustHaveAllServiceTypeFilters = true;
+    }
+  }
 
   resetCreatingBusiness() {
     this.creatingBusiness = new Business();
@@ -242,13 +258,16 @@ export class BusinessComponent implements OnInit {
     const itemIndex = this.serviceTypeFilters.indexOf(serviceType.id);
     if (itemIndex > -1) {
       this.serviceTypeFilters.splice(itemIndex,1);
-      console.log("removed service with id: " + serviceType.id);
+      // console.log("removed service with id: " + serviceType.id);
 
     } else {
       this.serviceTypeFilters.push(serviceType.id);
-      console.log("added service with id: " + serviceType.id);
+      // console.log("added service with id: " + serviceType.id);
 
     }
+
+    this.setAllBusinesses();
+
   }
 
   handleServiceTypeOnBusiness(business: Business, serviceType: ServiceType) {

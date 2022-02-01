@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let business of allBusinesses | searchByBusinessName:searchBusinessText | orderBy:'name'">
+        <tr *ngFor="let business of allBusinesses | searchByBusinessName:searchBusinessText | filterBusinessesByServiceTypes:serviceTypeFilters:mustHaveAllServiceTypeFilters | orderBy:'name'">
           <td>
 
             <div class="card mb-3 business-card">
@@ -192,11 +192,22 @@
     </div>
 
     <div class="modal-body">
+
+      <div class="form-check form-switch" *ngIf="isRoleBusiness()">
+        <input (change)="setShowOnlyMyBusinesses()" class="form-check-input" type="checkbox" role="switch" id="filterByMyBusinessesSwitch" [checked]="showOnlyMyBusinesses">
+        <label class="form-check-label" for="filterByMyBusinessesSwitch">Show Only Your businesses</label>
+      </div>
+      <div class="form-check form-switch">
+        <input (change)="setMustHaveAllFilters()" class="form-check-input" type="checkbox" role="switch" id="filterMustMeetAllSwitch" [checked]="mustHaveAllServiceTypeFilters">
+        <label class="form-check-label" for="filterMustMeetAllSwitch">Must Have All Filter Types</label>
+      </div>
+      <br>
       <h6>Service Types</h6>
       <div class="form-check form-switch" *ngFor="let serviceType of allServiceTypes">
-        <input (click)="handleServiceTypeFilter(serviceType)" class="form-check-input" type="checkbox" role="switch" [id]="serviceType.id + 'filter'" [checked]="serviceTypeInFilter(serviceType)">
+        <input (change)="handleServiceTypeFilter(serviceType)" class="form-check-input" type="checkbox" role="switch" [id]="serviceType.id + 'filter'" [checked]="serviceTypeInFilter(serviceType)">
         <label class="form-check-label" [for]="serviceType.id + 'filter'">Include {{serviceType.name}}</label>
       </div>
+
     </div>
 
     <div class="modal-footer modal-button-footer">
