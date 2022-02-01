@@ -1,6 +1,6 @@
 # Final Project (MonkeyWrench) PLACEHOLDER TO BE UPDATED
-![Album Page](https://drive.google.com/uc?export=view&id=1vyVArZDWAd9We46cfYoZShZpNfvaS_sw)
-![Album Comment Page](https://drive.google.com/uc?export=view&id=16AcTJqHZSmqX05cG6bIaG1Xv4-UCFg3W)
+![Service Request Page](HTTP PLACEHOLDER)
+![Client List Page](HTTP PLACEHOLDER)
 
 
 ## Overview
