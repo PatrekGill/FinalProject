@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let business of allBusinesses | searchByBusinessName:searchBusinessText | filterBusinessesByServiceTypes:serviceTypeFilters:mustHaveAllServiceTypeFilters | orderBy:'name'">
+        <tr *ngFor="let business of allBusinesses | searchByBusinessName:searchBusinessText | filterBusinessesByServiceTypes:serviceTypeFilters:mustHaveAllServiceTypeFilters | filterBusinessesByUser:showOnlyMyBusinesses:loggedInUser | orderBy:'name'">
           <td>
 
             <div class="card mb-3 business-card">
