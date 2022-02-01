@@ -12,4 +12,6 @@ public interface ServiceCallRepository extends JpaRepository<ServiceCall, Intege
 	
 	List<ServiceCall> findByBusinessId(int businessId);
 	
+	List<ServiceCall> findByAddressId(int addressId);
+	
 }

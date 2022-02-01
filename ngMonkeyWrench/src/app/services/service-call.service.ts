@@ -98,4 +98,13 @@ export class ServiceCallService {
     )
   }
 
+  getServiceCallsByAddressId(addressId : number): Observable<ServiceCall[]>{
+    return this.http.get<ServiceCall[]>(this.url + "/address/" + addressId).pipe(
+      catchError( (error: any)  => {
+        console.error("ServiceCallService.getServiceCallsByAddressId(): failed to get service calls");
+        return throwError(() => new Error("ServiceCallService.getServiceCallsByAddressId(): failed to get service calls"))
+      })
+    )
+  }
+
 }
