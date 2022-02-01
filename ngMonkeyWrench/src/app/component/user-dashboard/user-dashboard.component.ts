@@ -11,6 +11,8 @@ import { ServiceCallService } from 'src/app/services/service-call.service';
 })
 export class UserDashboardComponent implements OnInit {
 
+  filterBy : string = 'all';
+
   currentUser: User = new User();
 
   serviceCalls: ServiceCall[] = [];
@@ -39,10 +41,15 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsersServiceCalls();
+    this.getCurrentUserById();
   }
 
   reload(){
-
   }
 
+  getCurrentUserById(){
+    this.authService.doWithLoggedInUser((user: User) =>{
+      this.currentUser = user;
+    })
+  }
 }

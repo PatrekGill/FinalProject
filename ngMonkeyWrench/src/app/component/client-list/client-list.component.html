@@ -66,6 +66,7 @@
             <th scope="col">Zip</th>
             <th scope="col">Notes</th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody *ngFor='let address of clientAddresses'>
@@ -77,12 +78,13 @@
             <td>{{address.zipCode}}</td>
             <td>{{address.notes}}</td>
             <td><button class="btn btn-outline-primary" (click)="serviceCallForm(address)">Add Service Call</button> </td>
+            <td><button class="btn btn-outline-primary" (click)="viewServiceRecord(address)">Service History</button> </td>
           </tr>
         </tbody>
       </table>
     </div>
     <button class="btn btn-outline-success" (click)="viewAddressForm = true">Create New Address</button>
-    <button class="btn btn-outline-danger" (click)="viewCustomer = null; viewAddressForm = false">Back</button>
+    <button class="btn btn-outline-danger" (click)="viewCustomer = null; viewAddressForm = false; viewServiceHistory = false; viewServiceCallForm = false">Back</button>
   </div>
 
   <!-- add new address form -->
@@ -186,15 +188,36 @@
       </div>
     </div><br/>
 
-    <button class="btn btn-outline-success" (click)="addServiceCallToAddress(newServiceCall)">Submit</button>
-  </div>
-  <!-- test
-  <select [(ngModel)]="newServiceCall.business">
-    <option *ngFor="let business of contractorsBusinesses" [value]="business">
-      {{business.name}}
-    </option>
-</select> -->
-  <!-- end of new address form -->
+      <button class="btn btn-outline-success" (click)="addServiceCallToAddress(newServiceCall)">Submit</button>
+    </div>
+
+    <!-- service history -->
+    <div class="form-control" *ngIf='viewServiceHistory'>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Problem</th>
+            <th scope="col">Problem Description</th>
+            <th scope="col">Solution</th>
+            <th scope="col">Hours Labor</th>
+            <th scope="col">Total Cost</th>
+            <th scope="col">Notes</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody *ngFor='let call of serviceHistory'>
+          <tr>
+            <td>{{call.problem?.description}}</td>
+            <td>{{call.problemDescription}}</td>
+            <td>{{call.solution?.description}}</td>
+            <td>{{call.hoursLabor}}</td>
+            <td>{{call.totalCost}}</td>
+            <td>{{call.contractorNotes}}</td>
+            <td>{{call.dateScheduled | date : 'short'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
 
 
