@@ -65,3 +65,11 @@ div.addressListBox {
 tr:hover .action {
   display: inline-flex;
 }
+
+.lightPadder {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.headerCenter{
+  text-align: center;
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  loggedInUser : User = new User();
+
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.authService.doWithLoggedInUser((user: User) => {
+      this.loggedInUser = user;
+    });
+
   }
+
 
 }

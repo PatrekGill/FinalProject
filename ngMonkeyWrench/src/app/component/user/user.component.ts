@@ -18,6 +18,8 @@ import { UserService } from 'src/app/services/user.service';
 
 export class UserComponent implements OnInit {
 
+  loggedInUser : User = new User();
+
   constructor(
     private userService: UserService,
     private currentRoute: ActivatedRoute,
@@ -28,6 +30,10 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.authService.doWithLoggedInUser((user: User) => {
+      this.loggedInUser = user;
+    });
 
     this.getUser();
     this.getAllAddresses();
