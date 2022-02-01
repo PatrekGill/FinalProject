@@ -36,12 +36,22 @@
                     <div class="business-card-body">
                       <p class="card-text">{{business | businessServiceTypesString }}</p>
                     </div>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                   </div>
+
+                  <div class="card-footer bg-transparent">
+
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                      <button *ngIf="userOwnsBusiness(business,loggedInUser)" type="button" class="btn btn-outline-primary">Edit <i class="bi bi-pencil-square"></i></button>
+                      <button *ngIf="isRoleCustomer()" type="button" class="btn btn-outline-primary">Request Service</button>
+                      <button type="button" class="btn btn-outline-primary">Middle</button>
+                      <button type="button" class="btn btn-outline-primary">Right</button>
+                    </div>
+
+                  </div>
+
                 </div>
               </div>
             </div>
-
           </td>
         </tr>
 

@@ -23,6 +23,7 @@ export class BusinessComponent implements OnInit {
   serviceTypeSearchText: string;
   allServiceTypes: ServiceType[];
   editBusiness: Business | undefined;
+  loggedInUser: User = new User();
 
   constructor(
     private authService: AuthService,
@@ -32,7 +33,6 @@ export class BusinessComponent implements OnInit {
     private serviceTypeService: ServiceTypeService
   ) {
     this.creatingBusiness = new Business();
-
     this.allContractors = [];
     this.allBusinesses = [];
     this.allServiceTypes = [];
@@ -43,10 +43,15 @@ export class BusinessComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setUserRole();
-    this.setAllBusinesses();
-    this.setAllContractors();
-    this.setAllServiceTypes();
+    this.authService.doWithLoggedInUser(
+      (user:User) => {
+        this.loggedInUser = user;
+        this.setUserRole();
+        this.setAllBusinesses();
+        this.setAllContractors();
+        this.setAllServiceTypes();
+      }
+    )
   }
 
   isRoleBusiness(): boolean {
@@ -133,10 +138,16 @@ export class BusinessComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
+  userOwnsBusiness(business: Business, user: User): boolean {
+    console.log(business.user);
+
+    return business.user?.username === user.username;
+  }
 
   setUserRole() {
     this.authService.doWithLoggedInUser(
       (user: User) => {
+        this.loggedInUser = user;
         if (user) {
           this.userRole = user.role;
         } else {
