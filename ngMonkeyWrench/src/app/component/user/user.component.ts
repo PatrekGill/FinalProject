@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
 import { User } from 'src/app/models/user';
+import { DuplicateAddressCheckPipe } from 'src/app/pipes/duplicate-address-check.pipe';
+import { UserAddressesPipe } from 'src/app/pipes/user-addresses.pipe';
 import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
@@ -13,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
+
 export class UserComponent implements OnInit {
 
   constructor(
@@ -20,33 +23,37 @@ export class UserComponent implements OnInit {
     private currentRoute: ActivatedRoute,
     private authService: AuthService,
     private addyService: AddressService,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private addressCheck: DuplicateAddressCheckPipe
   ) { }
 
   ngOnInit(): void {
 
     this.getUser();
-    // this.getBusinesses();
+    this.getAllAddresses();
+    this.getBusinesses();
 
   }
 
   currentUserId: number = 0;
-  chosenUserId: number = 0;
 
   users: User[] = [];
   currentUser: User = new User();
   editedUser: User | null = new User();
   editUser: boolean = false;
 
-  addresses: Address[] = [];
-  currentAddress: Address = new Address();
+  allAddresses: Address[] = [];
+  userAddresses: Address[] = [];
+  newAddress: Address = new Address();
   editedAddress: Address | null = new Address();
-  editAddress: boolean = false;
+  addingAddress: boolean = false;
+  addressError: boolean = false;
+  addressErrorTxt: string = '';
+  stateAbbr: string = '';
 
   businesses: Business[] = [];
 
   pwUndo: string | undefined = '';
-
 
   reload() {
     this.userService.show(this.currentUser.id).subscribe(
@@ -55,6 +62,8 @@ export class UserComponent implements OnInit {
           this.editUser = false;
           this.currentUser = user;
           this.getAddresses();
+          this.getAllAddresses();
+          this.addressError = false;
         },
         error: (wrong) => {
           console.error('TodoListComponent.reload(): Error retreiving todos');
@@ -108,7 +117,7 @@ export class UserComponent implements OnInit {
     this.addyService.getAddressByUserId(this.currentUserId).subscribe(
       { // OBJECT
         next: (addressList) => {
-          this.addresses = addressList;
+          this.userAddresses = addressList;
         },
         error: (wrong) => {
           console.error('UserComponent.getAddressses(): Error retreiving addresses by UserId');
@@ -119,26 +128,28 @@ export class UserComponent implements OnInit {
     );
   }
 
-  // setEditAddress() {
-  //   this.editedAddress = Object.assign({}, this.currentAddress);
-  //   this.editedAddress.user.id = 3;
-  // }
+  getAllAddresses() {
+    this.addyService.getAddresses().subscribe(
+      { // OBJECT
+        next: (addressList) => {
+          this.allAddresses = addressList;
+        },
+        error: (wrong) => {
+          console.error('UserComponent.getAddressses(): Error retreiving addresses by UserId');
+          console.error(wrong);
+        },
+        complete: () => { }
+      } // END OF OBJECT
+    );
+  }
 
-  udpateAddress(address: Address, goToDetails = true) {
-    if(this.currentUser.id == address.user?.id || this.currentUser.id == 1) {
+  updateAddress(address: Address) {
+    if(this.currentUser.id == address.user.id || this.currentUser.id == 1) {
 
       address.user.id = 3;
 
-      console.log('userID for address post set');
-      console.log(address.user.id);
-
-
       this.addyService.updateAddress(address).subscribe({
         next: (t) => {
-          // this.editedAddress = null;
-          if(goToDetails) {
-            // this.currentAddress = t;
-          }
           this.reload();
         },
         error: (soSad) => {
@@ -146,6 +157,45 @@ export class UserComponent implements OnInit {
           console.error(soSad);
         }
       });
+    }
+  }
+
+  setStateAbbr(abbr: string) {
+    this.newAddress.stateAbbv = abbr;
+  }
+
+  stateAbbreviations = [
+    'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA',
+    'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA',
+    'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
+    'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX',
+    'UT','VT','VA','WA','WV','WI','WY'
+   ];
+
+  addAddress(address: Address) {
+
+    if(address.street === ''
+    || address.city === ''
+    || address.stateAbbv === ''
+    ) {
+      this.addressError = true;
+      this.addressErrorTxt = 'Please include the street address, city, and state';
+    }
+    else if(this.addressCheck.transform(this.allAddresses, address)){
+      console.log('UNIQUE ADDRESS');
+      this.addyService.createAddress(address).subscribe({
+        next: (addy) => {
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('UserComponent.addAddress(): Error creating address');
+          console.error(fail);
+        }
+      });
+    } else {
+      console.log('ERROR ERROR');
+      this.addressError = true;
+      this.addressErrorTxt = 'Cannot add address. Address already on file. If this is an error please click the link to email the admin.'
     }
   }
 
@@ -163,5 +213,10 @@ export class UserComponent implements OnInit {
       } // END OF OBJECT
     );
   }
+
+
+
+
+
 
 }

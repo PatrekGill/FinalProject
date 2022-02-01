@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +25,11 @@ import { SearchByUsernamePipe } from './pipes/search-by-username.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SearchByServicetypeNamePipe } from './pipes/search-by-servicetype-name.pipe';
 import { SearchByBusinessNamePipe } from './search-by-business-name.pipe';
+import { CallFilterPipe } from './pipes/call-filter.pipe';
+import { FirstNamePipe } from './pipes/first-name.pipe';
+import { LastNamePipe } from './pipes/last-name.pipe';
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
+import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,12 @@ import { SearchByBusinessNamePipe } from './search-by-business-name.pipe';
     SearchByUsernamePipe,
     OrderByPipe,
     SearchByServicetypeNamePipe,
-    SearchByBusinessNamePipe
+    SearchByBusinessNamePipe,
+    CallFilterPipe,
+    FirstNamePipe,
+    LastNamePipe,
+    PhoneNumberPipe,
+    DuplicateAddressCheckPipe
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,9 @@ import { SearchByBusinessNamePipe } from './search-by-business-name.pipe';
   ],
   providers: [
     AuthService,
-  	BusinessService
+  	BusinessService,
+    UserAddressesPipe,
+    DuplicateAddressCheckPipe
   ],
   bootstrap: [AppComponent]
 })
