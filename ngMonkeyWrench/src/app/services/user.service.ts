@@ -17,17 +17,6 @@ export class UserService {
     private authService: AuthService
   ) { }
 
-  getHttpOption() {
-    let options = {
-      headers: {
-      Authorization: 'Basic ' + this.authService.getCredentials(),
-      'X-Requested-With': 'XMLHttpRequest'
-      }
-    };
-  return options
-  }
-
-
   index(): Observable<User[]> {
     return this.http.get<User[]>(this.url).pipe(
         catchError((err: any) => {
@@ -57,7 +46,7 @@ export class UserService {
   createUser(todo: User): Observable<User> {
     // todo.completed = false;
     // todo.description = '';
-    return this.http.post<User>(this.url, todo, this.getHttpOption()).pipe(
+    return this.http.post<User>(this.url, todo, this.authService.getBasicHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('TodoService.create(): error creating user: ');
         console.log(err);
@@ -87,7 +76,7 @@ export class UserService {
   destroy(userId: number): Observable<void> {
     // CAN WRITE 2 WAYS, WITH CONCAT OR BACK TICKS
     // return this.http.delete(this.url + "/" + todoId);
-    return this.http.delete<void>(`${this.url}/${userId}`, this.getHttpOption()).pipe(
+    return this.http.delete<void>(`${this.url}/${userId}`, this.authService.getBasicHttpOptions()).pipe(
       catchError( (error: any) => {
         console.error('UserService.destroy(): error deleting user: ');
         console.error(error);
@@ -100,5 +89,12 @@ export class UserService {
     );
    }
 
-
+   getAll(): Observable<User[]> {
+    return this.http.get<User[]>(this.url).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => 'User getAll error');
+      })
+    );
+  }
 }

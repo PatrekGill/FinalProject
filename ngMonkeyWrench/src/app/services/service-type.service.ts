@@ -29,6 +29,15 @@ export class ServiceTypeService {
     );
   }
 
+  getAll(): Observable<ServiceType[]> {
+    return this.http.get<ServiceType[]>(this.url).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => 'ServiceType getAll error');
+      })
+    );
+  }
+
   createServiceType(serviceType: ServiceType): Observable<ServiceType>{
     return this.http.post<ServiceType>(this.url, serviceType)
     .pipe(

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap, catchError, throwError, Observable } from 'rxjs';
+import { tap, catchError, throwError, Observable, observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
@@ -50,7 +50,7 @@ export class AuthService {
         console.log(err);
         return throwError(
           () => new Error(
-          'Authservice.showUsername(): error retrieving user by username: ' + err
+            'Authservice.showUsername(): error retrieving user by username: ' + err
           )
         );
       })
@@ -81,10 +81,15 @@ export class AuthService {
           }
         );
       }
-
-
     } else {
-      console.error("AuthService: onGettingLoggedInUser(): No current user found");
+      console.log("AuthService: doWithLoggedInUser(): No current user found");
+      if (subscribeTo) {
+        onGet(undefined).subscribe();
+
+      } else {
+        onGet(undefined);
+
+      }
     }
   }
 

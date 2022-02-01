@@ -31,7 +31,5 @@ export class Business {
     this.users = users;
     this.serviceTypes = serviceTypes;
   }
-
-
 }
 

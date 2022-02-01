@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -19,10 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ServiceType {
 	
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "business_service_type",
-			   joinColumns = @JoinColumn(name = "contractor_id"),
-			   inverseJoinColumns = @JoinColumn(name = "business_type_id"))
+	@ManyToMany(mappedBy = "serviceTypes")
 	private List<Business> businesses;
 	
 	@Id
