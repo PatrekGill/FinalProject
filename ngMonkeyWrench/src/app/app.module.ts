@@ -19,12 +19,19 @@ import { UserDashboardComponent } from './component/user-dashboard/user-dashboar
 import { UserAddressesPipe } from './pipes/user-addresses.pipe';
 import { UserSidebarComponent } from './component/user-sidebar/user-sidebar.component';
 import { UserBusinessesPipe } from './pipes/user-businesses.pipe';
+import { BusinessServiceTypesStringPipe } from './pipes/business-service-types-string.pipe';
 import { ActiveCallsPipe } from './pipes/active-calls.pipe';
+import { SearchByUsernamePipe } from './pipes/search-by-username.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { SearchByServicetypeNamePipe } from './pipes/search-by-servicetype-name.pipe';
+import { SearchByBusinessNamePipe } from './search-by-business-name.pipe';
 import { CallFilterPipe } from './pipes/call-filter.pipe';
 import { FirstNamePipe } from './pipes/first-name.pipe';
 import { LastNamePipe } from './pipes/last-name.pipe';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe';
+import { FilterBusinessesByServiceTypesPipe } from './pipes/filter-businesses-by-service-types.pipe';
+import { FilterBusinessesByUserPipe } from './pipes/filter-businesses-by-user.pipe';
 
 @NgModule({
   declarations: [
@@ -42,11 +49,18 @@ import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe'
     UserSidebarComponent,
     UserBusinessesPipe,
     ActiveCallsPipe,
+    BusinessServiceTypesStringPipe,
+    SearchByUsernamePipe,
+    OrderByPipe,
+    SearchByServicetypeNamePipe,
+    SearchByBusinessNamePipe,
     CallFilterPipe,
     FirstNamePipe,
     LastNamePipe,
     PhoneNumberPipe,
-    DuplicateAddressCheckPipe
+    DuplicateAddressCheckPipe,
+    FilterBusinessesByServiceTypesPipe,
+    FilterBusinessesByUserPipe
   ],
   imports: [
     BrowserModule,

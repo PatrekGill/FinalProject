@@ -50,7 +50,7 @@ public class ProblemController {
 	}
 	
 	@PutMapping("problem/{problemId}")
-	public Problem updateProblem(@RequestBody Problem problem, @PathVariable int problemId, HttpServletResponse res) {
+	public Problem updateProblem(@RequestBody Problem problem, @PathVariable Integer problemId, HttpServletResponse res) {
 		try {
 			problem = problemService.updateProblem(problem, problemId);
 			if(problem == null) {

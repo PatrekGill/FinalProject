@@ -36,9 +36,8 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 	
 	@Override
 	public ServiceCall createNewServiceCall(ServiceCall serviceCall) {
-		serviceCall.setEstimate(false);
 		serviceCall.setCompleted(false);
-		return serviceCallRepo.save(serviceCall);
+		return serviceCallRepo.saveAndFlush(serviceCall);
 	}
 
 	@Override
@@ -61,6 +60,11 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 	@Override
 	public List<ServiceCall> findCallsByBusinessId(int businessId) {
 		return serviceCallRepo.findByBusinessId(businessId);
+	}
+
+	@Override
+	public List<ServiceCall> findCallsByAddressId(int addressId) {
+		return serviceCallRepo.findByAddressId(addressId);
 	}
 
 

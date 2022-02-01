@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
 import { Problem } from 'src/app/models/problem';
@@ -8,6 +9,7 @@ import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
 import { ProblemService } from 'src/app/services/problem.service';
+import { ServiceCallService } from 'src/app/services/service-call.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -45,7 +47,13 @@ export class ClientListComponent implements OnInit {
 
   business : Business = new Business;
 
+  estimate : boolean = false;
+
+  viewServiceHistory : boolean = false;
+
   clientList : User[] = [];
+
+  serviceHistory : ServiceCall[] = [];
 
   firstNameSearch : string = "";
 
@@ -53,12 +61,16 @@ export class ClientListComponent implements OnInit {
 
   phoneNumberSearch : string = "";
 
+  selectedProblem : Problem = new Problem;
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
     private addressService: AddressService,
     private problemService: ProblemService,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private serviceCallService: ServiceCallService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -97,7 +109,22 @@ export class ClientListComponent implements OnInit {
     if(this.viewCustomer){
       serviceCall.user = this.viewCustomer;
     }
+    serviceCall.problem = this.selectedProblem;
+    let scheduledDate = new Date(this.date + ' ' + this.time)
+    serviceCall.dateScheduled = scheduledDate;
+    serviceCall.estimate = this.estimate;
+    serviceCall.business = this.selectedBusiness;
+    console.log(serviceCall);
 
+
+    this.serviceCallService.createServiceCall(serviceCall).subscribe({
+      next: () => {
+        this.router.navigateByUrl('contractor');
+      },
+      error: () => {
+        console.error("ClientListComponent.addServiceCallToAddress(): failed to create service call")
+      }
+    })
 
   }
 
@@ -126,6 +153,7 @@ export class ClientListComponent implements OnInit {
     this.problemService.getProblems().subscribe({
       next: (problems) => {
         this.serviceCallProblems = problems;
+
       },
       error: (fail) => {
         console.error("ClientListComponent.getAllProblems(): failed to get problems")
@@ -135,8 +163,8 @@ export class ClientListComponent implements OnInit {
 
   serviceCallForm(address: Address) {
     this.selectedAddress = address;
+    this.viewServiceHistory = false;
     this.viewServiceCallForm = true;
-    this.getAllProblems;
   }
 
   getBusinessesByUserId(){
@@ -147,12 +175,28 @@ export class ClientListComponent implements OnInit {
           this.contractorsBusinesses = businesses;
         },
         error: (fail) => {
-          console.error("ContractorLoginComponent.getBusinessesByUserId(): failed to get businesses");
+          console.error("ClientListComponent.getBusinessesByUserId(): failed to get businesses");
         }
       })
     });
   }
 
+  viewServiceRecord(address : Address){
+    this.viewServiceHistory = true;
+    this.viewServiceCallForm = false;
+    this.selectedAddress = address;
+    if(this.selectedAddress){
+      this.serviceCallService.getServiceCallsByAddressId(this.selectedAddress.id).subscribe({
+        next: (calls) => {
+          this.serviceHistory = calls;
+        },
+        error: (fail) => {
+          console.error("ClientListComponenet.viewServiceRecord(): failed to get service calls")
+        }
+      })
+    }
+
+  }
 
 
 }
