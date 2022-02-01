@@ -43,8 +43,6 @@
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                       <button *ngIf="userOwnsBusiness(business,loggedInUser)" (click)="setEditBusiness(business); openCenteredModal(updateBusinessContent)" type="button" class="btn btn-outline-primary">Edit <i class="bi bi-pencil-square"></i></button>
                       <button *ngIf="isRoleCustomer()" type="button" class="btn btn-outline-primary">Request Service</button>
-                      <button type="button" class="btn btn-outline-primary">Middle</button>
-                      <button type="button" class="btn btn-outline-primary">Right</button>
                     </div>
 
                   </div>
@@ -189,22 +187,11 @@
 <ng-template #filterContent let-modal>
   <div>
     <div class="modal-header">
-      <div class="form-floating" style="width: 100%;">
-        <input type="text" class="form-control" id="titleEdit" placeholder="Title" >
-        <label for="titleEdit">Title</label>
-      </div>
-
+      <h1>Filter Businesses</h1>
     </div>
+
     <div class="modal-body">
-      <div class="form-floating">
-        <textarea rows="5" style="height: 100%;" type="text" class="form-control" id="descriptionEdit" placeholder="Description" ></textarea>
-        <label for="descriptionEdit">Description</label>
-      </div>
-      <br/>
-      <div class="form-floating">
-        <input type="text" class="form-control" id="imageEdit" placeholder="URL">
-        <label for="imageEdit">Logo URL</label>
-      </div>
+
     </div>
 
     <div class="modal-footer modal-button-footer">
