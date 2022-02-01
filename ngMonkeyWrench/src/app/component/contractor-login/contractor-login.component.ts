@@ -55,7 +55,6 @@ export class ContractorLoginComponent implements OnInit {
     this.getBusinessesByUserId();
     this.getAllProblems();
     this.getAllSolutions();
-    this.currentProblem = this.currentServiceCall.problem;
   }
 
   getBusinessesByUserId(){
