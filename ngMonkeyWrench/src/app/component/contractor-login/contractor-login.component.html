@@ -42,7 +42,6 @@
               <th scope="col">Problem</th>
               <th scope="col">Address</th>
               <th scope="col">Scheduled</th>
-              <th scope="col">Completed</th>
             </tr>
           </thead>
 
@@ -53,7 +52,6 @@
               <td>{{call.problem?.description}}</td>
               <td>{{call.address?.street}} {{call.address?.city}} {{call.address?.stateAbbv}}</td>
               <td>{{call.dateScheduled | date  : 'short'}} </td>
-              <td><input type="checkbox" name="completed" (change)="completeServiceCall(call)"><br></td>
             </tr>
           </tbody>
         </table>
@@ -61,7 +59,7 @@
   </div>
 </div>
 
-
+<div class = 'content'>
 <div class="content selectBusiness form-group">
   <div class="serviceCall selectServiceCall" *ngIf="showCurrentCall">
 
@@ -72,15 +70,17 @@
         </tr>
         <tr>
           <th><h5>{{currentServiceCall.address?.street}} {{currentServiceCall.address?.street2}} {{currentServiceCall.address?.city}}, {{currentServiceCall.address?.stateAbbv}} {{currentServiceCall.address?.zipCode}}</h5></th>
-          <th><h6>Created: {{currentServiceCall.dateCreated}}</h6></th>
+        </tr>
+        <tr>
+          <th><h6>Created: {{currentServiceCall.dateCreated | date : 'short'}}</h6></th>
         </tr>
       </thead>
       <tbody>
         <tr>
         <td>
           Problem:
-          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem" >
-            <option *ngFor="let problem of allProblems" value="{{problem}}">
+          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
+            <option *ngFor="let problem of allProblems" value={{problem.id}}>
               {{problem.description}}
             </option>
           </select>
@@ -94,8 +94,8 @@
         <tr>
           <td>
             Solution:
-            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution" >
-              <option *ngFor="let solution of allSolutions" value="{{solution}}">
+            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
+              <option *ngFor="let solution of allSolutions" value={{solution.id}}>
                 {{solution.description}}
               </option>
             </select>
@@ -157,6 +157,7 @@
         <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
       </select>
     </div> -->
+    </div>
   </div>
 </div>
 
