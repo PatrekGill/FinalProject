@@ -183,6 +183,7 @@
   </div>
 </ng-template>
 
+
 <!-- filter business modal -->
 <ng-template #filterContent let-modal>
   <div>
@@ -191,14 +192,15 @@
     </div>
 
     <div class="modal-body">
-
+      <h6>Service Types</h6>
+      <div class="form-check form-switch" *ngFor="let serviceType of allServiceTypes">
+        <input (click)="handleServiceTypeFilter(serviceType)" class="form-check-input" type="checkbox" role="switch" [id]="serviceType.id + 'filter'" [checked]="serviceTypeInFilter(serviceType)">
+        <label class="form-check-label" [for]="serviceType.id + 'filter'">Include {{serviceType.name}}</label>
+      </div>
     </div>
 
     <div class="modal-footer modal-button-footer">
       <button type="button" class="btn btn-warning" (click)="modal.close()">Close</button>
-      <!-- <span style="float: right;">
-        <button class="btn btn-primary">Save Changes</button>
-      </span> -->
     </div>
   </div>
 </ng-template>

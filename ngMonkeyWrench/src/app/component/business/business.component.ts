@@ -24,6 +24,7 @@ export class BusinessComponent implements OnInit {
   allServiceTypes: ServiceType[];
   editBusiness: Business | undefined;
   loggedInUser: User = new User();
+  serviceTypeFilters: number[] = [];
 
   constructor(
     private authService: AuthService,
@@ -63,6 +64,7 @@ export class BusinessComponent implements OnInit {
   isRoleUndefined(): boolean {
     return this.userRole === undefined;
   }
+
 
 
   resetCreatingBusiness() {
@@ -190,6 +192,10 @@ export class BusinessComponent implements OnInit {
     );
   }
 
+  serviceTypeInFilter(serviceType: ServiceType): boolean {
+    return this.serviceTypeFilters.includes(serviceType.id);
+  }
+
   businessHasServiceType(business:Business, serviceType: ServiceType): boolean {
     let hasType: boolean = false;
 
@@ -230,6 +236,19 @@ export class BusinessComponent implements OnInit {
     }
 
     return hasUser;
+  }
+
+  handleServiceTypeFilter(serviceType: ServiceType) {
+    const itemIndex = this.serviceTypeFilters.indexOf(serviceType.id);
+    if (itemIndex > -1) {
+      this.serviceTypeFilters.splice(itemIndex,1);
+      console.log("removed service with id: " + serviceType.id);
+
+    } else {
+      this.serviceTypeFilters.push(serviceType.id);
+      console.log("added service with id: " + serviceType.id);
+
+    }
   }
 
   handleServiceTypeOnBusiness(business: Business, serviceType: ServiceType) {
