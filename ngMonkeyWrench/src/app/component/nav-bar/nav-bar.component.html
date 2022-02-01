@@ -1,7 +1,7 @@
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
   <div class="navbar-siteTitle-div">
-    <a class="navbar-brand navbar-siteTitle-text" href="#">MonkeyWrench</a>
+    <a class="navbar-brand navbar-siteTitle-text">MonkeyWrench</a>
   </div>
 
   <button class="navbar-toggler" type="button"
@@ -15,11 +15,11 @@
 
   <div class="collapse navbar-collapse homeSpacer" id="navbarNavAltMarkup" [ngbCollapse] = 'isCollapsed'>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#" (click)='navToDashboard()' >Dashboard <span class="sr-only"></span></a>
+      <a *ngIf="loggedInUser.role === 'business'" class="nav-item nav-link" [routerLink]="['/contractor']" >Dashboard</a>
+      <a *ngIf="loggedInUser.role === 'customer'" class="nav-item nav-link" [routerLink]="['/userDashboard']" >Dashboard</a>
       <span *ngIf="loggedIn()"><a class="nav-item nav-link" [routerLink]="['/user']">Profile</a></span>
-      <a class="nav-item nav-link" href="#">Support</a>
       <a class="nav-item nav-link" [routerLink]="['/contact']" >About</a>
-      <a class="nav-item nav-link" [routerLink]="['/business']" >Businesses</a>
+
 
     <!-- modal for login -->
     <div class="navbar-not-logged-in" *ngIf="!loggedIn()">
