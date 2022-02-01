@@ -47,6 +47,7 @@ public class ServiceCallController {
 			HttpServletResponse res, 
 			HttpServletRequest req) {
 		try {
+			sc.setSolution(null);
 			sc = sCallSvc.createNewServiceCall(sc);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
@@ -70,6 +71,10 @@ public class ServiceCallController {
 			HttpServletResponse res
 			) {		
 		try {
+			if(servCall.getSolution().getId() == 0) {
+				servCall.setSolution(null);
+			}
+			
 			servCall = sCallSvc.updateServiceCallById(servCall, scId);
 			if(servCall == null) {
 				res.setStatus(404);

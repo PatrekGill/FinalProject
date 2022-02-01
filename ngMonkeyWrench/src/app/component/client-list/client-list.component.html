@@ -153,9 +153,9 @@
     <div class='selectBusiness'>
       <div class="col">
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle >Select Business</button>
+          <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle >{{displayBusinessMessage}}</button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic3" >
-            <button ngbDropdownItem *ngFor='let business of contractorsBusinesses' (click)='selectedBusiness=business'>{{ business.name }}</button>
+            <button ngbDropdownItem *ngFor='let business of contractorsBusinesses' (click)='selectedBusiness=business; setBusinessDisplayMessage(selectedBusiness.name)'>{{ business.name }}</button>
           </div>
         </div>
       </div>
@@ -165,9 +165,9 @@
       <div class='row'>
         <div class="col">
           <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Problem</button>
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{displayProblemMessage}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
-              <button ngbDropdownItem *ngFor='let problem of serviceCallProblems' (click)='selectedProblem = problem'>{{ problem.description }}</button>
+              <button ngbDropdownItem *ngFor='let problem of serviceCallProblems' (click)='selectedProblem = problem; setProblemDisplayMessage(selectedProblem.description)'>{{ problem.description }}</button>
             </div>
           </div>
         </div>
@@ -178,10 +178,10 @@
       <div class="row">
         <div class="col">
           <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Estimate</button>
+            <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{displayEstimateMessage}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic2" >
-              <button ngbDropdownItem (click)="estimate = true">Estimate</button>
-              <button ngbDropdownItem >Charged </button>
+              <button ngbDropdownItem (click)="estimate = true; setEstimateDisplayMessage()">Estimate</button>
+              <button ngbDropdownItem (click)="estimate = false; setEstimateDisplayMessage()">Charged</button>
             </div>
           </div>
         </div>
