@@ -19,6 +19,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ClientListComponent implements OnInit {
 
+  displayBusinessMessage : string = "Business"
+  displayProblemMessage : string = "Problem"
+  displayEstimateMessage : string = "Estimate"
+
   date : string = ""
 
   time : string = ""
@@ -109,6 +113,9 @@ export class ClientListComponent implements OnInit {
     if(this.viewCustomer){
       serviceCall.user = this.viewCustomer;
     }
+    if(serviceCall.solution?.id === 0){
+      serviceCall.solution = undefined;
+    }
     serviceCall.problem = this.selectedProblem;
     let scheduledDate = new Date(this.date + ' ' + this.time)
     serviceCall.dateScheduled = scheduledDate;
@@ -194,6 +201,30 @@ export class ClientListComponent implements OnInit {
           console.error("ClientListComponenet.viewServiceRecord(): failed to get service calls")
         }
       })
+    }
+
+  }
+
+  setBusinessDisplayMessage(name : string | undefined) {
+    if(name !== undefined) {
+      this.displayBusinessMessage = name;
+    }
+  }
+
+  setProblemDisplayMessage(name : string | undefined) {
+    if(name !== undefined) {
+      this.displayProblemMessage = name;
+    }
+  }
+
+  setEstimateDisplayMessage() {
+    if(this.estimate === false) {
+      console.log(this.estimate);
+      this.displayEstimateMessage = "Charged";
+    }
+    if(this.estimate === true) {
+      console.log(this.estimate);
+      this.displayEstimateMessage = "Estimate";
     }
 
   }
