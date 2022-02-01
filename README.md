@@ -82,4 +82,4 @@ The most significant step in our education with this project was a larger team e
 - Service Request approval
 
 ## Database Schema
-![Database Schema](https://drive.google.com/uc?export=view&id=1tm6plsI2CzVoAF95C8qtbAp0b1hncMR2)
+![Database Schema](HTML LINk)
