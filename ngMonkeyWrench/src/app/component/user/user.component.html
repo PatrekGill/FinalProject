@@ -1,4 +1,9 @@
-<app-contractor-sidebar>Loading...</app-contractor-sidebar>
+<div *ngIf="loggedInUser.role === 'business'">
+  <app-contractor-sidebar></app-contractor-sidebar>
+</div>
+<div *ngIf="loggedInUser.role === 'customer'">
+  <app-user-sidebar></app-user-sidebar>
+</div>
 <div class="userContent">
   <div class=headerCenter>
     <h1>Your Profile:</h1>
