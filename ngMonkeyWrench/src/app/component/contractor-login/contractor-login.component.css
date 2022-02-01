@@ -16,7 +16,7 @@ div.selectBusiness{
 }
 
 .clientListBox{
-  min-width: 60%;
+  min-width: 600px;
   min-height: 150px;
   max-width: 60%;
   margin: 0 auto;
@@ -27,4 +27,18 @@ div.selectBusiness{
   font-family: Georgia;
   border-radius: 2em;
   padding-bottom: 10px;
+}
+
+div.selectServiceCall{
+  /* margin-left: 50px; */
+  position: relative;
+  padding: 1px 16px;
+  height: auto;
+  text-align: center;
+  padding-top: 81px;
+}
+
+div.callsTable{
+  padding-left: 15px;
+  padding-right: 15px;
 }

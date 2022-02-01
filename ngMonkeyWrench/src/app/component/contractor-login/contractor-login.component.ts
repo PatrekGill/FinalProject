@@ -76,7 +76,7 @@ export class ContractorLoginComponent implements OnInit {
     this.showCalls = true;
     this.callService.getServiceCallsByBusinessId(business.id).subscribe({
       next: (calls) => {
-        console.log(calls);
+        // console.log(calls);
 
         // need to test this sorting function
         this.serviceCalls = calls;
@@ -126,6 +126,8 @@ export class ContractorLoginComponent implements OnInit {
     this.callService.updateServiceCall(call).subscribe({
       next: (t) => {
         // this.reload();
+        this.showCurrentCall = false;
+        this.showCalls = true
       },
       error: (soSad) => {
         console.error('UserComponent.updateUser(): error on update');
