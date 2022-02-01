@@ -79,8 +79,8 @@
         <tr>
         <td>
           Problem:
-          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
-            <option *ngFor="let problem of allProblems" value="{{problem.id}}">
+          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem" >
+            <option *ngFor="let problem of allProblems" value="{{problem}}">
               {{problem.description}}
             </option>
           </select>
@@ -94,8 +94,8 @@
         <tr>
           <td>
             Solution:
-            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
-              <option *ngFor="let solution of allSolutions" value="{{solution.id}}">
+            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution" >
+              <option *ngFor="let solution of allSolutions" value="{{solution}}">
                 {{solution.description}}
               </option>
             </select>

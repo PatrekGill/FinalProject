@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
 import { Problem } from 'src/app/models/problem';
@@ -8,6 +9,7 @@ import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
 import { ProblemService } from 'src/app/services/problem.service';
+import { ServiceCallService } from 'src/app/services/service-call.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -62,7 +64,9 @@ export class ClientListComponent implements OnInit {
     private userService: UserService,
     private addressService: AddressService,
     private problemService: ProblemService,
-    private businessService: BusinessService
+    private businessService: BusinessService,
+    private serviceCallService: ServiceCallService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -104,8 +108,19 @@ export class ClientListComponent implements OnInit {
     serviceCall.problem = this.selectedProblem;
     let scheduledDate = new Date(this.date + ' ' + this.time)
     serviceCall.dateScheduled = scheduledDate;
-    serviceCall.estimate = this.estimate
+    serviceCall.estimate = this.estimate;
+    serviceCall.business = this.selectedBusiness;
     console.log(serviceCall);
+
+
+    this.serviceCallService.createServiceCall(serviceCall).subscribe({
+      next: () => {
+        this.router.navigateByUrl('contractor');
+      },
+      error: () => {
+        console.error("ClientListComponent.addServiceCallToAddress(): failed to create service call")
+      }
+    })
 
 
 
