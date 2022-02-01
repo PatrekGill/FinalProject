@@ -36,9 +36,8 @@ public class ServiceCallServiceImpl implements ServiceCallService{
 	
 	@Override
 	public ServiceCall createNewServiceCall(ServiceCall serviceCall) {
-		serviceCall.setEstimate(false);
 		serviceCall.setCompleted(false);
-		return serviceCallRepo.save(serviceCall);
+		return serviceCallRepo.saveAndFlush(serviceCall);
 	}
 
 	@Override

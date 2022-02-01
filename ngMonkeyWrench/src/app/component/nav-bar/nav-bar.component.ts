@@ -92,7 +92,7 @@ export class NavBarComponent implements OnInit {
               this.router.navigateByUrl('/contractor');
             }
             else{
-              this.router.navigateByUrl('/user');
+              this.router.navigateByUrl('/userDashboard');
             }
           },
           error: (wrong) => {

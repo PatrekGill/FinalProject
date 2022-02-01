@@ -89,4 +89,13 @@ export class ServiceCallService {
     )
   }
 
+  getServiceCallById(serviceCallId : number): Observable<ServiceCall>{
+    return this.http.get<ServiceCall>(this.url + '/' + serviceCallId).pipe(
+      catchError( (error: any) => {
+        console.error("ServiceCallService.getServiceCallById(): error finding service call");
+        return throwError(() => new Error("ServiceCallService.getServiceCallById(): error finding service call"))
+      })
+    )
+  }
+
 }
