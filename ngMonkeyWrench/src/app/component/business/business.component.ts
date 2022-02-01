@@ -125,6 +125,8 @@ export class BusinessComponent implements OnInit {
 
   setEditBusiness(business: Business) {
     this.editBusiness = Object.assign({},business);
+    console.log(this.editBusiness);
+
   }
 
   resetServiceTypeSearchText() {
@@ -139,8 +141,6 @@ export class BusinessComponent implements OnInit {
   }
 
   userOwnsBusiness(business: Business, user: User): boolean {
-    console.log(business.user);
-
     return business.user?.username === user.username;
   }
 
@@ -212,5 +212,23 @@ export class BusinessComponent implements OnInit {
         complete: () => { }
       }
     );
+  }
+
+  businessHasServiceType(business:Business, serviceType: ServiceType): boolean {
+    let hasType: boolean = false;
+
+    if (business.serviceTypes) {
+      const typeId: number = serviceType.id;
+      business.serviceTypes.forEach(
+        (type) => {
+          hasType = type.id === typeId;
+          if (hasType) {
+            return;
+          }
+        }
+      );
+    }
+
+    return hasType;
   }
 }

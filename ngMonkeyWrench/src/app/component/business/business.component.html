@@ -5,7 +5,7 @@
 
     <div class="business-search input-group">
       <button *ngIf="isRoleBusiness()" class="btn btn-outline-primary" (click)="openCenteredModal(createBusinessContent)"><i class="bi bi-plus"></i></button>
-      <button *ngIf="!isRoleBusiness()" class="btn btn-primary" (click)="openCenteredModal(createBusinessContent)" disabled><i class="bi bi-plus"></i></button>
+      <button *ngIf="!isRoleBusiness()" class="btn btn-primary" disabled><i class="bi bi-plus"></i></button>
       <button class="btn btn-secondary" (click)="openCenteredModal(filterContent)"><i class="bi bi-filter"></i></button>
 
       <div class="business-search-bar form-floating">
@@ -41,7 +41,7 @@
                   <div class="card-footer bg-transparent">
 
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                      <button *ngIf="userOwnsBusiness(business,loggedInUser)" type="button" class="btn btn-outline-primary">Edit <i class="bi bi-pencil-square"></i></button>
+                      <button *ngIf="userOwnsBusiness(business,loggedInUser)" (click)="setEditBusiness(business); openCenteredModal(updateBusinessContent)" type="button" class="btn btn-outline-primary">Edit <i class="bi bi-pencil-square"></i></button>
                       <button *ngIf="isRoleCustomer()" type="button" class="btn btn-outline-primary">Request Service</button>
                       <button type="button" class="btn btn-outline-primary">Middle</button>
                       <button type="button" class="btn btn-outline-primary">Right</button>
@@ -80,13 +80,13 @@
       <br/>
       <div class="form-floating">
         <input type="text" class="form-control" id="logoUrlInput" placeholder="URL" [(ngModel)]="creatingBusiness.logoUrl">
-        <label for="logoUrlInput">Image URL</label>
+        <label for="logoUrlInput">Logo URL</label>
       </div>
 
       <br/>
       <h6>Add Employees</h6>
       <div class="form-floating">
-        <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="usernameSearchText">
+        <input type="text" class="form-control" id="usernameSearchInput" placeholder="Search For Usernames" [(ngModel)]="usernameSearchText">
         <label for="usernameSearchInput">Search For Usernames</label>
       </div>
       <div class="add-users-section">
@@ -107,7 +107,7 @@
       <div class="add-users-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let serviceType of allServiceTypes | searchByServicetypeName:serviceTypeSearchText | orderBy:'name'">
-            <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(creatingBusiness,serviceType)" [checked]="creatingBusiness.serviceTypes?.includes(serviceType)" aria-label="...">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(creatingBusiness,serviceType)" [checked]="businessHasServiceType(creatingBusiness,serviceType)" aria-label="...">
             {{serviceType.name}}
           </li>
         </ul>
@@ -142,13 +142,13 @@
       <br/>
       <div class="form-floating">
         <input type="text" class="form-control" id="logoUrlInput" placeholder="URL" [(ngModel)]="editBusiness.logoUrl">
-        <label for="logoUrlInput">Image URL</label>
+        <label for="logoUrlInput">Logo URL</label>
       </div>
 
       <br/>
-      <h6>Add Employees</h6>
+      <h6>Adjust Employees</h6>
       <div class="form-floating">
-        <input type="text" class="form-control" id="usernameSearchInput" placeholder="" [(ngModel)]="usernameSearchText">
+        <input type="text" class="form-control" id="usernameSearchInput" placeholder="Search For Usernames" [(ngModel)]="usernameSearchText">
         <label for="usernameSearchInput">Search For Usernames</label>
       </div>
       <div class="add-users-section">
@@ -161,7 +161,7 @@
       </div>
 
       <br/>
-      <h6>Add Service Types</h6>
+      <h6>Adjust Service Types</h6>
       <div class="form-floating">
         <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="serviceTypeSearchText">
         <label for="usernameSearchInput">Search For Service Types</label>
@@ -169,7 +169,7 @@
       <div class="add-users-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let serviceType of allServiceTypes | searchByServicetypeName:serviceTypeSearchText | orderBy:'name'">
-            <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(editBusiness,serviceType)" [checked]="editBusiness.serviceTypes?.includes(serviceType)" aria-label="...">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(editBusiness,serviceType)" [checked]="businessHasServiceType(editBusiness,serviceType)" aria-label="...">
             {{serviceType.name}}
           </li>
         </ul>
@@ -203,7 +203,7 @@
       <br/>
       <div class="form-floating">
         <input type="text" class="form-control" id="imageEdit" placeholder="URL">
-        <label for="imageEdit">Image URL</label>
+        <label for="imageEdit">Logo URL</label>
       </div>
     </div>
 
