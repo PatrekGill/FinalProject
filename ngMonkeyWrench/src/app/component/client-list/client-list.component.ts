@@ -45,6 +45,8 @@ export class ClientListComponent implements OnInit {
 
   business : Business = new Business;
 
+  estimate : boolean = false;
+
   clientList : User[] = [];
 
   firstNameSearch : string = "";
@@ -52,6 +54,8 @@ export class ClientListComponent implements OnInit {
   lastNameSearch : string = "";
 
   phoneNumberSearch : string = "";
+
+  selectedProblem : Problem = new Problem;
 
   constructor(
     private authService: AuthService,
@@ -97,6 +101,12 @@ export class ClientListComponent implements OnInit {
     if(this.viewCustomer){
       serviceCall.user = this.viewCustomer;
     }
+    serviceCall.problem = this.selectedProblem;
+    let scheduledDate = new Date(this.date + ' ' + this.time)
+    serviceCall.dateScheduled = scheduledDate;
+    serviceCall.estimate = this.estimate
+    console.log(serviceCall);
+
 
 
   }
@@ -126,6 +136,8 @@ export class ClientListComponent implements OnInit {
     this.problemService.getProblems().subscribe({
       next: (problems) => {
         this.serviceCallProblems = problems;
+        console.log(this.serviceCallProblems);
+
       },
       error: (fail) => {
         console.error("ClientListComponent.getAllProblems(): failed to get problems")
@@ -136,7 +148,6 @@ export class ClientListComponent implements OnInit {
   serviceCallForm(address: Address) {
     this.selectedAddress = address;
     this.viewServiceCallForm = true;
-    this.getAllProblems;
   }
 
   getBusinessesByUserId(){
