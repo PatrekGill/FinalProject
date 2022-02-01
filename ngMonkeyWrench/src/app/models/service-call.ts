@@ -7,10 +7,8 @@ import { User } from "./user";
 export class ServiceCall {
   id: number;
   address: Address | undefined;
-  // problem: Problem;
   problem: Problem | undefined;
   solution: Solution | undefined;
-  // solution: Solution;
   problemDescription: string | undefined;
   dateCreated: Date | undefined;
   dateScheduled: Date | undefined;
@@ -27,10 +25,8 @@ export class ServiceCall {
   constructor(
     id: number = 0,
     address?: Address,
-    // problem: Problem = new Problem(),
     problem?: Problem,
     solution?: Solution,
-    // solution: Solution = new Solution(),
     problemDescription?: string,
     dateCreated?: Date,
     dateScheduled?: Date,

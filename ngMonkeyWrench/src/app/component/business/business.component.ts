@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
+import { ServiceCall } from 'src/app/models/service-call';
 import { ServiceType } from 'src/app/models/service-type';
 import { User } from 'src/app/models/user';
+import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
+import { ServiceCallService } from 'src/app/services/service-call.service';
 import { ServiceTypeService } from 'src/app/services/service-type.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -27,18 +31,24 @@ export class BusinessComponent implements OnInit {
   serviceTypeFilters: number[] = [];
   showOnlyMyBusinesses: boolean = false;
   mustHaveAllServiceTypeFilters: boolean = false;
+  serviceCallBusiness: Business | undefined;
+  allUsersAddresses: Address[];
+  creatingServiceCall: ServiceCall = new ServiceCall();
 
   constructor(
     private authService: AuthService,
     private modalService: NgbModal,
     private businessService: BusinessService,
     private userService: UserService,
-    private serviceTypeService: ServiceTypeService
+    private serviceTypeService: ServiceTypeService,
+    private serviceCallService: ServiceCallService,
+    private addressService: AddressService
   ) {
     this.creatingBusiness = new Business();
     this.allContractors = [];
     this.allBusinesses = [];
     this.allServiceTypes = [];
+    this.allUsersAddresses = [];
 
     this.usernameSearchText = "";
     this.serviceTypeSearchText = "";
@@ -50,6 +60,7 @@ export class BusinessComponent implements OnInit {
       (user:User) => {
         this.loggedInUser = user;
         this.setUserRole();
+        this.setAllUsersAddresses();
         this.setAllBusinesses();
         this.setAllContractors();
         this.setAllServiceTypes();
@@ -89,6 +100,14 @@ export class BusinessComponent implements OnInit {
 
   resetEditBusiness() {
     this.editBusiness = undefined;
+  }
+
+  setServiceCallBusiness(business: Business) {
+    this.serviceCallBusiness = this.deepCopy(business);
+  }
+
+  resetServiceCallBusiness() {
+    this.serviceCallBusiness = undefined;
   }
 
   createBusiness(business: Business) {
@@ -149,6 +168,21 @@ export class BusinessComponent implements OnInit {
         }
       }
     );
+  }
+
+  setAllUsersAddresses() {
+    this.allUsersAddresses = [];
+    this.addressService.getAddressByUserId(this.loggedInUser.id).subscribe(
+      {
+        next: (addressess) => {
+          this.allUsersAddresses = addressess;
+        },
+        error: (errorFound) => {
+          console.log("setAllUsersAddresses(): Error getting all addresses");
+          console.error(errorFound);
+        }
+      }
+    )
   }
 
   setAllContractors() {
