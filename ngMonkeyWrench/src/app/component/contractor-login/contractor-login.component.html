@@ -12,7 +12,6 @@
     </div>
   </div>
 </div>
-
 <div class="content" *ngIf="showCalls">
   <H1>Service Requests:</H1>
   <br>
@@ -56,13 +55,11 @@
     </div>
   </div>
 </div>
-
-
 <div class = 'content'>
 <div class="content selectBusiness form-group">
   <div class="serviceCall selectServiceCall" *ngIf="showCurrentCall">
 
-    <table  name="singleServiceCall" class="form-group ">
+    <table name="singleServiceCall" class="form-group table-dark">
       <thead>
         <tr>
           <th><h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
@@ -78,7 +75,7 @@
         <tr>
         <td colspan="2">
           Problem:
-          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
+          <select class="form-control callUpdateDropdowns" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
             <option *ngFor="let problem of allProblems" value={{problem.id}}>
               {{problem.description}}
             </option>
@@ -89,13 +86,13 @@
         </tr>
         <tr>
           <td colspan="2">
-            Problem description: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
+            Problem details: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
           </td>
         </tr>
         <tr>
           <td>
             Solution:
-            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
+            <select class="form-control callUpdateDropdowns" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
               <option *ngFor="let solution of allSolutions" value={{solution.id}}>
                 {{solution.description}}
               </option>
@@ -104,12 +101,14 @@
         </tr>
         <tr>
           <td colspan="2">
-            Solution description:<textarea class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
+            Solution details:<textarea class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
           </td>
         </tr>
         <tr>
+          <td></td>
           <td >
             Estimate: <input type="checkbox" [(ngModel)]="currentServiceCall.estimate">
+            Complete: <input type="checkbox" [(ngModel)]="currentServiceCall.completed">
           </td>
         </tr>
         <tr>
@@ -120,20 +119,20 @@
             Cost: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.totalCost">
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>
             Complete: <input type="checkbox" [(ngModel)]="currentServiceCall.completed">
           </td>
-        </tr>
+        </tr> -->
       </tbody>
-      <tfoot>
-        <tr>
-          <td>
-            <button  class="form-control" (click)="showCurrentCall = false; showCalls = true">Back</button>
+      <tfoot >
+        <tr >
+          <td class="updateButtonRow" >
+            <button  class="form-control callUpdatePageButtons btn-secondary" (click)="showCurrentCall = false; showCalls = true">Back</button>
+            <button  class="form-control callUpdatePageButtons btn-success" (click)="updateServiceCall(currentServiceCall)">Save</button>
           </td>
-          <td>
-            <button  class="form-control" (click)="updateServiceCall(currentServiceCall)">Save</button>
-          </td>
+          <!-- <td>
+          </td> -->
         </tr>
       </tfoot>
     </table>
