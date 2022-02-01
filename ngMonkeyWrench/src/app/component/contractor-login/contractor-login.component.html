@@ -35,7 +35,7 @@
         <h2>In Progress: </h2>
      </div>
       <div >
-        <table class="table table-dark">
+        <table class="table table-dark table-striped table-hover">
           <thead>
             <tr>
               <th scope="col">Name</th>
@@ -45,7 +45,9 @@
               <th scope="col">Completed</th>
             </tr>
           </thead>
-          <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete | callFilter: filterBy'>
+
+          <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete | callFilter:filterBy' (click)="getServiceCallById(call)">
+
             <tr>
               <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
               <td>{{call.problem?.description}}</td>
@@ -57,3 +59,104 @@
         </table>
     </div>
   </div>
+</div>
+
+
+<div class="content form-group">
+  <div class="serviceCall" *ngIf="showCurrentCall">
+
+    <table name="singleServiceCall" class="form-group">
+      <thead>
+        <tr>
+          <th><h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
+        </tr>
+        <tr>
+          <th><h5>{{currentServiceCall.address?.street}} {{currentServiceCall.address?.street2}} {{currentServiceCall.address?.city}}, {{currentServiceCall.address?.stateAbbv}} {{currentServiceCall.address?.zipCode}}</h5></th>
+          <th><h6>Created: {{currentServiceCall.dateCreated}}</h6></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <td>
+          Problem:
+          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
+            <option *ngFor="let problem of allProblems" value="{{problem.id}}">
+              {{problem.description}}
+            </option>
+          </select>
+        </td>
+        </tr>
+        <tr>
+          <td>
+            Problem description: <textarea class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Solution:
+            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
+              <option *ngFor="let solution of allSolutions" value="{{solution.id}}">
+                {{solution.description}}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Solution description:<textarea class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td >
+            Estimate: <input type="checkbox" [(ngModel)]="currentServiceCall.estimate">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Labor hours: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.hoursLabor">
+          </td>
+          <td>
+            Cost: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.totalCost">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Complete: <input type="checkbox" [(ngModel)]="currentServiceCall.completed">
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <button  class="form-control" (click)="showCurrentCall = false">Back</button>
+          </td>
+          <td>
+            <button  class="form-control" (click)="updateServiceCall(currentServiceCall)">Save</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <!-- <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"
+            required
+            [(ngModel)]="model.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="alterEgo">Alter Ego</label>
+      <input type="text"  class="form-control" id="alterEgo"
+            [(ngModel)]="model.alterEgo" name="alterEgo">
+    </div>
+
+    <div class="form-group">
+      <label for="power">Hero Power</label>
+      <select class="form-control"  id="power"
+              required
+              [(ngModel)]="model.power" name="power">
+        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+      </select>
+    </div> -->
+  </div>
+</div>
+
