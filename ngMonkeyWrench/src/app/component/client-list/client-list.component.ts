@@ -49,7 +49,11 @@ export class ClientListComponent implements OnInit {
 
   estimate : boolean = false;
 
+  viewServiceHistory : boolean = false;
+
   clientList : User[] = [];
+
+  serviceHistory : ServiceCall[] = [];
 
   firstNameSearch : string = "";
 
@@ -122,8 +126,6 @@ export class ClientListComponent implements OnInit {
       }
     })
 
-
-
   }
 
   createNewAddress(address: Address){
@@ -151,7 +153,6 @@ export class ClientListComponent implements OnInit {
     this.problemService.getProblems().subscribe({
       next: (problems) => {
         this.serviceCallProblems = problems;
-        console.log(this.serviceCallProblems);
 
       },
       error: (fail) => {
@@ -162,6 +163,7 @@ export class ClientListComponent implements OnInit {
 
   serviceCallForm(address: Address) {
     this.selectedAddress = address;
+    this.viewServiceHistory = false;
     this.viewServiceCallForm = true;
   }
 
@@ -173,12 +175,28 @@ export class ClientListComponent implements OnInit {
           this.contractorsBusinesses = businesses;
         },
         error: (fail) => {
-          console.error("ContractorLoginComponent.getBusinessesByUserId(): failed to get businesses");
+          console.error("ClientListComponent.getBusinessesByUserId(): failed to get businesses");
         }
       })
     });
   }
 
+  viewServiceRecord(address : Address){
+    this.viewServiceHistory = true;
+    this.viewServiceCallForm = false;
+    this.selectedAddress = address;
+    if(this.selectedAddress){
+      this.serviceCallService.getServiceCallsByAddressId(this.selectedAddress.id).subscribe({
+        next: (calls) => {
+          this.serviceHistory = calls;
+        },
+        error: (fail) => {
+          console.error("ClientListComponenet.viewServiceRecord(): failed to get service calls")
+        }
+      })
+    }
+
+  }
 
 
 }
