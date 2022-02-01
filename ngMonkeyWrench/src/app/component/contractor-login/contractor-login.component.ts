@@ -108,14 +108,11 @@ export class ContractorLoginComponent implements OnInit {
   }
 
   getServiceCallById(call: ServiceCall) {
-    // this.businessSelected = business;
+
     this.showCalls = false;
     this.showCurrentCall = true;
     this.callService.getServiceCallById(call.id).subscribe({
       next: (call) => {
-        console.log(call);
-
-        // need to test this sorting function
         this.currentServiceCall = call;
       },
       error: (fail) => {
@@ -127,17 +124,6 @@ export class ContractorLoginComponent implements OnInit {
   }
 
   updateServiceCall(call: ServiceCall) {
-    console.log("================================");
-    console.log("IN UPDATE CALL");
-
-    console.log('CALL OBEJECT');
-    console.log(call);
-    console.log('CALL PROBLEM');
-    console.log(call.problem);
-
-
-
-
     this.callService.updateServiceCall(call).subscribe({
       next: (t) => {
         // this.reload();
@@ -155,10 +141,6 @@ export class ContractorLoginComponent implements OnInit {
       { // OBJECT
         next: (problemsList) => {
           this.allProblems = problemsList;
-          console.log('ALL PROBLEMS');
-          console.log(this.allProblems);
-
-
         },
         error: (wrong) => {
           console.error('ContractorLoginComponent.getAllProblems(): Error retreiving all problems');

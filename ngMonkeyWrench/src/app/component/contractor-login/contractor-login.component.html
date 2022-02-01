@@ -18,13 +18,13 @@
   <br>
   <div class="wrapper radioDatePipe">
     <form action="">
-      <input [(ngModel)]="filterBy" type="radio" id="day" name="filterBy" value="day">
+      <input [(ngModel)]="filterBy" type="radio" id="day" name="dateSorter" value="day">
       <label for="day"> Day</label>
-      <input [(ngModel)]="filterBy" type="radio" id="week" name="filterBy" value="week">
+      <input [(ngModel)]="filterBy" type="radio" id="week" name="dateSorter" value="week">
       <label for="week"> Week</label>
-      <input [(ngModel)]="filterBy" type="radio" id="month" name="filterBy" value="month">
+      <input [(ngModel)]="filterBy" type="radio" id="month" name="dateSorter" value="month">
       <label for="month"> Month</label>
-      <input [(ngModel)]="filterBy" type="radio" id="all" name="filterBy" value="all">
+      <input [(ngModel)]="filterBy" type="radio" id="all" name="dateSorter" value="all">
       <label for="All">  All</label>
     </form>
     </div>
@@ -45,7 +45,9 @@
               <th scope="col">Completed</th>
             </tr>
           </thead>
+
           <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete | callFilter:filterBy' (click)="getServiceCallById(call)">
+
             <tr>
               <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
               <td>{{call.problem?.description}}</td>
@@ -59,10 +61,11 @@
   </div>
 </div>
 
-<div class="content">
+
+<div class="content form-group">
   <div class="serviceCall" *ngIf="showCurrentCall">
 
-    <table name="singleServiceCall">
+    <table name="singleServiceCall" class="form-group">
       <thead>
         <tr>
           <th><h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
@@ -76,7 +79,7 @@
         <tr>
         <td>
           Problem:
-          <select name="problem" [(ngModel)]="currentServiceCall.problem.id" >
+          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
             <option *ngFor="let problem of allProblems" value="{{problem.id}}">
               {{problem.description}}
             </option>
@@ -85,13 +88,13 @@
         </tr>
         <tr>
           <td>
-            Problem description: <textarea class="serviceCallTextArea" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
+            Problem description: <textarea class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
           </td>
         </tr>
         <tr>
           <td>
             Solution:
-            <select name="solution" [(ngModel)]="currentServiceCall.solution.id" >
+            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
               <option *ngFor="let solution of allSolutions" value="{{solution.id}}">
                 {{solution.description}}
               </option>
@@ -100,7 +103,7 @@
         </tr>
         <tr>
           <td>
-            Solution description:<textarea class="serviceCallTextArea" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
+            Solution description:<textarea class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
           </td>
         </tr>
         <tr>
@@ -110,10 +113,10 @@
         </tr>
         <tr>
           <td>
-            Labor hours: <input type="number" [(ngModel)]="currentServiceCall.hoursLabor">
+            Labor hours: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.hoursLabor">
           </td>
           <td>
-            Cost: <input type="number" [(ngModel)]="currentServiceCall.totalCost">
+            Cost: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.totalCost">
           </td>
         </tr>
         <tr>
@@ -125,10 +128,10 @@
       <tfoot>
         <tr>
           <td>
-            <button (click)="showCurrentCall = false">Back</button>
+            <button  class="form-control" (click)="showCurrentCall = false">Back</button>
           </td>
           <td>
-            <button (click)="updateServiceCall(currentServiceCall)">Save</button>
+            <button  class="form-control" (click)="updateServiceCall(currentServiceCall)">Save</button>
           </td>
         </tr>
       </tfoot>
@@ -156,3 +159,4 @@
     </div> -->
   </div>
 </div>
+
