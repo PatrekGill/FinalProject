@@ -92,7 +92,7 @@
       <div class="add-users-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
-            <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(creatingBusiness,user)" [checked]="creatingBusiness.users?.includes(user)" aria-label="...">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(creatingBusiness,user)" [checked]="businessHasUser(creatingBusiness,user)" aria-label="...">
             {{user.username}}
           </li>
         </ul>
@@ -154,7 +154,7 @@
       <div class="add-users-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
-            <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(editBusiness,user)" [checked]="editBusiness.users?.includes(user)" aria-label="...">
+            <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(editBusiness,user)" [checked]="businessHasUser(editBusiness,user)" aria-label="...">
             {{user.username}}
           </li>
         </ul>

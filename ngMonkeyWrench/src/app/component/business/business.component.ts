@@ -64,35 +64,6 @@ export class BusinessComponent implements OnInit {
     return this.userRole === undefined;
   }
 
-  handleServiceTypeOnBusiness(business: Business, serviceType: ServiceType) {
-    if (!business.serviceTypes) {
-      business.serviceTypes = [];
-    }
-
-    const indexOfItem = business.serviceTypes.indexOf(serviceType);
-    if (indexOfItem > -1) {
-      business.serviceTypes.splice(indexOfItem,1);
-
-    } else {
-      business.serviceTypes.push(serviceType);
-
-    }
-  }
-
-  handleUserOnBusiness(business: Business, user: User) {
-    if (!business.users) {
-      business.users = [];
-    }
-
-    const indexOfItem = business.users.indexOf(user);
-    if (indexOfItem > -1) {
-      business.users.splice(indexOfItem,1);
-
-    } else {
-      business.users.push(user);
-
-    }
-  }
 
   resetCreatingBusiness() {
     this.creatingBusiness = new Business();
@@ -109,7 +80,8 @@ export class BusinessComponent implements OnInit {
         this.setAllBusinesses()
       }
     );
-    this.creatingBusiness = new Business();
+
+    this.resetCreatingBusiness();
   }
 
 
@@ -120,12 +92,16 @@ export class BusinessComponent implements OnInit {
         this.setAllBusinesses()
       }
     );
-    this.creatingBusiness = new Business();
+
+    this.resetEditBusiness();
+  }
+
+  deepCopy(objectToCopy:any): any {
+    return JSON.parse(JSON.stringify(objectToCopy));
   }
 
   setEditBusiness(business: Business) {
-    this.editBusiness = Object.assign({},business);
-    console.log(this.editBusiness);
+    this.editBusiness = this.deepCopy(business);
 
   }
 
@@ -217,18 +193,90 @@ export class BusinessComponent implements OnInit {
   businessHasServiceType(business:Business, serviceType: ServiceType): boolean {
     let hasType: boolean = false;
 
-    if (business.serviceTypes) {
+    const businessServiceTypes = business.serviceTypes;
+    if (businessServiceTypes) {
       const typeId: number = serviceType.id;
-      business.serviceTypes.forEach(
-        (type) => {
-          hasType = type.id === typeId;
-          if (hasType) {
-            return;
-          }
+      console.log(businessServiceTypes);
+      for (let index = 0; index < businessServiceTypes.length; index++) {
+        const type = businessServiceTypes[index];
+
+        hasType = type.id === typeId;
+        if (hasType) {
+          break;
         }
-      );
+      }
+
     }
 
     return hasType;
+  }
+
+
+  businessHasUser(business:Business, user: User): boolean {
+    let hasUser: boolean = false;
+
+    const businessUsers = business.users;
+    if (businessUsers) {
+      const userId: number = user.id;
+
+      for (let index = 0; index < businessUsers.length; index++) {
+        const checkUser = businessUsers[index];
+
+        hasUser = checkUser.id === userId;
+        if (hasUser) {
+          break;
+        }
+      }
+
+    }
+
+    return hasUser;
+  }
+
+  handleServiceTypeOnBusiness(business: Business, serviceType: ServiceType) {
+    if (!business.serviceTypes) {
+      business.serviceTypes = [];
+    }
+
+    let indexOfItem = -1;
+    const businessServiceTypes = business.serviceTypes;
+
+    for (let index = 0; index < businessServiceTypes.length; index++) {
+      const checkServiceType = businessServiceTypes[index];
+      if (checkServiceType.id === serviceType.id) {
+        indexOfItem = index;
+        break;
+      }
+    }
+
+    if (indexOfItem > -1) {
+      business.serviceTypes.splice(indexOfItem,1);
+    } else {
+      business.serviceTypes.push(serviceType);
+    }
+  }
+
+  handleUserOnBusiness(business: Business, user: User) {
+    if (!business.users) {
+      business.users = [];
+    }
+
+    let indexOfItem = -1;
+    const businessUsers = business.users;
+
+    for (let index = 0; index < businessUsers.length; index++) {
+      const checkUser = businessUsers[index];
+      if (checkUser.id === user.id) {
+        indexOfItem = index;
+        break;
+      }
+    }
+
+    if (indexOfItem > -1) {
+      business.users.splice(indexOfItem,1);
+    } else {
+      business.users.push(user);
+    }
+
   }
 }
