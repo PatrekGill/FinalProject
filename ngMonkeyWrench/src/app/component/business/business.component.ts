@@ -196,7 +196,6 @@ export class BusinessComponent implements OnInit {
     const businessServiceTypes = business.serviceTypes;
     if (businessServiceTypes) {
       const typeId: number = serviceType.id;
-      console.log(businessServiceTypes);
       for (let index = 0; index < businessServiceTypes.length; index++) {
         const type = businessServiceTypes[index];
 
