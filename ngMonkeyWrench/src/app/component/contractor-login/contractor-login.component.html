@@ -36,7 +36,7 @@
      </div>
       <div >
         <table class="table table-dark">
-          <thead>
+          <!-- <thead> -->
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Problem</th>
@@ -44,7 +44,7 @@
               <th scope="col">Scheduled</th>
               <th scope="col">Completed</th>
             </tr>
-          </thead>
+          <!-- </thead> -->
           <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete | callFilter:filterBy'>
             <tr>
               <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
