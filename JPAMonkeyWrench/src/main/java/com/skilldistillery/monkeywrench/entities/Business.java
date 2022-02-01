@@ -57,10 +57,13 @@ public class Business {
 	   inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 
-	@ManyToMany(mappedBy = "businesses")
+	@ManyToMany
+	@JoinTable(name = "business_service_type",
+	   joinColumns = @JoinColumn(name = "business_id"),
+	   inverseJoinColumns = @JoinColumn(name = "service_type_id"))
 	private List<ServiceType> serviceTypes;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"password","notes","role"})
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

@@ -296,18 +296,18 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `business_service_type` ;
 
 CREATE TABLE IF NOT EXISTS `business_service_type` (
-  `contractor_id` INT NOT NULL,
-  `business_type_id` INT NOT NULL,
-  PRIMARY KEY (`contractor_id`, `business_type_id`),
-  INDEX `fk_contractor_has_service_type_service_type1_idx` (`business_type_id` ASC),
-  INDEX `fk_contractor_has_service_type_contractor1_idx` (`contractor_id` ASC),
+  `business_id` INT NOT NULL,
+  `service_type_id` INT NOT NULL,
+  PRIMARY KEY (`business_id`, `service_type_id`),
+  INDEX `fk_contractor_has_service_type_service_type1_idx` (`service_type_id` ASC),
+  INDEX `fk_contractor_has_service_type_contractor1_idx` (`business_id` ASC),
   CONSTRAINT `fk_contractor_has_service_type_contractor1`
-    FOREIGN KEY (`contractor_id`)
+    FOREIGN KEY (`business_id`)
     REFERENCES `business` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contractor_has_service_type_service_type1`
-    FOREIGN KEY (`business_type_id`)
+    FOREIGN KEY (`service_type_id`)
     REFERENCES `service_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -597,7 +597,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `servicecallsdb`;
-INSERT INTO `business_service_type` (`contractor_id`, `business_type_id`) VALUES (1, 1);
+INSERT INTO `business_service_type` (`business_id`, `service_type_id`) VALUES (1, 1);
 
 COMMIT;
 
