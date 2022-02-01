@@ -62,21 +62,21 @@
 <div class="content selectBusiness form-group">
   <div class="serviceCall selectServiceCall" *ngIf="showCurrentCall">
 
-    <table name="singleServiceCall" class="form-group">
+    <table  name="singleServiceCall" class="form-group ">
       <thead>
         <tr>
           <th><h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
         </tr>
         <tr>
           <th><h5>{{currentServiceCall.address?.street}} {{currentServiceCall.address?.street2}} {{currentServiceCall.address?.city}}, {{currentServiceCall.address?.stateAbbv}} {{currentServiceCall.address?.zipCode}}</h5></th>
-        </tr>
-        <tr>
-          <th><h6>Created: {{currentServiceCall.dateCreated | date : 'short'}}</h6></th>
+        <!-- </tr>
+        <tr> -->
+          <th class="cellBorder" ><h6>Created: {{currentServiceCall.dateCreated | date : 'short'}}</h6></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-        <td>
+        <td colspan="2">
           Problem:
           <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
             <option *ngFor="let problem of allProblems" value={{problem.id}}>
@@ -84,10 +84,12 @@
             </option>
           </select>
         </td>
+        <td></td>
+        <td></td>
         </tr>
         <tr>
-          <td>
-            Problem description: <textarea class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
+          <td colspan="2">
+            Problem description: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
           </td>
         </tr>
         <tr>
@@ -101,7 +103,7 @@
           </td>
         </tr>
         <tr>
-          <td>
+          <td colspan="2">
             Solution description:<textarea class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
           </td>
         </tr>
