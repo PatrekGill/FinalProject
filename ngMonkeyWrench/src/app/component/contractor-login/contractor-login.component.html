@@ -5,7 +5,7 @@
   <div class="col">
     <h1>Welcome {{currentUser.firstName}}  {{currentUser.lastName}}</h1><br>
     <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select Business</button>
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="!showCurrentCall">Select Business</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngFor='let business of userBusinesses'>
         <button ngbDropdownItem (click)='getServiceCallsByBusinessId(business)'>{{ business.name }}</button>
       </div>
@@ -62,8 +62,8 @@
 </div>
 
 
-<div class="content form-group">
-  <div class="serviceCall" *ngIf="showCurrentCall">
+<div class="content selectBusiness form-group">
+  <div class="serviceCall selectServiceCall" *ngIf="showCurrentCall">
 
     <table name="singleServiceCall" class="form-group">
       <thead>
@@ -128,7 +128,7 @@
       <tfoot>
         <tr>
           <td>
-            <button  class="form-control" (click)="showCurrentCall = false">Back</button>
+            <button  class="form-control" (click)="showCurrentCall = false; showCalls = true">Back</button>
           </td>
           <td>
             <button  class="form-control" (click)="updateServiceCall(currentServiceCall)">Save</button>
