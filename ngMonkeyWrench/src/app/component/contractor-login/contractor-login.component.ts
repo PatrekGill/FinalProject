@@ -123,11 +123,17 @@ export class ContractorLoginComponent implements OnInit {
   }
 
   updateServiceCall(call: ServiceCall) {
+    console.log(call);
+
     this.callService.updateServiceCall(call).subscribe({
       next: (t) => {
         // this.reload();
         this.showCurrentCall = false;
         this.showCalls = true
+        if(this.businessSelected){
+          this.getServiceCallsByBusinessId(this.businessSelected)
+        }
+
       },
       error: (soSad) => {
         console.error('UserComponent.updateUser(): error on update');
