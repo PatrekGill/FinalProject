@@ -29,7 +29,7 @@
               <tr>
                 <td class="tableElementsSpecific">{{call.problem?.description}}</td>
                 <td class="tableElementsSpecific">{{call.address?.street}} {{call.address?.city}}, {{call.address?.stateAbbv}}</td>
-                <td class="tableElementsSpecific">{{call.dateScheduled}}</td>
+                <td class="tableElementsSpecific">{{call.dateScheduled | date : 'short'}}</td>
               </tr>
           </tbody>
 
