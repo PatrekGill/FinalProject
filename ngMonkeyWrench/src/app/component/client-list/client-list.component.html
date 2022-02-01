@@ -124,64 +124,75 @@
   <!-- new service call form need fields for problem, estimate or call-->
   <div *ngIf='viewServiceCallForm'>
     <div class="form-floating">
+      <!-- call description -->
       <input type="text" class="form-control" id="createCallDescription"
         placeholder="Problem Description" [(ngModel)]="newServiceCall.problemDescription"/>
       <label for="createCallDescription">Problem Description</label>
     </div><br/>
+    <!-- call notes -->
     <div class="form-floating">
-      <input type="number" class="form-control" id="createCallNotes"
+      <input type="text" class="form-control" id="createCallNotes"
         placeholder="Notes for Contractor" [(ngModel)]="newServiceCall.contractorNotes"/>
       <label for="createCallNotes">Notes for Contractor</label>
     </div><br/>
+    <!-- schedule date -->
     <div class="form-floating">
       <input type="date" class="form-control" id="createCallScheduledDate"
         placeholder="Scheduled Date" [(ngModel)]="date"/>
       <label for="createCallScheduledDate">Scheduled Date</label>
     </div><br/>
-
+    <!-- schedule time -->
     <div class="form-floating">
       <input type="time" class="form-control" id="createCallTime"
         placeholder="Time" [(ngModel)]="time"/>
       <label for="createCallTime">Time</label>
     </div><br/>
-
-
+    <!-- problem for service call -->
     <div class="form-floating">
-      <div class="col">
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Problem</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button ngbDropdownItem>Action - 1</button>
-            <button ngbDropdownItem>Another Action</button>
-            <button ngbDropdownItem>Something else is here</button>
+      <div class='row'>
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Problem</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+              <button ngbDropdownItem *ngFor='let problem of serviceCallProblems' (click)='selectedProblem = problem'>{{ problem.description }}</button>
+            </div>
           </div>
         </div>
       </div>
     </div><br/>
-    <div class="form-floating">
-      <div class="col">
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Estimate</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button ngbDropdownItem>Action - 1</button>
-            <button ngbDropdownItem>Another Action</button>
-            <button ngbDropdownItem>Something else is here</button>
+    <!-- estimate boolean -->
+    <div class="form-control">
+      <div class="row">
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Estimate</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" >
+              <button ngbDropdownItem (click)="estimate = true">Estimate</button>
+              <button ngbDropdownItem >Charged </button>
+            </div>
           </div>
         </div>
       </div>
     </div><br/>
-    <div class='selectBusiness'>
+    <!-- which business to send out -->
+    <!-- <div class='selectBusiness'>
       <div class="col">
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select Business</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngFor='let business of contractorsBusinesses'>
-            <button ngbDropdownItem (click)='selectedBusiness = business'>{{ business.name }}</button>
+          <button class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle >Select Business</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic3" *ngFor='let business of contractorsBusinesses'>
+            <button ngbDropdownItem [(ngModel)]="newServiceCall.business">{{ business.name }}</button>
           </div>
         </div>
       </div>
-    </div><br>
+    </div><br> -->
     <button class="btn btn-outline-success" (click)="addServiceCallToAddress(newServiceCall)">Submit</button>
   </div>
+  <!-- test
+  <select [(ngModel)]="newServiceCall.business">
+    <option *ngFor="let business of contractorsBusinesses" [value]="business">
+      {{business.name}}
+    </option>
+</select> -->
   <!-- end of new address form -->
 
 

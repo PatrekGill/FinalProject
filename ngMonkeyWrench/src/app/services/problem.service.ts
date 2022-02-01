@@ -10,7 +10,7 @@ import { Problem } from '../models/problem';
 })
 export class ProblemService {
 
-  private url = environment.baseUrl + 'api/type';
+  private url = environment.baseUrl + 'api/problem';
 
   constructor(
     private http: HttpClient
