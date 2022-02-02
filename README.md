@@ -1,6 +1,7 @@
-# Final Project (MonkeyWrench) PLACEHOLDER TO BE UPDATED
-![Service Request Page](https://drive.google.com/uc?export=view&id=qm0AkeRsSPtFEzQrgD18lsDEjzeEV8MP)
-![Client List Page](HTTP PLACEHOLDER)
+# Final Project (MonkeyWrench)
+![Service Request Page]<img width="1280" alt="Screen Shot 2022-02-01 at 9 44 27 PM" src="https://user-images.githubusercontent.com/89475786/152215945-99dca1ec-fe2f-4950-b941-35322885e1bb.png">
+![Business Page] <img width="1075" alt="Screen Shot 2022-02-02 at 8 43 59 AM" src="https://user-images.githubusercontent.com/89475786/152215835-edc3343c-6037-401a-93d8-32690a20d9bc.png">
+
 
 ## Overview
 This was a team project to build a full-stack web application over the course of one week. The website was developed by four individuals remotely using Zoom, Slack, Trello, Git, Figma wireframe, and Github for collaboration.
@@ -81,4 +82,4 @@ The most significant step in our education with this project was a larger team e
 - On-site equipment implementation
 
 ## Database Schema
-![Database Schema](https://files.slack.com/files-pri/T052X7BAZ-F030Z4BSZF0/servicecallsdb.png)
+![Database Schema] <img width="668" alt="Screen Shot 2022-01-10 at 9 14 25 AM" src="https://user-images.githubusercontent.com/89475786/152216095-32e07691-7085-44af-b964-e3369236c77c.png">
