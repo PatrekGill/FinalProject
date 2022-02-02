@@ -30,15 +30,35 @@ div.selectBusiness{
 }
 
 div.selectServiceCall{
-  /* margin-left: 50px; */
+  margin-right: 1px;
   position: relative;
   padding: 1px 16px;
+  max-width: 80%;
   height: auto;
   text-align: center;
-  padding-top: 81px;
+  padding: 30px;
+  background-color: lightgray;
+  border-radius: 2em;
 }
 
 div.callsTable{
   padding-left: 15px;
   padding-right: 15px;
+  border-radius: 5px ;
+  width: auto;
+}
+
+
+table, th, td {
+  border: 1px solid black;
+}
+
+.singleServiceCall {
+  border-radius: 5px
+}
+
+
+table {
+  border-radius:6px;
+  width: 100%;
 }

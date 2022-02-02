@@ -7,8 +7,10 @@ import { User } from "./user";
 export class ServiceCall {
   id: number;
   address: Address | undefined;
-  problem: Problem | undefined;
-  solution: Solution | undefined;
+  // problem: Problem;
+  problem: Problem = new Problem();
+  solution: Solution = new Solution();
+  // solution: Solution;
   problemDescription: string | undefined;
   dateCreated: Date | undefined;
   dateScheduled: Date | undefined;
@@ -42,8 +44,8 @@ export class ServiceCall {
     ){
       this.id = id;
       this.address = address;
-      this.problem = problem;
-      this.solution = solution;
+      this.problem = problem? problem: new Problem();
+      this.solution = solution? solution : new Solution();
       this.problemDescription = problemDescription;
       this.dateCreated = dateCreated;
       this.dateScheduled = dateScheduled;
