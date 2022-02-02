@@ -59,7 +59,7 @@
           </thead>
           <tbody *ngFor='let call of serviceCalls | activeCalls:showComplete | callFilter:filterBy' (click)="getServiceCallById(call)">
             <tr>
-              <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
+              <td>{{call.address?.user?.firstName}} {{call.address?.user?.lastName}}</td>
               <td>{{call.problem?.description}}</td>
               <td>{{call.address?.street}} {{call.address?.city}} {{call.address?.stateAbbv}}</td>
               <td>({{call.user?.phoneNumber | slice:0:3}}) {{call.user?.phoneNumber | slice:3:6}}-{{call.user?.phoneNumber | slice:6:10}}</td>
@@ -81,7 +81,7 @@
         <tr>
           <th>
 
-            <h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
+            <h3>{{currentServiceCall.address?.user?.firstName}} {{currentServiceCall.address?.user?.lastName}}</h3></th>
           <th class="schedDate"><h6>Appointment: {{currentServiceCall.dateScheduled | date  : 'short'}}</h6></th>
         </tr>
         <tr>
