@@ -95,24 +95,49 @@
         </tbody>
         <br>
       </table>
-      <div >
-        <!-- <span *ngIf="currentUser.role == 'business' || currentUser.role == 'admin' ">Client: SEARCH BY USER NAME LIST FNAME LNAME & PHONE# DISPLAY FNAME LNAME & PHONE#</span><br>
-        Street: <input type="text" name="street" [(ngModel)]="newAddress.street" value="4321 Lowell St"><br>
-        Street2: <input type="text" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3"><br>
-        City: <input type="text" name="city" [(ngModel)]="newAddress.city" value="Denver"><br> -->
-        <!-- State: <input type="text" name="stateAbbv" [(ngModel)]="newAddress.stateAbbv" value="CO"><br> -->
 
-<!-- ============================================================================== -->
-         <!-- State: <select name="state" [(ngModel)]="newAddress.stateAbbv" >
-           <option value="" disabled>Choose a state</option>
-           <option *ngFor="let state of stateAbbreviations" >
-             {{ state }}
-            </option>
-          </select> -->
-<!-- ============================================================================== -->
+<!-- <div > -->
   <!-- add new address form -->
-  <div *ngIf='addingAddress'>
-    <div class="form-floating">
+  <!-- <div class="userContent"> -->
+    <div class="addressListBox" *ngIf='addingAddress'>
+
+      <table class="table table-striped table-dark">
+        <tbody>
+          <tr>
+            <td>
+              Street: <input class="form-control" type="text" name="street" [(ngModel)]="newAddress.street" value="4321 Lowell St">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Street2: <input class="form-control" type="text" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              City: <input class="form-control" type="text" name="city" [(ngModel)]="newAddress.city" value="Denver">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              State: <select class="form-control" name="state" [(ngModel)]="newAddress.stateAbbv" >
+                <option value="" disabled>Choose a state</option>
+                <option *ngFor="let state of stateAbbreviations" >
+                  {{ state }}
+                  </option>
+              </select><br>
+              </td>
+          </tr>
+          <tr>
+            <td>
+              Zip Code: <input class="form-control" type="number" name="zipCode" [(ngModel)]="newAddress.zipCode" >
+            </td>
+          </tr>
+        </tbody>
+        <button class="btn btn-outline-success" (click)="addAddress(newAddress)">Add</button>
+      </table>
+
+    <!-- <div class="form-floating">
       <input type="text" class="form-control" id="createStreet"
         placeholder="Street" [(ngModel)]="newAddress.street"/>
       <label for="createStreet">Street</label>
@@ -142,41 +167,42 @@
         placeholder="Notes" [(ngModel)]="newAddress.notes"/>
       <label for="createAddressNotes">Notes</label>
     </div><br/>
-    <button class="btn btn-outline-success" (click)="addAddress(newAddress)">Submit</button>
-  </div>
+    <button class="btn btn-outline-success" (click)="addAddress(newAddress)">Submit</button> -->
+    </div>
+  <!-- </div> -->
   <!-- end of new address form -->
 
-         <br>
+         <!-- <br>
 
-        <!-- Zip Code: <input type="number" name="zipCode" [(ngModel)]="newAddress.zipCode" value="87123"><br>
+        Zip Code: <input type="number" name="zipCode" [(ngModel)]="newAddress.zipCode" value="87123"><br>
         <span *ngIf="currentUser.role == 'business' || currentUser.role ==  'admin' " >Notes: <input type="text" name="notes" [(ngModel)]="newAddress.notes" placeholder="A/C on roof, dog in yard..."></span><br>
         <button (click)="addAddress(newAddress)">Add</button>
         <div class="duplicateAddress" *ngIf="addressError == true">
           <span>{{addressErrorTxt}} </span>
         </div>
-      </div> -->
+      </div>
 
         <br><br><br>
         <br><br><br>
         <div *ngIf="addingAddress">
 
         <div class="form-floating mb-3 mt-3" *ngIf="addingAddress">
-          <input type="text" class="form-control" id="street" name="street" [(ngModel)]="newAddress.street" placeholder="123 Something St"><br>
+          <input type="text" id="street" name="street" [(ngModel)]="newAddress.street" placeholder="123 Something St"><br>
           <label for="street">Street</label>
-          <input type="text" class="form-floating" id="street2" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3"><br>
+          <input type="text" id="street2" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3"><br>
           <label for="street2">Street2</label>
-          <input type="text" class="form-floating" id="city" name="city" [(ngModel)]="newAddress.city" placeholder="Denver"><br>
+          <input type="text" id="city" name="city" [(ngModel)]="newAddress.city" placeholder="Denver"><br>
           <label for="city">City</label>
-          <input type="text" class="form-floating" id="stateAbbv" name="stateAbbv" [(ngModel)]="newAddress.stateAbbv" placeholder="CO"><br>
+          <input type="text" id="stateAbbv" name="stateAbbv" [(ngModel)]="newAddress.stateAbbv" placeholder="CO"><br>
           <label for="stateAbbv">State</label>
-          <input type="number" class="form-floating" id="zipCode" name="zipCode" [(ngModel)]="newAddress.zipCode" placeholder="87654"><br>
+          <input type="number" id="zipCode" name="zipCode" [(ngModel)]="newAddress.zipCode" placeholder="87654"><br>
           <label for="zipCode">Zip Code</label>
           <span *ngIf="currentUser.role == 'business' || currentUser.role ==  'admin' " ><input type="text" class="form-floating" id="notes" name="notes" [(ngModel)]="newAddress.notes" placeholder="A/C on roof, dog in yard..."></span><br>
           <label for="notes">Notes</label>
           <button (click)="addAddress(newAddress)">Add</button>
-      </div>
-    </div>  <!-- end address div -->
-    <br><br><br>
+      </div> -->
+ <!--   </div> --> <!-- end address div -->
 
-  </div>    <!-- End class userWrapper   -->
+</div>    <!-- End class userWrapper   -->
 </div>   <!-- End class userContent   -->
+<br><br><br>

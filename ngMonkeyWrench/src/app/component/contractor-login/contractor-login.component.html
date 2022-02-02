@@ -12,7 +12,6 @@
     </div>
   </div>
 </div>
-
 <div class="content" *ngIf="showCalls">
   <H1>Service Requests:</H1>
   <br>
@@ -62,10 +61,13 @@
 <div class="content selectBusiness form-group">
   <div class="serviceCall selectServiceCall" *ngIf="showCurrentCall">
 
-    <table  name="singleServiceCall" class="form-group ">
+    <table name="singleServiceCall" class="table table-dark" id="updateCallTable">
       <thead>
         <tr>
-          <th><h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
+          <th>
+
+            <h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
+          <th class="schedDate"><h6>Appointment: {{currentServiceCall.dateScheduled | date  : 'short'}}</h6></th>
         </tr>
         <tr>
           <th><h5>{{currentServiceCall.address?.street}} {{currentServiceCall.address?.street2}} {{currentServiceCall.address?.city}}, {{currentServiceCall.address?.stateAbbv}} {{currentServiceCall.address?.zipCode}}</h5></th>
@@ -74,28 +76,28 @@
           <th class="cellBorder" ><h6>Created: {{currentServiceCall.dateCreated | date : 'short'}}</h6></th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-        <td colspan="2">
+      <tbody  >
+        <!-- <div class="updateCallProblemElement"> -->
+        <tr >
+        <td colspan="2" >
           Problem:
-          <select class="form-control" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
+          <select class="form-control callUpdateDropdowns" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
             <option *ngFor="let problem of allProblems" value={{problem.id}}>
               {{problem.description}}
             </option>
           </select>
         </td>
-        <td></td>
-        <td></td>
-        </tr>
+      </tr>
+    <!-- </div> -->
         <tr>
           <td colspan="2">
-            Problem description: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
+            Problem details: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
           </td>
         </tr>
         <tr>
-          <td>
+          <td colspan="2">
             Solution:
-            <select class="form-control" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
+            <select class="form-control callUpdateDropdowns" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
               <option *ngFor="let solution of allSolutions" value={{solution.id}}>
                 {{solution.description}}
               </option>
@@ -104,60 +106,42 @@
         </tr>
         <tr>
           <td colspan="2">
-            Solution description:<textarea class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
+            Solution details:<textarea class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.contractorNotes">{{currentServiceCall.contractorNotes}}</textarea>
           </td>
         </tr>
         <tr>
+          <td></td>
           <td >
-            Estimate: <input type="checkbox" [(ngModel)]="currentServiceCall.estimate">
+            <label for="" class="updateCallEstimate">Estimate: </label><input name="updateCallEstimate" type="checkbox" [(ngModel)]="currentServiceCall.estimate">
+            <label for="" class="updateCallComplete">Complete: </label><input name="updateCallComplete" type="checkbox" [(ngModel)]="currentServiceCall.completed">
           </td>
         </tr>
         <tr>
           <td>
-            Labor hours: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.hoursLabor">
+            Labor hours: <input class="form-control updateCallLabor" type="number" [(ngModel)]="currentServiceCall.hoursLabor">
           </td>
           <td>
-            Cost: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.totalCost">
+            Cost: <input class="form-control updateCallCost" type="number" [(ngModel)]="currentServiceCall.totalCost ">
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>
             Complete: <input type="checkbox" [(ngModel)]="currentServiceCall.completed">
           </td>
-        </tr>
+        </tr> -->
       </tbody>
       <tfoot>
         <tr>
           <td>
-            <button  class="form-control" (click)="showCurrentCall = false; showCalls = true">Back</button>
           </td>
           <td>
-            <button  class="form-control" (click)="updateServiceCall(currentServiceCall)">Save</button>
+            <button  class="form-control callUpdatePageButtons btn-success1" (click)="updateServiceCall(currentServiceCall)">Save</button>
+            <button  class="form-control callUpdatePageButtons btn-secondary" (click)="showCurrentCall = false; showCalls = true">Back</button>
           </td>
         </tr>
       </tfoot>
     </table>
-    <!-- <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name"
-            required
-            [(ngModel)]="model.name" name="name">
-    </div>
-
-    <div class="form-group">
-      <label for="alterEgo">Alter Ego</label>
-      <input type="text"  class="form-control" id="alterEgo"
-            [(ngModel)]="model.alterEgo" name="alterEgo">
-    </div>
-
-    <div class="form-group">
-      <label for="power">Hero Power</label>
-      <select class="form-control"  id="power"
-              required
-              [(ngModel)]="model.power" name="power">
-        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-      </select>
-    </div> -->
     </div>
   </div>
+  <br><br><br>
 </div>
