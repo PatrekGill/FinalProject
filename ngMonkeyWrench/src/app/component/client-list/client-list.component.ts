@@ -115,8 +115,8 @@ export class ClientListComponent implements OnInit {
     }
 
     serviceCall.problem = this.selectedProblem;
-    let scheduledDate = new Date(this.date + ' ' + this.time)
-    serviceCall.dateScheduled = scheduledDate;
+    // let scheduledDate = new Date(this.date + ' ' + this.time)
+    // serviceCall.dateScheduled = scheduledDate;
     serviceCall.estimate = this.estimate;
     serviceCall.business = this.selectedBusiness;
     console.log(serviceCall);
