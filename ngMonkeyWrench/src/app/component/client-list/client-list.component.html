@@ -138,21 +138,10 @@
       <label for="createCallNotes">Notes for Contractor</label>
     </div><br/>
     <!-- schedule date -->
-    <!-- <div class="form-floating">
-      <input type="date" class="form-control" id="createCallScheduledDate"
-        placeholder="Scheduled Date" [(ngModel)]="date"/>
-      <label for="createCallScheduledDate">Scheduled Date</label>
-    </div><br/> -->
-    <!-- schedule time -->
-    <!-- <div class="form-floating">
-      <input type="time" class="form-control" id="createCallTime"
-        placeholder="Time" [(ngModel)]="time"/>
-      <label for="createCallTime">Time</label>
-    </div><br/> -->
       <div class="form-floating">
-      <input type="datetime-local" class="form-control" id="createCallTime"
-        placeholder="Time" [(ngModel)]="newServiceCall.dateScheduled"/>
-      <label for="createCallTime">Schedule</label>
+        <h5>Scheduled</h5>
+      <input type="datetime-local" class="form-control-lg" id="createCallTime"
+      [(ngModel)]="newServiceCall.dateScheduled"/>
      </div><br/>
     <!-- which business to send out -->
     <div class='selectBusiness'>
@@ -179,7 +168,6 @@
       </div>
     </div><br/>
     <!-- estimate boolean -->
-    <div class="form-control">
       <div class="row">
         <div class="col">
           <div ngbDropdown class="d-inline-block">
@@ -190,7 +178,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div><br/>
 
       <button class="btn btn-outline-success" (click)="addServiceCallToAddress(newServiceCall)">Submit</button>

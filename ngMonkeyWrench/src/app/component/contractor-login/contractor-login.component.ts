@@ -28,6 +28,7 @@ export class ContractorLoginComponent implements OnInit {
     { }
 
   filterBy : string = 'day';
+  displayBusinessMessage : string = "Select Business"
 
   expandedBox: boolean = true;
 
@@ -76,9 +77,6 @@ export class ContractorLoginComponent implements OnInit {
     this.showCalls = true;
     this.callService.getServiceCallsByBusinessId(business.id).subscribe({
       next: (calls) => {
-        // console.log(calls);
-
-        // need to test this sorting function
         this.serviceCalls = calls;
         this.serviceCalls.sort(function(a, b) {
           if(a.dateScheduled && b.dateScheduled) {
@@ -122,7 +120,6 @@ export class ContractorLoginComponent implements OnInit {
         console.error(fail);
       }
     });
-    // return this.currentServiceCall;
   }
 
   updateServiceCall(call: ServiceCall) {
@@ -130,7 +127,6 @@ export class ContractorLoginComponent implements OnInit {
 
     this.callService.updateServiceCall(call).subscribe({
       next: (t) => {
-        // this.reload();
         this.showCurrentCall = false;
         this.showCalls = true
         if(this.businessSelected){
@@ -174,6 +170,12 @@ export class ContractorLoginComponent implements OnInit {
         complete: () => { }
       } // END OF OBJECT
     );
+  }
+
+  setBusinessDisplayMessage(name : string | undefined) {
+    if(name !== undefined) {
+      this.displayBusinessMessage = name;
+    }
   }
 
 }
