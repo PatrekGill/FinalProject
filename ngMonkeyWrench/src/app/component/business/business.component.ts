@@ -40,6 +40,7 @@ export class BusinessComponent implements OnInit {
   creatingServiceCall: ServiceCall = new ServiceCall();
   problemSearchText: string;
   completedLoadTasks: number = 0;
+  businessesLoaded: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -86,7 +87,7 @@ export class BusinessComponent implements OnInit {
   }
   isPageLoading() {
     let loading = true;
-    if (this.completedLoadTasks >= 6) {
+    if (this.completedLoadTasks >= 6 || this.businessesLoaded) {
       loading = false;
     }
     return loading;
@@ -300,12 +301,12 @@ export class BusinessComponent implements OnInit {
         next: (businessList) => {
           this.allBusinesses = businessList;
           this.addToLoadingTask();
+          this.businessesLoaded = true;
         },
         error: (wrong) => {
           console.error('UserComponent.getBusinesses(): Error retreiving all businesses');
           console.error(wrong);
-        },
-        complete: () => { }
+        }
       }
     );
   }
