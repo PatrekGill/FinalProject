@@ -76,6 +76,45 @@
     <div class="addressListBox lightPadder" >
       <h1 class="addressTitle">Addresses:</h1>
       <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;" (click)="addingAddress = true">New Address</button>
+
+      <div class="addressListBox" *ngIf='addingAddress'>
+        <table class="table table-striped table-dark table-shadow">
+          <tbody>
+            <tr>
+              <td>
+                Street: <input class="form-control" type="text" name="street" [(ngModel)]="newAddress.street" value="4321 Lowell St">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Street2: <input class="form-control" type="text" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                City: <input class="form-control" type="text" name="city" [(ngModel)]="newAddress.city" value="Denver">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                State: <select class="form-control" name="state" [(ngModel)]="newAddress.stateAbbv" >
+                  <option value="" disabled>Choose a state</option>
+                  <option *ngFor="let state of stateAbbreviations" >
+                    {{ state }}
+                    </option>
+                </select><br>
+                </td>
+            </tr>
+            <tr>
+              <td>
+                Zip Code: <input class="form-control" type="number" name="zipCode" [(ngModel)]="newAddress.zipCode" >
+              </td>
+            </tr>
+          </tbody>
+          <button class="btn btn-outline-success" style="width: 100%; margin-bottom: 10px;" (click)="addAddress(newAddress)">Add</button>
+        </table>
+      </div>
+
       <table class="table table-striped table-hover table-shadow">
         <thead class="table-dark table-striped table-hover">
           <tr>
@@ -97,76 +136,7 @@
 <!-- <div > -->
   <!-- add new address form -->
   <!-- <div class="userContent"> -->
-    <div class="addressListBox" *ngIf='addingAddress'>
 
-      <table class="table table-striped table-dark table-shadow">
-        <tbody>
-          <tr>
-            <td>
-              Street: <input class="form-control" type="text" name="street" [(ngModel)]="newAddress.street" value="4321 Lowell St">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Street2: <input class="form-control" type="text" name="street2" [(ngModel)]="newAddress.street2" placeholder="Apt 3">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              City: <input class="form-control" type="text" name="city" [(ngModel)]="newAddress.city" value="Denver">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              State: <select class="form-control" name="state" [(ngModel)]="newAddress.stateAbbv" >
-                <option value="" disabled>Choose a state</option>
-                <option *ngFor="let state of stateAbbreviations" >
-                  {{ state }}
-                  </option>
-              </select><br>
-              </td>
-          </tr>
-          <tr>
-            <td>
-              Zip Code: <input class="form-control" type="number" name="zipCode" [(ngModel)]="newAddress.zipCode" >
-            </td>
-          </tr>
-        </tbody>
-        <button class="btn btn-outline-success" (click)="addAddress(newAddress)">Add</button>
-      </table>
-
-    <!-- <div class="form-floating">
-      <input type="text" class="form-control" id="createStreet"
-        placeholder="Street" [(ngModel)]="newAddress.street"/>
-      <label for="createStreet">Street</label>
-    </div><br/>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="createStreet2"
-        placeholder="Street 2" [(ngModel)]="newAddress.street2"/>
-      <label for="createStreet2">Street 2 (optional)</label>
-    </div><br/>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="createCity"
-        placeholder="City" [(ngModel)]="newAddress.city"/>
-      <label for="createCity">City</label>
-    </div><br/>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="createState"
-        placeholder="State Abbv" [(ngModel)]="newAddress.stateAbbv"/>
-      <label for="createState">State Abbv</label>
-    </div><br/>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="createZip"
-        placeholder="Zip Code" [(ngModel)]="newAddress.zipCode"/>
-      <label for="createZip">Zip Code</label>
-    </div><br/>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="createAddressNotes"
-        placeholder="Notes" [(ngModel)]="newAddress.notes"/>
-      <label for="createAddressNotes">Notes</label>
-    </div><br/>
-    <button class="btn btn-outline-success" (click)="addAddress(newAddress)">Submit</button> -->
-    </div>
   <!-- </div> -->
   <!-- end of new address form -->
 
