@@ -1,10 +1,14 @@
-
+/*
 .radioDatePipe {
 display: inline-block;
 }
 
 .radioDatePipe label {
   padding-right: 5px;
+} */
+
+.radioDatePipe label {
+  margin-bottom: 10px;
 }
 
 div.content {
