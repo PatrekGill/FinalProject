@@ -18,7 +18,9 @@
       <a *ngIf="loggedInUser.role === 'business'" class="nav-item nav-link" [routerLink]="['/contractor']" >Dashboard</a>
       <a *ngIf="loggedInUser.role === 'customer'" class="nav-item nav-link" [routerLink]="['/userDashboard']" >Dashboard</a>
       <span *ngIf="loggedIn()"><a class="nav-item nav-link" [routerLink]="['/user']">Profile</a></span>
+      <a *ngIf='!loggedIn()' class="nav-item nav-link" [routerLink]="['/home']" >Home</a>
       <a class="nav-item nav-link" [routerLink]="['/contact']" >About</a>
+
 
 
     <!-- modal for login -->
