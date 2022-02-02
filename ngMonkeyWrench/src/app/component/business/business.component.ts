@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
+import { Problem } from 'src/app/models/problem';
+import { ServiceCall } from 'src/app/models/service-call';
 import { ServiceType } from 'src/app/models/service-type';
 import { User } from 'src/app/models/user';
+import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
+import { ProblemService } from 'src/app/services/problem.service';
+import { ServiceCallService } from 'src/app/services/service-call.service';
 import { ServiceTypeService } from 'src/app/services/service-type.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -27,22 +34,35 @@ export class BusinessComponent implements OnInit {
   serviceTypeFilters: number[] = [];
   showOnlyMyBusinesses: boolean = false;
   mustHaveAllServiceTypeFilters: boolean = false;
+  serviceCallBusiness: Business | undefined;
+  allUsersAddresses: Address[];
+  allProblems: Problem[];
+  creatingServiceCall: ServiceCall = new ServiceCall();
+  problemSearchText: string;
+  completedLoadTasks: number = 0;
 
   constructor(
     private authService: AuthService,
     private modalService: NgbModal,
     private businessService: BusinessService,
     private userService: UserService,
-    private serviceTypeService: ServiceTypeService
+    private serviceTypeService: ServiceTypeService,
+    private serviceCallService: ServiceCallService,
+    private addressService: AddressService,
+    private problemService: ProblemService,
+    private router: Router
   ) {
     this.creatingBusiness = new Business();
     this.allContractors = [];
     this.allBusinesses = [];
     this.allServiceTypes = [];
+    this.allUsersAddresses = [];
+    this.allProblems = [];
 
     this.usernameSearchText = "";
     this.serviceTypeSearchText = "";
     this.searchBusinessText = "";
+    this.problemSearchText = "";
   }
 
   ngOnInit(): void {
@@ -50,11 +70,26 @@ export class BusinessComponent implements OnInit {
       (user:User) => {
         this.loggedInUser = user;
         this.setUserRole();
+        this.setAllUsersAddresses();
         this.setAllBusinesses();
         this.setAllContractors();
         this.setAllServiceTypes();
+        this.setAllProblems();
       }
     )
+  }
+
+  addToLoadingTask() {
+    if (this.isPageLoading()) {
+      this.completedLoadTasks++;
+    }
+  }
+  isPageLoading() {
+    let loading = true;
+    if (this.completedLoadTasks >= 6) {
+      loading = false;
+    }
+    return loading;
   }
 
   isRoleBusiness(): boolean {
@@ -67,6 +102,21 @@ export class BusinessComponent implements OnInit {
     return this.userRole === undefined;
   }
 
+  setAllProblems() {
+    this.problemService.getProblems().subscribe(
+      {
+        next: (problems) => {
+          this.allProblems = problems;
+          this.addToLoadingTask();
+        },
+        error: (errorFound) => {
+          console.log("setAllUsersAddresses(): Error getting all addresses");
+          console.error(errorFound);
+        }
+
+      }
+    )
+  }
 
   setShowOnlyMyBusinesses() {
     if (this.showOnlyMyBusinesses) {
@@ -87,8 +137,40 @@ export class BusinessComponent implements OnInit {
     this.creatingBusiness = new Business();
   }
 
+  createServiceCall(serviceCall: ServiceCall) {
+    serviceCall.user = this.loggedInUser;
+
+    this.serviceCallService.createServiceCall(serviceCall).subscribe(
+      {
+        next: () => {
+          this.resetServiceCallBusiness();
+          this.resetCreatingServiceCall();
+          this.router.navigateByUrl("/userDashboard");
+        },
+        error: (errorFound) => {
+          console.log("setAllUsersAddresses(): Error getting all addresses");
+          console.error(errorFound);
+        }
+      }
+    )
+
+  }
+
+  resetCreatingServiceCall() {
+    this.creatingServiceCall = new ServiceCall();
+  }
+
   resetEditBusiness() {
     this.editBusiness = undefined;
+  }
+
+
+  setCreatingServiceCallBusiness(business: Business) {
+    this.creatingServiceCall.business = this.deepCopy(business);
+  }
+
+  resetServiceCallBusiness() {
+    this.serviceCallBusiness = undefined;
   }
 
   createBusiness(business: Business) {
@@ -120,7 +202,6 @@ export class BusinessComponent implements OnInit {
 
   setEditBusiness(business: Business) {
     this.editBusiness = this.deepCopy(business);
-
   }
 
   resetServiceTypeSearchText() {
@@ -147,8 +228,26 @@ export class BusinessComponent implements OnInit {
         } else {
           this.userRole = undefined;
         }
+
+        this.addToLoadingTask();
       }
     );
+  }
+
+  setAllUsersAddresses() {
+    this.allUsersAddresses = [];
+    this.addressService.getAddressByUserId(this.loggedInUser.id).subscribe(
+      {
+        next: (addressess) => {
+          this.allUsersAddresses = addressess;
+          this.addToLoadingTask();
+        },
+        error: (errorFound) => {
+          console.log("setAllUsersAddresses(): Error getting all addresses");
+          console.error(errorFound);
+        }
+      }
+    )
   }
 
   setAllContractors() {
@@ -165,7 +264,8 @@ export class BusinessComponent implements OnInit {
                     this.allContractors.push(user);
                   }
                 }
-              )
+              );
+              this.addToLoadingTask();
             }
           )
         },
@@ -183,6 +283,7 @@ export class BusinessComponent implements OnInit {
       {
         next: (serviceTypesList) => {
           this.allServiceTypes = serviceTypesList;
+          this.addToLoadingTask();
         },
         error: (wrong) => {
           console.error('BusinessComponent.setAllServiceTypes(): Error retreiving all ServiceTypes');
@@ -198,6 +299,7 @@ export class BusinessComponent implements OnInit {
       {
         next: (businessList) => {
           this.allBusinesses = businessList;
+          this.addToLoadingTask();
         },
         error: (wrong) => {
           console.error('UserComponent.getBusinesses(): Error retreiving all businesses');

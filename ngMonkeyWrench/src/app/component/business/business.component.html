@@ -4,7 +4,8 @@
 <div *ngIf="loggedInUser.role === 'customer'">
   <app-user-sidebar></app-user-sidebar>
 </div>
-<div class="main-business-div">
+
+<div class="content">
   <div>
     <h1 style="text-align: center;">Businesses</h1>
 
@@ -27,6 +28,11 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="isPageLoading()">
+          <td>
+            <div class="loader"></div>
+          </td>
+        </tr>
         <tr *ngFor="let business of allBusinesses | searchByBusinessName:searchBusinessText | filterBusinessesByServiceTypes:serviceTypeFilters:mustHaveAllServiceTypeFilters | filterBusinessesByUser:showOnlyMyBusinesses:loggedInUser | orderBy:'name'">
           <td>
 
@@ -47,7 +53,7 @@
 
                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                       <button *ngIf="userOwnsBusiness(business,loggedInUser)" (click)="setEditBusiness(business); openCenteredModal(updateBusinessContent)" type="button" class="btn btn-outline-primary">Edit <i class="bi bi-pencil-square"></i></button>
-                      <button *ngIf="isRoleCustomer()" type="button" class="btn btn-outline-primary">Request Service</button>
+                      <button *ngIf="isRoleCustomer()" (click)="setCreatingServiceCallBusiness(business); openCenteredModal(createServiceCallContent)" type="button" class="btn btn-sm btn-outline-primary">Request Service</button>
                     </div>
 
                   </div>
@@ -92,7 +98,7 @@
         <input type="text" class="form-control" id="usernameSearchInput" placeholder="Search For Usernames" [(ngModel)]="usernameSearchText">
         <label for="usernameSearchInput">Search For Usernames</label>
       </div>
-      <div class="add-users-section">
+      <div class="checkbox-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
             <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(creatingBusiness,user)" [checked]="businessHasUser(creatingBusiness,user)" aria-label="...">
@@ -107,7 +113,7 @@
         <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="serviceTypeSearchText">
         <label for="usernameSearchInput">Search For Service Types</label>
       </div>
-      <div class="add-users-section">
+      <div class="checkbox-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let serviceType of allServiceTypes | searchByServicetypeName:serviceTypeSearchText | orderBy:'name'">
             <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(creatingBusiness,serviceType)" [checked]="businessHasServiceType(creatingBusiness,serviceType)" aria-label="...">
@@ -154,7 +160,7 @@
         <input type="text" class="form-control" id="usernameSearchInput" placeholder="Search For Usernames" [(ngModel)]="usernameSearchText">
         <label for="usernameSearchInput">Search For Usernames</label>
       </div>
-      <div class="add-users-section">
+      <div class="checkbox-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let user of allContractors | searchByUsername:usernameSearchText | orderBy:'username'">
             <input class="form-check-input me-1" type="checkbox" (click)="handleUserOnBusiness(editBusiness,user)" [checked]="businessHasUser(editBusiness,user)" aria-label="...">
@@ -169,7 +175,7 @@
         <input type="text" class="form-control" id="usernameSearchInput" placeholder="URL" [(ngModel)]="serviceTypeSearchText">
         <label for="usernameSearchInput">Search For Service Types</label>
       </div>
-      <div class="add-users-section">
+      <div class="checkbox-section">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let serviceType of allServiceTypes | searchByServicetypeName:serviceTypeSearchText | orderBy:'name'">
             <input class="form-check-input me-1" type="checkbox" (click)="handleServiceTypeOnBusiness(editBusiness,serviceType)" [checked]="businessHasServiceType(editBusiness,serviceType)" aria-label="...">
@@ -217,6 +223,54 @@
 
     <div class="modal-footer modal-button-footer">
       <button type="button" class="btn btn-warning" (click)="modal.close()">Close</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- create ServiceCall modal -->
+<ng-template #createServiceCallContent let-modal>
+  <div>
+    <!-- modal header -->
+    <div class="modal-header">
+      <h1>Create Service Request</h1>
+    </div>
+
+    <!-- modal body -->
+    <div class="modal-body">
+      <h6>Select Address (Required)</h6>
+      <select  class="form-select" aria-label="" [(ngModel)]="creatingServiceCall.address">
+        <option *ngFor="let address of allUsersAddresses" [ngValue]="address">{{address | formatAddress}}</option>
+      </select>
+
+      <br>
+      <h6>Problem Codes</h6>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="problemCodeSearchInput" placeholder="Search By Description" [(ngModel)]="problemSearchText">
+        <label for="problemCodeSearchInput">Search By Description</label>
+      </div>
+      <div class="checkbox-section">
+        <div class="list-group radio-list-group">
+          <label *ngFor="let problem of allProblems | searchByProblemDescription:problemSearchText" class="list-group-item">
+            <input type="radio" name="problem" (click)="creatingServiceCall.problem = problem" [id]="problem.description" />
+            {{problem | problemString}}
+          </label>
+        </div>
+      </div>
+
+      <br>
+      <div class="form-floating">
+        <textarea rows="5" style="height: 100%;" type="text" class="form-control" id="descriptionInput" placeholder="Description" [(ngModel)]="creatingServiceCall.problemDescription" ></textarea>
+        <label for="descriptionInput">Problem Description (Required)</label>
+      </div>
+
+    </div>
+
+    <div class="modal-footer modal-button-footer">
+      <button type="button" class="btn btn-warning" (click)="resetServiceCallBusiness(); modal.close();">Cancel</button>
+      <span style="float: right;">
+        <button class="btn btn-primary" (click)="createServiceCall(creatingServiceCall); modal.close();">Create</button>
+      </span>
     </div>
   </div>
 </ng-template>

@@ -1,3 +1,17 @@
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+
 .main-business-div {
   margin-top: 100px;
 }
@@ -67,7 +81,7 @@
 
 }
 
-.add-users-section {
+.checkbox-section {
   /* border: 2px solid black */
   border-style: solid;
   border-color: darkblue;
@@ -105,4 +119,44 @@ tbody::-webkit-scrollbar {
 }
 ::-webkit-scrollbar-track:hover {
   background: #f1f1f160;
+}
+
+.list-group-item {
+  user-select: none;
+}
+
+.list-group label input[type="radio"] {
+  cursor: pointer;
+}
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group label input[type="radio"] {
+  content: "\2022";
+  color: transparent;
+  font-weight: bold;
+  margin-right: 1em;
+}
+.list-group-item:before {
+  content: "\2022";
+  color: transparent;
+  font-weight: bold;
+  margin-right: 1em;
+}
+
+.list-group label input[type="radio"]:checked {
+  background-color: #0275D8;
+  color: #FFF;
+}
+.list-group-item:hover {
+  background-color: #0275D8;
+  color: #FFF;
+}
+
+.list-group label input[type="radio"]:checked {
+  color: inherit;
+}
+.list-group-item:before {
+  color: inherit;
 }

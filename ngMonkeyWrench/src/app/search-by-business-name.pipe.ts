@@ -8,13 +8,18 @@ export class SearchByBusinessNamePipe implements PipeTransform {
 
   transform(businesses: Business[], text: string): Business[] {
     let listOfBusinesses: Business[] = [];
-    businesses.forEach(
-      (business) => {
-        if (business.name?.toLowerCase().includes(text)) {
-          listOfBusinesses.push(business);
+    if (text === "") {
+      listOfBusinesses = businesses;
+    } else {
+      businesses.forEach(
+        (business) => {
+          if (business.name?.toLowerCase().includes(text)) {
+            listOfBusinesses.push(business);
+          }
         }
-      }
-    )
+      );
+
+    }
 
     return listOfBusinesses;
   }

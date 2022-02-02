@@ -27,10 +27,8 @@ export class ServiceCall {
   constructor(
     id: number = 0,
     address?: Address,
-    // problem: Problem = new Problem(),
     problem?: Problem,
     solution?: Solution,
-    // solution: Solution = new Solution(),
     problemDescription?: string,
     dateCreated?: Date,
     dateScheduled?: Date,

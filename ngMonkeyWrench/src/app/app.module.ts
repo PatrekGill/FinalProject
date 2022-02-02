@@ -32,6 +32,9 @@ import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { DuplicateAddressCheckPipe } from './pipes/duplicate-address-check.pipe';
 import { FilterBusinessesByServiceTypesPipe } from './pipes/filter-businesses-by-service-types.pipe';
 import { FilterBusinessesByUserPipe } from './pipes/filter-businesses-by-user.pipe';
+import { FormatAddressPipe } from './pipes/format-address.pipe';
+import { ProblemStringPipe } from './pipes/problem-string.pipe';
+import { SearchByProblemDescriptionPipe } from './pipes/search-by-problem-description.pipe';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { FilterBusinessesByUserPipe } from './pipes/filter-businesses-by-user.pi
     PhoneNumberPipe,
     DuplicateAddressCheckPipe,
     FilterBusinessesByServiceTypesPipe,
-    FilterBusinessesByUserPipe
+    FilterBusinessesByUserPipe,
+    FormatAddressPipe,
+    ProblemStringPipe,
+    SearchByProblemDescriptionPipe
   ],
   imports: [
     BrowserModule,
