@@ -90,7 +90,7 @@
       </tr>
         <tr>
           <td colspan="2">
-            Problem details: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
+            Problem details: <textarea  class="serviceCallTextArea form-control" rows="3" [(ngModel)]="currentServiceCall.problemDescription">{{currentServiceCall.problemDescription}}</textarea>
           </td>
         </tr>
         <tr>
