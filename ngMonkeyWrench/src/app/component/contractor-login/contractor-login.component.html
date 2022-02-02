@@ -40,6 +40,7 @@
               <th scope="col">Name</th>
               <th scope="col">Problem</th>
               <th scope="col">Address</th>
+              <th scope="col">Phone Number</th>
               <th scope="col">Scheduled</th>
             </tr>
           </thead>
@@ -48,6 +49,7 @@
               <td>{{call.user?.firstName}} {{call.user?.lastName}}</td>
               <td>{{call.problem?.description}}</td>
               <td>{{call.address?.street}} {{call.address?.city}} {{call.address?.stateAbbv}}</td>
+              <td>({{call.user?.phoneNumber | slice:0:3}}) {{call.user?.phoneNumber | slice:3:6}}-{{call.user?.phoneNumber | slice:6:10}}</td>
               <td>{{call.dateScheduled | date  : 'short'}} </td>
             </tr>
           </tbody>
@@ -56,7 +58,7 @@
   </div>
 </div>
 
-
+<!-- edit service call -->
 <div class = 'content'>
 <div class="content selectBusiness form-group">
   <div class="serviceCall selectServiceCall" *ngIf="showCurrentCall">
@@ -71,13 +73,11 @@
         </tr>
         <tr>
           <th><h5>{{currentServiceCall.address?.street}} {{currentServiceCall.address?.street2}} {{currentServiceCall.address?.city}}, {{currentServiceCall.address?.stateAbbv}} {{currentServiceCall.address?.zipCode}}</h5></th>
-        <!-- </tr>
-        <tr> -->
+
           <th class="cellBorder" ><h6>Created: {{currentServiceCall.dateCreated | date : 'short'}}</h6></th>
         </tr>
       </thead>
       <tbody  >
-        <!-- <div class="updateCallProblemElement"> -->
         <tr >
         <td colspan="2" >
           Problem:
@@ -88,7 +88,6 @@
           </select>
         </td>
       </tr>
-    <!-- </div> -->
         <tr>
           <td colspan="2">
             Problem details: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
@@ -110,7 +109,8 @@
           </td>
         </tr>
         <tr>
-          <td></td>
+          <td> Date Scheduled <input type="datetime-local" class="form-control-lg" id="createCallTime"
+            [(ngModel)]="currentServiceCall.dateScheduled"/></td>
           <td >
             <label for="" class="updateCallEstimate">Estimate: </label><input name="updateCallEstimate" type="checkbox" [(ngModel)]="currentServiceCall.estimate">
             <label for="" class="updateCallComplete">Complete: </label><input name="updateCallComplete" type="checkbox" [(ngModel)]="currentServiceCall.completed">
@@ -124,11 +124,6 @@
             Cost: <input class="form-control updateCallCost" type="number" [(ngModel)]="currentServiceCall.totalCost ">
           </td>
         </tr>
-        <!-- <tr>
-          <td>
-            Complete: <input type="checkbox" [(ngModel)]="currentServiceCall.completed">
-          </td>
-        </tr> -->
       </tbody>
       <tfoot>
         <tr>
