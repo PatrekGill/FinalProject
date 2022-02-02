@@ -22,6 +22,11 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="isPageLoading()">
+          <td>
+            <div class="loader"></div>
+          </td>
+        </tr>
         <tr *ngFor="let business of allBusinesses | searchByBusinessName:searchBusinessText | filterBusinessesByServiceTypes:serviceTypeFilters:mustHaveAllServiceTypeFilters | filterBusinessesByUser:showOnlyMyBusinesses:loggedInUser | orderBy:'name'">
           <td>
 

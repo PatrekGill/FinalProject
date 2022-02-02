@@ -39,6 +39,7 @@ export class BusinessComponent implements OnInit {
   allProblems: Problem[];
   creatingServiceCall: ServiceCall = new ServiceCall();
   problemSearchText: string;
+  completedLoadTasks: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -78,6 +79,19 @@ export class BusinessComponent implements OnInit {
     )
   }
 
+  addToLoadingTask() {
+    if (this.isPageLoading()) {
+      this.completedLoadTasks++;
+    }
+  }
+  isPageLoading() {
+    let loading = true;
+    if (this.completedLoadTasks >= 6) {
+      loading = false;
+    }
+    return loading;
+  }
+
   isRoleBusiness(): boolean {
     return this.userRole === "business";
   }
@@ -93,6 +107,7 @@ export class BusinessComponent implements OnInit {
       {
         next: (problems) => {
           this.allProblems = problems;
+          this.addToLoadingTask();
         },
         error: (errorFound) => {
           console.log("setAllUsersAddresses(): Error getting all addresses");
@@ -213,6 +228,8 @@ export class BusinessComponent implements OnInit {
         } else {
           this.userRole = undefined;
         }
+
+        this.addToLoadingTask();
       }
     );
   }
@@ -223,6 +240,7 @@ export class BusinessComponent implements OnInit {
       {
         next: (addressess) => {
           this.allUsersAddresses = addressess;
+          this.addToLoadingTask();
         },
         error: (errorFound) => {
           console.log("setAllUsersAddresses(): Error getting all addresses");
@@ -246,7 +264,8 @@ export class BusinessComponent implements OnInit {
                     this.allContractors.push(user);
                   }
                 }
-              )
+              );
+              this.addToLoadingTask();
             }
           )
         },
@@ -264,6 +283,7 @@ export class BusinessComponent implements OnInit {
       {
         next: (serviceTypesList) => {
           this.allServiceTypes = serviceTypesList;
+          this.addToLoadingTask();
         },
         error: (wrong) => {
           console.error('BusinessComponent.setAllServiceTypes(): Error retreiving all ServiceTypes');
@@ -279,6 +299,7 @@ export class BusinessComponent implements OnInit {
       {
         next: (businessList) => {
           this.allBusinesses = businessList;
+          this.addToLoadingTask();
         },
         error: (wrong) => {
           console.error('UserComponent.getBusinesses(): Error retreiving all businesses');

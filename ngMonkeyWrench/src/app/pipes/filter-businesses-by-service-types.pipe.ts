@@ -10,7 +10,7 @@ export class FilterBusinessesByServiceTypesPipe implements PipeTransform {
     let filtered: Business[] = [];
 
     if (filterServiceTypesIds.length < 1) {
-      filtered = [...businesses];
+      filtered = businesses;
 
     } else {
       businesses.forEach(
