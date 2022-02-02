@@ -12,15 +12,12 @@ export class BusinessServiceTypesStringPipe implements PipeTransform {
 
   getServiceTypesAsString(business: Business): string {
     let serviceTypesString = "";
-    console.log("here");
     if (!business.serviceTypes) {
       return serviceTypesString;
     }
 
     const numberOfServices = business.serviceTypes.length;
     if (numberOfServices > 0) {
-      console.log("here");
-
       business.serviceTypes.forEach(type => {
         serviceTypesString += (type.name + ", ");
       });

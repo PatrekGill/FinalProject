@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Address } from 'src/app/models/address';
 import { Business } from 'src/app/models/business';
+import { Problem } from 'src/app/models/problem';
 import { ServiceCall } from 'src/app/models/service-call';
 import { ServiceType } from 'src/app/models/service-type';
 import { User } from 'src/app/models/user';
 import { AddressService } from 'src/app/services/address.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BusinessService } from 'src/app/services/business.service';
+import { ProblemService } from 'src/app/services/problem.service';
 import { ServiceCallService } from 'src/app/services/service-call.service';
 import { ServiceTypeService } from 'src/app/services/service-type.service';
 import { UserService } from 'src/app/services/user.service';
@@ -33,7 +36,9 @@ export class BusinessComponent implements OnInit {
   mustHaveAllServiceTypeFilters: boolean = false;
   serviceCallBusiness: Business | undefined;
   allUsersAddresses: Address[];
+  allProblems: Problem[];
   creatingServiceCall: ServiceCall = new ServiceCall();
+  problemSearchText: string;
 
   constructor(
     private authService: AuthService,
@@ -42,17 +47,21 @@ export class BusinessComponent implements OnInit {
     private userService: UserService,
     private serviceTypeService: ServiceTypeService,
     private serviceCallService: ServiceCallService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private problemService: ProblemService,
+    private router: Router
   ) {
     this.creatingBusiness = new Business();
     this.allContractors = [];
     this.allBusinesses = [];
     this.allServiceTypes = [];
     this.allUsersAddresses = [];
+    this.allProblems = [];
 
     this.usernameSearchText = "";
     this.serviceTypeSearchText = "";
     this.searchBusinessText = "";
+    this.problemSearchText = "";
   }
 
   ngOnInit(): void {
@@ -64,6 +73,7 @@ export class BusinessComponent implements OnInit {
         this.setAllBusinesses();
         this.setAllContractors();
         this.setAllServiceTypes();
+        this.setAllProblems();
       }
     )
   }
@@ -78,6 +88,20 @@ export class BusinessComponent implements OnInit {
     return this.userRole === undefined;
   }
 
+  setAllProblems() {
+    this.problemService.getProblems().subscribe(
+      {
+        next: (problems) => {
+          this.allProblems = problems;
+        },
+        error: (errorFound) => {
+          console.log("setAllUsersAddresses(): Error getting all addresses");
+          console.error(errorFound);
+        }
+
+      }
+    )
+  }
 
   setShowOnlyMyBusinesses() {
     if (this.showOnlyMyBusinesses) {
@@ -98,12 +122,36 @@ export class BusinessComponent implements OnInit {
     this.creatingBusiness = new Business();
   }
 
+  createServiceCall(serviceCall: ServiceCall) {
+    serviceCall.user = this.loggedInUser;
+
+    this.serviceCallService.createServiceCall(serviceCall).subscribe(
+      {
+        next: () => {
+          this.resetServiceCallBusiness();
+          this.resetCreatingServiceCall();
+          this.router.navigateByUrl("/userDashboard");
+        },
+        error: (errorFound) => {
+          console.log("setAllUsersAddresses(): Error getting all addresses");
+          console.error(errorFound);
+        }
+      }
+    )
+
+  }
+
+  resetCreatingServiceCall() {
+    this.creatingServiceCall = new ServiceCall();
+  }
+
   resetEditBusiness() {
     this.editBusiness = undefined;
   }
 
-  setServiceCallBusiness(business: Business) {
-    this.serviceCallBusiness = this.deepCopy(business);
+
+  setCreatingServiceCallBusiness(business: Business) {
+    this.creatingServiceCall.business = this.deepCopy(business);
   }
 
   resetServiceCallBusiness() {
@@ -139,7 +187,6 @@ export class BusinessComponent implements OnInit {
 
   setEditBusiness(business: Business) {
     this.editBusiness = this.deepCopy(business);
-
   }
 
   resetServiceTypeSearchText() {

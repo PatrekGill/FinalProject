@@ -10,7 +10,9 @@ export class FormatAddressPipe implements PipeTransform {
     let addressAsString = "";
 
     addressAsString += address.street;
-    addressAsString += (" " + address.street2);
+    if (address.street2) {
+      addressAsString += (" " + address.street2);
+    }
     addressAsString += (", " + address.city);
     addressAsString += (", " + address.stateAbbv);
     addressAsString += (" " + address.zipCode);

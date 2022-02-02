@@ -106,3 +106,43 @@ tbody::-webkit-scrollbar {
 ::-webkit-scrollbar-track:hover {
   background: #f1f1f160;
 }
+
+.list-group-item {
+  user-select: none;
+}
+
+.list-group label input[type="radio"] {
+  cursor: pointer;
+}
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group label input[type="radio"] {
+  content: "\2022";
+  color: transparent;
+  font-weight: bold;
+  margin-right: 1em;
+}
+.list-group-item:before {
+  content: "\2022";
+  color: transparent;
+  font-weight: bold;
+  margin-right: 1em;
+}
+
+.list-group label input[type="radio"]:checked {
+  background-color: #0275D8;
+  color: #FFF;
+}
+.list-group-item:hover {
+  background-color: #0275D8;
+  color: #FFF;
+}
+
+.list-group label input[type="radio"]:checked {
+  color: inherit;
+}
+.list-group-item:before {
+  color: inherit;
+}
