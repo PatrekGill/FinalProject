@@ -65,36 +65,43 @@ table {
 
 }
 
-.btn-success {
-  /* color: #000;
+.btn-success1 {
+  color: #000;
   background-color: #EF9E60;
   border-color: #020202;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition-property: border-color, box-shadow;
     transition-duration: 0.15s, 0.15s;
     transition-timing-function: ease-in-out, ease-in-out;
-    transition-delay: 0s, 0s; */
-    background-color: #EF9E60;
+    transition-delay: 0s, 0s;
+    /* background-color: #EF9E60;
     color:#FFF;
-    border-color: #EF9E60;
+    border-color: #EF9E60; */
+    float: right;
   }
-  .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+  .btn-success1:hover, .btn-success1:focus, .btn-success1:active, .btn-success1.active, .open .dropdown-toggle.btn-success1 {
 
-    background-color: #2F3E48;
+    background-color: #157347;
     color:#FFF;
-    border-color: #31347B;
+    border-color: #146c43;
+    /* box-shadow: 0 0 0 0.25rem rgb(60 153 110 / 50%); */
    }
 
+#updateCallTable tbody {
+  text-align: left;
+  padding-left: 10px;
+}
 
 .callUpdateDropdowns{
   width: 290px;
 }
 
-/* .btn-secondary {
-  color: #000;
+.btn-secondary {
+  /* color: #000;
   background-color: darkgray;
-  border-color: #6c757d;
-} */
+  border-color: #6c757d; */
+  float: right;
+}
 
 .callUpdatePageButtons {
   cursor: pointer;
@@ -102,8 +109,8 @@ table {
 }
 
 .updateButtonRow{
-  /* display: inline; */
-  float: right;
+  display: inline;
+  /* float: right; */
 }
 
 div.content {

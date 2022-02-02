@@ -27,12 +27,13 @@ div.userListBox {
   margin: 0 auto;
   background-color: #283891;
   position: relative;
-  padding-top: 10px;
+  padding-top: 30px;
   padding-left: 30px;
   padding-right: 30px;
   color: white;
   font-family: Georgia;
   border-radius: 2em;
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 50%);
 /*
    min-width: 1000px;
    padding-left: 30px; */
@@ -51,6 +52,7 @@ div.addressListBox {
   color: white;
   font-family: Georgia;
   border-radius: 2em;
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 50%);
 }
 
 

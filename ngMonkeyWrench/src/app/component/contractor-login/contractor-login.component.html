@@ -55,14 +55,17 @@
     </div>
   </div>
 </div>
+
+
 <div class = 'content'>
 <div class="content selectBusiness form-group">
   <div class="serviceCall selectServiceCall" *ngIf="showCurrentCall">
 
-    <table name="singleServiceCall" class="form-group table-dark">
+    <table name="singleServiceCall" class="table table-dark" id="updateCallTable">
       <thead>
         <tr>
           <th><h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
+          <th></th>
         </tr>
         <tr>
           <th><h5>{{currentServiceCall.address?.street}} {{currentServiceCall.address?.street2}} {{currentServiceCall.address?.city}}, {{currentServiceCall.address?.stateAbbv}} {{currentServiceCall.address?.zipCode}}</h5></th>
@@ -71,9 +74,10 @@
           <th class="cellBorder" ><h6>Created: {{currentServiceCall.dateCreated | date : 'short'}}</h6></th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-        <td colspan="2">
+      <tbody  >
+        <!-- <div class="updateCallProblemElement"> -->
+        <tr >
+        <td colspan="2" >
           Problem:
           <select class="form-control callUpdateDropdowns" name="problem" [(ngModel)]="currentServiceCall.problem.id" >
             <option *ngFor="let problem of allProblems" value={{problem.id}}>
@@ -81,16 +85,15 @@
             </option>
           </select>
         </td>
-        <td></td>
-        <td></td>
-        </tr>
+      </tr>
+    <!-- </div> -->
         <tr>
           <td colspan="2">
             Problem details: <textarea  class="serviceCallTextArea form-control" rows="3" >{{currentServiceCall.problemDescription}}</textarea>
           </td>
         </tr>
         <tr>
-          <td>
+          <td colspan="2">
             Solution:
             <select class="form-control callUpdateDropdowns" name="solution" [(ngModel)]="currentServiceCall.solution.id" >
               <option *ngFor="let solution of allSolutions" value={{solution.id}}>
@@ -116,7 +119,12 @@
             Labor hours: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.hoursLabor">
           </td>
           <td>
-            Cost: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.totalCost">
+            <!-- <div class="form-floating">
+              <input type="text" class="form-control" id="updateCost"
+              placeholder="Cost" [(ngModel)]="currentServiceCall.totalCost"/>
+              <label for="updateCost">Cost</label>
+            </div> -->
+            Cost: <input class="form-control updateCost" type="number" [(ngModel)]="currentServiceCall.totalCost">
           </td>
         </tr>
         <!-- <tr>
@@ -127,12 +135,12 @@
       </tbody>
       <tfoot >
         <tr >
-          <td class="updateButtonRow" >
-            <button  class="form-control callUpdatePageButtons btn-secondary" (click)="showCurrentCall = false; showCalls = true">Back</button>
-            <button  class="form-control callUpdatePageButtons btn-success" (click)="updateServiceCall(currentServiceCall)">Save</button>
-          </td>
           <!-- <td>
           </td> -->
+          <td class="updateButtonRow" colspan="2" >
+            <button  class="form-control callUpdatePageButtons btn-success1" (click)="updateServiceCall(currentServiceCall)">Save</button>
+            <button  class="form-control callUpdatePageButtons btn-secondary" (click)="showCurrentCall = false; showCalls = true">Back</button>
+          </td>
         </tr>
       </tfoot>
     </table>
