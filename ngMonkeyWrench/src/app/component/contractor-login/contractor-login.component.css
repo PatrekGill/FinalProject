@@ -7,6 +7,14 @@ display: inline-block;
   padding-right: 5px;
 }
 
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: auto;
+  text-align: center;
+  padding-top: 30px;
+}
+
 div.selectBusiness{
   margin-left: 200px;
   padding: 1px 16px;
@@ -18,7 +26,7 @@ div.selectBusiness{
 .clientListBox{
   min-width: 600px;
   min-height: 150px;
-  max-width: 60%;
+  max-width: 75%;
   margin: 0 auto;
   background-color: #283891;
   position: relative;
@@ -27,18 +35,20 @@ div.selectBusiness{
   font-family: Georgia;
   border-radius: 2em;
   padding-bottom: 10px;
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 50%);
 }
 
 div.selectServiceCall{
   margin-right: 1px;
   position: relative;
   padding: 1px 16px;
-  max-width: 80%;
+  max-width: 75%;
   height: auto;
   text-align: center;
   padding: 30px;
   background-color: #283891;
   border-radius: 2em;
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 50%);
 }
 
 div.callsTable{
@@ -54,7 +64,7 @@ table, th, td {
 }
 
 .singleServiceCall {
-  border-radius: 5px
+  border-radius: 5px;
 }
 
 
@@ -62,10 +72,10 @@ table {
   border-radius:2em;
   width: 100%;
   color: floralwhite;
-
 }
 
 .btn-success1 {
+  margin-left: 5px;
   color: #000;
   background-color: #EF9E60;
   border-color: #020202;
@@ -79,13 +89,21 @@ table {
     border-color: #EF9E60; */
     float: right;
   }
-  .btn-success1:hover, .btn-success1:focus, .btn-success1:active, .btn-success1.active, .open .dropdown-toggle.btn-success1 {
 
-    background-color: #157347;
-    color:#FFF;
-    border-color: #146c43;
-    /* box-shadow: 0 0 0 0.25rem rgb(60 153 110 / 50%); */
-   }
+.btn-success1:hover, .btn-success1:focus, .btn-success1:active, .btn-success1.active, .open .dropdown-toggle.btn-success1 {
+
+  background-color: #157347;
+  color:#FFF;
+  border-color: #146c43;
+  /* box-shadow: 0 0 0 0.25rem rgb(60 153 110 / 50%); */
+}
+
+.btn-secondary {
+  /* color: #000;
+  background-color: darkgray;
+  border-color: #6c757d; */
+  float: right;
+}
 
 #updateCallTable tbody {
   text-align: left;
@@ -96,15 +114,9 @@ table {
   width: 290px;
 }
 
-.btn-secondary {
-  /* color: #000;
-  background-color: darkgray;
-  border-color: #6c757d; */
-  float: right;
-}
-
 .callUpdatePageButtons {
   cursor: pointer;
+  display: inline;
   width: 100px;
 }
 
@@ -113,10 +125,26 @@ table {
   /* float: right; */
 }
 
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: auto;
-  text-align: center;
-  padding-top: 30px;
+.updateCallLabor{
+width: 100px;
+}
+
+.updateCallCost{
+width: 100px;
+text-align: right;
+
+}
+
+.updateCallComplete{
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+.updateCallEstimate{
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+.schedDate{
+  color: red;
 }

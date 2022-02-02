@@ -64,8 +64,10 @@
     <table name="singleServiceCall" class="table table-dark" id="updateCallTable">
       <thead>
         <tr>
-          <th><h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
-          <th></th>
+          <th>
+
+            <h3>{{currentServiceCall.user?.firstName}} {{currentServiceCall.user?.lastName}}</h3></th>
+          <th class="schedDate"><h6>Appointment: {{currentServiceCall.dateScheduled | date  : 'short'}}</h6></th>
         </tr>
         <tr>
           <th><h5>{{currentServiceCall.address?.street}} {{currentServiceCall.address?.street2}} {{currentServiceCall.address?.city}}, {{currentServiceCall.address?.stateAbbv}} {{currentServiceCall.address?.zipCode}}</h5></th>
@@ -110,21 +112,16 @@
         <tr>
           <td></td>
           <td >
-            Estimate: <input type="checkbox" [(ngModel)]="currentServiceCall.estimate">
-            Complete: <input type="checkbox" [(ngModel)]="currentServiceCall.completed">
+            <label for="" class="updateCallEstimate">Estimate: </label><input name="updateCallEstimate" type="checkbox" [(ngModel)]="currentServiceCall.estimate">
+            <label for="" class="updateCallComplete">Complete: </label><input name="updateCallComplete" type="checkbox" [(ngModel)]="currentServiceCall.completed">
           </td>
         </tr>
         <tr>
           <td>
-            Labor hours: <input class="form-control" type="number" [(ngModel)]="currentServiceCall.hoursLabor">
+            Labor hours: <input class="form-control updateCallLabor" type="number" [(ngModel)]="currentServiceCall.hoursLabor">
           </td>
           <td>
-            <!-- <div class="form-floating">
-              <input type="text" class="form-control" id="updateCost"
-              placeholder="Cost" [(ngModel)]="currentServiceCall.totalCost"/>
-              <label for="updateCost">Cost</label>
-            </div> -->
-            Cost: <input class="form-control updateCost" type="number" [(ngModel)]="currentServiceCall.totalCost">
+            Cost: <input class="form-control updateCallCost" type="number" [(ngModel)]="currentServiceCall.totalCost ">
           </td>
         </tr>
         <!-- <tr>
@@ -133,38 +130,18 @@
           </td>
         </tr> -->
       </tbody>
-      <tfoot >
-        <tr >
-          <!-- <td>
-          </td> -->
-          <td class="updateButtonRow" colspan="2" >
+      <tfoot>
+        <tr>
+          <td>
+          </td>
+          <td>
             <button  class="form-control callUpdatePageButtons btn-success1" (click)="updateServiceCall(currentServiceCall)">Save</button>
             <button  class="form-control callUpdatePageButtons btn-secondary" (click)="showCurrentCall = false; showCalls = true">Back</button>
           </td>
         </tr>
       </tfoot>
     </table>
-    <!-- <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name"
-            required
-            [(ngModel)]="model.name" name="name">
-    </div>
-
-    <div class="form-group">
-      <label for="alterEgo">Alter Ego</label>
-      <input type="text"  class="form-control" id="alterEgo"
-            [(ngModel)]="model.alterEgo" name="alterEgo">
-    </div>
-
-    <div class="form-group">
-      <label for="power">Hero Power</label>
-      <select class="form-control"  id="power"
-              required
-              [(ngModel)]="model.power" name="power">
-        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-      </select>
-    </div> -->
     </div>
   </div>
+  <br><br><br>
 </div>
