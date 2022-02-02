@@ -1,10 +1,14 @@
-
+/*
 .radioDatePipe {
 display: inline-block;
 }
 
 .radioDatePipe label {
   padding-right: 5px;
+} */
+
+.radioDatePipe label {
+  margin-bottom: 10px;
 }
 
 div.content {
@@ -32,7 +36,7 @@ div.selectBusiness{
   position: relative;
   padding-top: 10px;
   color: white;
-  font-family: Georgia;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 2em;
   padding-bottom: 10px;
   box-shadow: 0 20px 40px 0 rgb(0 0 0 / 50%);

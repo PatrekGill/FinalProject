@@ -4,32 +4,47 @@
   <h1>Welcome {{currentUser.firstName}}  {{currentUser.lastName}}</h1><br>
   <H1>Service Requests:</H1>
     <br>
-    <div class="wrapper radioDatePipe">
+    <div class="btn-group radioDatePipe" role="group" aria-label="Basic radio toggle button group">
+      <input [(ngModel)]="filterBy" type="radio" class="btn-check" name="dateSorter" id="day" autocomplete="off" value="day">
+      <label class="btn btn-outline-primary" for="day">Day</label>
+
+      <input [(ngModel)]="filterBy" type="radio" class="btn-check" name="dateSorter" id="week" autocomplete="off" value="week">
+      <label class="btn btn-outline-primary" for="week">Week</label>
+
+      <input [(ngModel)]="filterBy" type="radio" class="btn-check" name="dateSorter" id="month" autocomplete="off" value="month">
+      <label class="btn btn-outline-primary" for="month">Month</label>
+
+      <input [(ngModel)]="filterBy" type="radio" class="btn-check" name="dateSorter" id="all" autocomplete="off" value="all">
+      <label class="btn btn-outline-primary" for="all">All</label>
+    </div>
+    <!-- <div class="wrapper radioDatePipe">
+
       <form action="">
-        <input [(ngModel)]="filterBy" type="radio" id="day" name="dateSorter" value="day">
+        <input [(ngModel)]="filterBy" type="radio" id="day" name="dateSorter" >
         <label for="day"> Day</label>
-        <input [(ngModel)]="filterBy" type="radio" id="week" name="dateSorter" value="week">
+        <input [(ngModel)]="filterBy" type="radio" id="week" name="dateSorter" >
         <label for="week"> Week</label>
-        <input [(ngModel)]="filterBy" type="radio" id="month" name="dateSorter" value="month">
+        <input [(ngModel)]="filterBy" type="radio" id="month" name="dateSorter" >
         <label for="month"> Month</label>
         <input [(ngModel)]="filterBy" type="radio" id="all" name="dateSorter" value="all">
         <label for="All">  All</label>
       </form>
       <br>
-      </div>
+    </div> -->
     <div class="clientListBox container-fluid">
       <h2>In Progress:</h2>
 
       <div *ngIf="expandedBox" class="tableElements">
-        <table class="table table-dark">
-          <tr>
-            <th scope="col">Problem</th>
-            <th scope="col">Address</th>
-            <th scope="col">Date Scheduled</th>
-          </tr>
-          <tbody *ngFor="let call of serviceCalls | callFilter: filterBy">
-
-              <tr>
+        <table class="table table-dark table-shadow">
+          <thead>
+            <tr>
+              <th scope="col">Problem</th>
+              <th scope="col">Address</th>
+              <th scope="col">Date Scheduled</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let call of serviceCalls | callFilter: filterBy">
                 <td class="tableElementsSpecific">{{call.problem?.description}}</td>
                 <td class="tableElementsSpecific">{{call.address?.street}} {{call.address?.city}}, {{call.address?.stateAbbv}}</td>
                 <td class="tableElementsSpecific">{{call.dateScheduled | date  : 'short'}}</td>

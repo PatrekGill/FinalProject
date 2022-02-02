@@ -12,7 +12,7 @@
   <div class='userWrapper'>
     <div class="userListBox lightPadder" >
       <div *ngIf="!editUser" >
-      <table class="table table-dark table-striped">
+      <table class="table table-dark table-striped table-shadow">
         <tbody>
 
           <tr>
@@ -75,7 +75,8 @@
 
     <div class="addressListBox lightPadder" >
       <h1 class="addressTitle">Addresses:</h1>
-      <table class="table table-striped table-hover">
+      <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;" (click)="addingAddress = true">New Address</button>
+      <table class="table table-striped table-hover table-shadow">
         <thead class="table-dark table-striped table-hover">
           <tr>
             <th>Owner Name</th>
@@ -90,10 +91,7 @@
             <td *ngIf="userAddress.street2 != null">{{userAddress.street}} {{userAddress.street2}} {{userAddress.city}}, {{userAddress.stateAbbv}} {{userAddress.zipCode}}</td>
             <td ><button class="btn btn-primary" (click)="updateAddress(userAddress)" >Remove</button></td>  <!-- Removes userId from address or puts at user ID 1 which can be an admin user which cares for unassigned-->
           </tr>
-          <br>
-          <button class="btn btn-primary" (click)="addingAddress = true">New Address</button>
         </tbody>
-        <br>
       </table>
 
 <!-- <div > -->
@@ -101,7 +99,7 @@
   <!-- <div class="userContent"> -->
     <div class="addressListBox" *ngIf='addingAddress'>
 
-      <table class="table table-striped table-dark">
+      <table class="table table-striped table-dark table-shadow">
         <tbody>
           <tr>
             <td>

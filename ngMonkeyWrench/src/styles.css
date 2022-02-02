@@ -24,7 +24,7 @@
   position: relative;
   padding-top: 10px;
   color: white;
-  font-family: Georgia;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 2em;
 }
 
@@ -52,8 +52,12 @@
   position: relative;
   padding-top: 10px;
   color: white;
-  font-family: Georgia;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 2em;
+}
+
+.table-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
 }
 
 .datePipeSelectionBtn a {

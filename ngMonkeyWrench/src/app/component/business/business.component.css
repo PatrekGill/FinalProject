@@ -11,6 +11,9 @@
   animation: spin 2s linear infinite;
 }
 
+div.content {
+  text-align: left;
+}
 
 .main-business-div {
   margin-top: 100px;
