@@ -27,14 +27,15 @@ export class FilterBusinessesByServiceTypesPipe implements PipeTransform {
             );
 
             if (mustHaveAll) {
+              passesFilter = true;
               for (let index = 0; index < filterServiceTypesIds.length; index++) {
                 const id = filterServiceTypesIds[index];
                 if (!businessServiceTypeIds.includes(id)) {
+                  passesFilter = false;
                   break;
                 }
               }
 
-              passesFilter = true;
 
             } else {
               for (let index = 0; index < filterServiceTypesIds.length; index++) {
