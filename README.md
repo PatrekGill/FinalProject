@@ -40,27 +40,27 @@ MonkeyWrench is a contractor/customer based maintenance portal where many contra
 Angular, Java 1.8, JUnit 5, SpringMVC, Spring Boot, Spring Tool Suite, Apache Tomcat Server, HTML, CSS, MAMP, SQL (MySQL), Git terminal, MAC OS, Bootstrap 5, Google, Github, Java Persistence API & Hibernate, MySQL Workbench, Gradle, Trello, Amazon Web Services, Chrome Developer Tools
 
 ## Lessons Learned
-- **CSS and the pitfalls of templates**
+- **Organize a fully fleshed out plan that all members of the team can envision and follow**
 <br>
-Templates are great for beginners, however, it quickly became apparent after moving on to the front-end that the template we had used for the navbar, sidebar, and footer created significant headaches with CSS inheritance while working with other pages. In hindsight, after seeing the amount of generic styling used in it, the template should've been cleaned up for use on other pages. This was our first real dive into CSS, however, so this could be expected. Another point to this is to in the future achieve a mutual understanding of page layout and design of things such as buttons, links, interaction.
+We set a good foundation for our portal design with our wireframe, however, it is important to very specifically iterate over each design feature to ensure every member of the team is on the same page and can work toward the same goal. We soon realized that what we thought was common understanding was easily being misunderstood which led to debates in design philosophy down the road which could have been avoided. Although not a major setback, it did slow our process down when we had to stop and all come to an understanding about what we were trying to achieve and how we could implement it.
 <br>
 <br>
 
-- **Chrome Developer Tools Are Your Friend**
+- **Angular Quirks**
 <br>
-A bit more to the point of CSS. The Chrome Developer tools greatly helped in troubleshooting issues and were extremely useful with their capability to live edit CSS/HTML
+We learned some of the intricacies of angular front-end design which led to quite a few head-scratchers. One such example is the conflicting dynamic between a select and an ngModel. Our emphasis on the use of pipes expanded the functionality of our base code allowing for more dynamic front-end data manipulation.
 <br>
 <br>
 
 - **Git branches**
 <br>
-Git branches and pull requests were used to great affect. They significantly improved our flexibility to work as a team.
+Git branches and pull requests were used to great affect. They significantly improved our flexibility to work as a team and avoid any possible conflicts on merge.
 <br>
 <br>
 
 - **Working as a team**
 <br>
-The most significant step in our education with this project was a larger team effort for us. Our previous group projects saw (mostly) work split between 2 people on much smaller applications. Even doubling to four revealed the true need for communication and delegation of tasks to achieve our goals. One thing that should be stressed are coding standards. While we didn't have the time to write a comprehensive documentation on the subject, it was not discussed. In the future, it would be wise for efficiency sake and debugging to have more dialogue about how things should look/be named.
+The most significant step in our education with this project was a larger team effort for us. As each day passed our team cohesiveness grew very quickly and we were able to more readily implement, design, and augment features on our platform. This is because we began to understand each other's approach to code and we could more clearly communicate our own ideas. We also became more adept at thinking around problems. If a problem proved to be substantially difficult to overcome, we would often come up with a solution for the same issue through a different approach. This significantly sped up our production schedule.
 
 ## Project Owners
 [CJ Harris](https://github.com/CJHarris1)
@@ -73,13 +73,13 @@ The most significant step in our education with this project was a larger team e
 
 ## What Could've Been Done Better
 - As discussed above, a better more uniform approach to actually coding/naming conventions would be ideal.
-- The CSS and styling also could've used more touch-up across several pages.
-- Another level of interfaces to be used on several DAO objects would've been good for keeping a more focused approach to the naming and behavior of their methods.
+- The CSS and styling also needs more in-depth work to truly create a professional feel.
 
 ## Future Implementations
 - UI cleanup
 - UX Design streamlining
 - Service Request approval
+- On-site equipment implementation
 
 ## Database Schema
-![Database Schema](HTML LINk)
+![Database Schema](https://files.slack.com/files-pri/T052X7BAZ-F030Z4BSZF0/servicecallsdb.png)
