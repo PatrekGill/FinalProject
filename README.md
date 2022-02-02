@@ -1,7 +1,6 @@
 # Final Project (MonkeyWrench) PLACEHOLDER TO BE UPDATED
-![Service Request Page](https://drive.google.com/uc?export=view&id=1qm0AkeRsSPtFEzQrgD18lsDEjzeEV8MP)
+![Service Request Page](https://drive.google.com/uc?export=view&id=qm0AkeRsSPtFEzQrgD18lsDEjzeEV8MP)
 ![Client List Page](HTTP PLACEHOLDER)
-
 
 ## Overview
 This was a team project to build a full-stack web application over the course of one week. The website was developed by four individuals remotely using Zoom, Slack, Trello, Git, Figma wireframe, and Github for collaboration.
