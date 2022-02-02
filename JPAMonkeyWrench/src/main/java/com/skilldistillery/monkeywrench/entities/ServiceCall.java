@@ -283,11 +283,17 @@ public class ServiceCall {
 		return id == other.id;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Service [id=" + id + ", problemDescription=" + problemDescription + ", completed=" + completed
-				+ ", totalCost=" + totalCost + ", estimate=" + estimate + ", hoursLabor=" + hoursLabor
-				+ ", contractorNotes=" + contractorNotes + ", address=" + address + "]";
+		return "ServiceCall [id=" + id + ", problemDescription=" + problemDescription + ", dateCreated=" + dateCreated
+				+ ", dateScheduled=" + dateScheduled + ", hoursLabor=" + hoursLabor + ", totalCost=" + totalCost
+				+ ", contractorNotes=" + contractorNotes + ", address=" + address + ", problem=" + problem
+				+ ", solution=" + solution + ", comments=" + comments + ", business=" + business + ", user=" + user
+				+ ", completed=" + completed + ", estimate=" + estimate + ", customerRating=" + customerRating
+				+ ", customerRatingComment=" + customerRatingComment + "]";
 	}
+
+	
 	
 }

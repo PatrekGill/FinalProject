@@ -27,7 +27,7 @@ export class ContractorLoginComponent implements OnInit {
     )
     { }
 
-  filterBy : string = 'all';
+  filterBy : string = 'day';
 
   expandedBox: boolean = true;
 

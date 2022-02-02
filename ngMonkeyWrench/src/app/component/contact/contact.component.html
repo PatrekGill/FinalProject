@@ -1,1 +1,31 @@
-<p>contact works!</p>
+<div *ngIf="loggedInUser.role === 'business'">
+  <app-contractor-sidebar></app-contractor-sidebar>
+</div>
+<div *ngIf="loggedInUser.role === 'customer'">
+  <app-user-sidebar></app-user-sidebar>
+</div>
+
+<div class='content'>
+  <div class="david">
+    <h2>David Lizon</h2>
+    <a href="https://www.linkedin.com/in/davidlizon/"> Linked In</a> <br>
+    <a href="https://github.com/DavidLizon">GitHub</a>
+  </div><br><br>
+  <div class='patrek'>
+    <h2>Patrek Gill</h2>
+    <a href="https://www.linkedin.com/in/patrekgill/"> Linked In</a> <br>
+    <a href="https://github.com/PatrekGill">GitHub</a>
+  </div><br><br>
+  <div class='kyle'>
+    <h2>Kyle Palasti</h2>
+    <a href="https://www.linkedin.com/in/kylepalasti/"> Linked In</a> <br>
+    <a href="https://github.com/KPalasti">GitHub</a>
+  </div><br><br>
+  <div class='CJ'>
+    <h2>CJ Harris</h2>
+    <a href="https://www.linkedin.com/in/cj-harris-37109721b/"> Linked In</a> <br>
+    <a href="https://github.com/CJHarris1">GitHub</a>
+  </div><br><br>
+
+
+</div>

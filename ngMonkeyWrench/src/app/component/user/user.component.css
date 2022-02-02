@@ -9,7 +9,7 @@
 div.userContent {
   margin-left: 200px;
   padding: px 16px;
-  height: 1000px;
+  height: auto;
   text-align: left;
   padding-top: 81px;
 }
@@ -27,15 +27,13 @@ div.userListBox {
   margin: 0 auto;
   background-color: #283891;
   position: relative;
-  padding-top: 10px;
+  padding-top: 30px;
   padding-left: 30px;
   padding-right: 30px;
   color: white;
   font-family: Georgia;
   border-radius: 2em;
-/*
-   min-width: 1000px;
-   padding-left: 30px; */
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 50%);
 }
 
 div.addressListBox {
@@ -51,6 +49,7 @@ div.addressListBox {
   color: white;
   font-family: Georgia;
   border-radius: 2em;
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 50%);
 }
 
 
@@ -64,4 +63,12 @@ div.addressListBox {
 
 tr:hover .action {
   display: inline-flex;
+}
+
+.lightPadder {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.headerCenter{
+  text-align: center;
 }
