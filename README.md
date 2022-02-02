@@ -85,4 +85,4 @@ The most significant step in our education with this project was a larger team e
 - On-site equipment implementation
 
 ## Database Schema
-<img width="668" alt="Screen Shot 2022-01-10 at 9 14 25 AM" src="https://user-images.githubusercontent.com/89475786/152216095-32e07691-7085-44af-b964-e3369236c77c.png">
+![servicecallsdb](https://user-images.githubusercontent.com/89475786/152216903-a1838a26-daa8-4b9b-98d3-8783567217af.png)
