@@ -48,7 +48,10 @@ public class ServiceCallController {
 			HttpServletRequest req) {
 		try {
 			sc.setSolution(null);
+			System.out.println(sc);
 			sc = sCallSvc.createNewServiceCall(sc);
+			System.out.println(sc );
+			System.out.println("*********************************************************");
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(sc.getId());
