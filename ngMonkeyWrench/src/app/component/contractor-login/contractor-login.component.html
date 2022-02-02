@@ -5,9 +5,9 @@
   <div class="col">
     <h1>Welcome {{currentUser.firstName}}  {{currentUser.lastName}}</h1><br>
     <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="!showCurrentCall">Select Business</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" *ngFor='let business of userBusinesses'>
-        <button ngbDropdownItem (click)='getServiceCallsByBusinessId(business)'>{{ business.name }}</button>
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle *ngIf="!showCurrentCall">{{displayBusinessMessage}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+        <button ngbDropdownItem *ngFor='let business of userBusinesses' (click)='getServiceCallsByBusinessId(business); setBusinessDisplayMessage(business.name)'>{{ business.name }}</button>
       </div>
     </div>
   </div>

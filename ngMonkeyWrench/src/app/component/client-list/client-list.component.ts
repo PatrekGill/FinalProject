@@ -19,7 +19,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ClientListComponent implements OnInit {
 
-  displayBusinessMessage : string = "Business"
+  displayBusinessMessage : string = "Select Business"
   displayProblemMessage : string = "Problem"
   displayEstimateMessage : string = "Estimate"
 
@@ -115,8 +115,6 @@ export class ClientListComponent implements OnInit {
     }
 
     serviceCall.problem = this.selectedProblem;
-    // let scheduledDate = new Date(this.date + ' ' + this.time)
-    // serviceCall.dateScheduled = scheduledDate;
     serviceCall.estimate = this.estimate;
     serviceCall.business = this.selectedBusiness;
     console.log(serviceCall);
