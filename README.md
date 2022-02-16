@@ -1,4 +1,6 @@
 # Final Project (MonkeyWrench)
+[Deployed Site](http://44.224.50.229:8080/MonkeyWrench)
+
 ## Service Request Page
 <img width="1280" alt="Screen Shot 2022-02-01 at 9 44 27 PM" src="https://user-images.githubusercontent.com/89475786/152215945-99dca1ec-fe2f-4950-b941-35322885e1bb.png">
 
@@ -14,11 +16,17 @@ MonkeyWrench is a contractor/customer based maintenance portal where many contra
 
 ### File Structure
 [Entites](https://github.com/KPalasti/FinalProject/tree/main/JPAMonkeyWrench/src/main/java/com/skilldistillery/monkeywrench/entities)
+<br>
 [Services](https://github.com/KPalasti/FinalProject/tree/main/MonkeyWrench/src/main/java/com/skilldistillery/monkeywrench/services)
+<br>
 [Repositories](https://github.com/KPalasti/FinalProject/tree/main/MonkeyWrench/src/main/java/com/skilldistillery/monkeywrench/repositories)
+<br>
 [Controllers](https://github.com/KPalasti/FinalProject/tree/main/MonkeyWrench/src/main/java/com/skilldistillery/monkeywrench/controllers)
+<br>
 [Security](https://github.com/KPalasti/FinalProject/tree/main/MonkeyWrench/src/main/java/com/skilldistillery/monkeywrench/security)
+<br>
 [Database Files](https://github.com/KPalasti/FinalProject/tree/main/DB)
+<br>
 [Stylesheets, HTML, & Angular](https://github.com/KPalasti/MidtermProject/ngMonkeyWrench)
 
 ## Practices Used
